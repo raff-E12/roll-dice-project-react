@@ -3,115 +3,84 @@
 
 @import "tailwindcss";
 
-/***** Stile di Pagina *****/ 
+:root {
+  /* Colori principali */
+  --color-primary: #ff4d4d; 
+  --color-secondary: #ffd93d;
+  --color-accent: #4dd2ff;
+
+  /* Colori di sfondo */
+  --color-bg-dark: #1b1b1b;
+  --color-bg-light: #f5f5f5; 
+
+  /* Testo */
+  --color-text-primary: #ffffff;
+  --color-text-dark: #222222;
+  --color-text-muted: #aaaaaa;
+
+  /* Stati interattivi */
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+
+  /* Ombre e bordi */
+  --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.3);
+  --border-radius: 12px;
+}
+
+/***** Stile La Schermata Principale *****/ 
 
 @layer base {
 
-  body{
-    @apply h-screen flex items-center justify-center bg-red-500;
+  body {
+    @apply h-screen flex items-center justify-center bg-transparent;
+  }
+ 
+  .main-sc {
+    @apply h-screen flex items-center justify-center w-screen 
+    border-2 border-white p-2 overflow-hidden bg-red-500;
   }
 
-  .container{
-    @apply grid bg-amber-50 w-[250px]
-    place-items-center p-6 rounded-2xl shadow-2xl shadow-red-900;
+  .logo-sc{
+    @apply w-[70px] h-[70px] p-2 absolute top-0 left-0 m-6
+    2xl:w-[160px] 2xl:h-[160px] xl:w-[120px] 
+    xl:h-[120px] lg:w-[90px] lg:h-[90px] md:w-[70px] md:h-[70px];
   }
+
 }
+
+/***** Fine Stile La Schermata Principale *****/
+
+/***** Componenti Generali *****/ 
 
 @layer components {
 
-  .dice{
-    @apply relative w-[100px] h-[100px] transform-3d transition-normal duration-500 ease-in-out;
+  .modal-sc{
+    @apply w-screen absolute h-screen top-0 left-0 
+    bg-transparent backdrop-blur-xl flex items-center justify-center;
   }
 
-  .face{
-    @apply absolute w-[100%] h-[100%] rounded-2xl border-4 border-gray-200 
-    transform-3d bg-linear-150/hsl from-gray-200 to-gray-50
+  .modals{
+    @apply w-[600px] h-[400px] bg-white rounded-2xl p-10 flex flex-col
+    justify-center items-center relative;
   }
 
-  .face::before{
-    @apply content-none absolute w-[100%] h-[100%] rounded-2xl bg-gray-200 translate-z-[-1px];
+  #logo-modal{
+    @apply rotate-[20deg] w-[190px] h-[190px] 
+    absolute right-[-20px] top-[-30px];
   }
 
-  .face::after{
-    @apply content-none absolute w-[18px] h-[18px] rounded-2xl top-[50%] left-[50%] bg-gray-950;
+  #logo-modal img:nth-of-type(1){
+    @apply drop-shadow-lg drop-shadow-black relative;
   }
 
-  .roll{
-    @apply text-red-700 mt-3 p-2 rounded-2xl text-sm cursor-pointer font-bold
-    border-2 border-red-700 capitalize transition-all duration-75 hover:bg-red-500 hover:text-white;
+  #logo-modal img:nth-of-type(2){
+    @apply content-none w-[130px] h-[130px] absolute scale-200
+    right-[30px] top-[30px] -z-10;
   }
 
 }
 
-@layer utilities {
+/***** Componenti Generali *****/
 
-  .front {
-    @apply translate-z-[50px];
-  }
-
-  .front::after {
-    content: '';
-    @apply w-[30px] h-[30px] bg-red-500 mt-[-0px] ml-[-0px] absolute top-[50%] left-[50%];
-    transform: translate(-50%, -50%);
-  }
-
-  .back {
-    @apply rotate-x-[180deg] translate-z-[-50px];
-  }
-
-  .back::after {
-    content: '';
-    @apply mt-[-35px] ml-[-30px] absolute;
-    box-shadow: 40px 0, 0 25px, 40px 25px, 0 50px, 40px 50px;
-  }
-
-  .top {
-    @apply rotate-x-[90deg] translate-z-[0px] translate-y-[-50px];
-  }
-
-  .top::after {
-    content: '';
-    @apply mt-[-30px] ml-[-30px] absolute;
-    box-shadow: 40px 40px;
-  }
-
-  .bottom {
-    @apply rotate-x-[-90deg] translate-z-[0px] translate-y-[50px];
-  }
-
-  .bottom::after {
-    content: '';
-    @apply mt-[-36px] ml-[-36px] absolute;
-    box-shadow: 26px 26px, 52px 52px, 52px 0, 0 52px;
-  }
-
-  .right {
-    @apply rotate-y-[90deg] translate-z-[0px] translate-y-[0px] translate-x-[50px];
-  }
-
-  .right::after {
-    content: '';
-    @apply mt-[-30px] ml-[-30px] absolute;
-    box-shadow: 40px 0, 0 40px, 40px 40px;
-  }
-
-  .left {
-    @apply rotate-y-[90deg] translate-z-[0px] translate-x-[-50px];
-  }
-
-  .left::after {
-    content: '';
-    @apply mt-[-35px] ml-[-35px] absolute;
-    box-shadow: 25px 25px, 50px 50px;
-  }
-
-  @keyframes rolling {
-      50% {
-          transform: rotateX(455deg) rotateY(455deg);
-      }
-  }
-  
-}
-
-/***** End Stile di Pagina *****/
 

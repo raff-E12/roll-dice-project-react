@@ -3,7 +3,7 @@
 
 @import "tailwindcss";
 
-:root {
+@theme {
   /* Colori principali */
   --color-primary: #ff4d4d; 
   --color-secondary: #ffd93d;
@@ -26,6 +26,11 @@
   /* Ombre e bordi */
   --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.3);
   --border-radius: 12px;
+
+  /* Font */
+  --font-lexend: "Lexend", sans-serif;
+  --font-montserrant: "Montserrat", sans-serif;
+  --font-varela: "Varela Round", sans-serif;
 }
 
 /***** Stile La Schermata Principale *****/ 
@@ -42,9 +47,8 @@
   }
 
   .logo-sc{
-    @apply w-[70px] h-[70px] p-2 absolute top-0 left-0 m-6
-    2xl:w-[160px] 2xl:h-[160px] xl:w-[120px] 
-    xl:h-[120px] lg:w-[90px] lg:h-[90px] md:w-[70px] md:h-[70px];
+    @apply w-[70px] h-[70px] p-2 2xl:w-[110px] 2xl:h-[110px] xl:w-[90px] 
+    xl:h-[90px] lg:w-[80px] lg:h-auto md:w-[70px] md:h-[70px];
   }
 
 }
@@ -56,31 +60,63 @@
 @layer components {
 
   .modal-sc{
-    @apply w-screen absolute h-screen top-0 left-0 
+    @apply w-screen absolute h-screen top-0 left-0
     bg-transparent backdrop-blur-xl flex items-center justify-center;
   }
 
   .modals{
-    @apply w-[600px] h-[400px] bg-white rounded-2xl p-10 flex flex-col
-    justify-center items-center relative;
+    @apply w-[300px] h-auto bg-white rounded-2xl p-10 flex flex-col
+    justify-center items-center relative mt-12 mb-11;
+
+    @apply 2xl:w-[700px] xl:w-[700px] lg:w-[600px];
   }
 
   #logo-modal{
-    @apply rotate-[20deg] w-[190px] h-[190px] 
-    absolute right-[-20px] top-[-30px];
+    @apply rotate-[20deg] w-[60px] h-[60px]
+    absolute right-[-20px] top-[-3px];
+
+    @apply 2xl:w-[120px] 2xl:h-[120px] xl:w-[80px] xl:h-[80px];
   }
 
   #logo-modal img:nth-of-type(1){
-    @apply drop-shadow-lg drop-shadow-black relative;
+    @apply drop-shadow-lg drop-shadow-black max-w-full h-auto z-10;
+
+    @apply 2xl:top-1 2xl:right-3 xl:top-0 xl:right-3 xl:-left-6;
   }
 
   #logo-modal img:nth-of-type(2){
-    @apply content-none w-[130px] h-[130px] absolute scale-200
-    right-[30px] top-[30px] -z-10;
+    @apply content-none w-[70px] h-auto absolute scale-200 right-[3px] top-[3px] -z-10 animate-spin;
+
+    animation-duration: 10s;
+
+    @apply 2xl:w-[100px] 2xl:h-[100px] xl:w-[120px] xl:h-auto;
   }
 
+  .container-modal{
+    @apply w-full flex justify-center items-center text-center capitalize flex-col gap-3;
+  }
+
+  .btn-modal{
+    @apply w-full p-3 bg-red-700 mt-5 text-white cursor-pointer hover:bg-red-800;
+  }
+
+  .navbar-sc{
+    @apply w-full border-2 border-white absolute top-0 flex items-center justify-between p-3;
+
+    @apply 2xl:w-[90%] xl:w-7xl lg:w-[90%];
+  }
+
+  .icon-drop-menu{
+    @apply w-[50px] h-[50px] border-2 border-red-950 flex justify-center items-center rounded-4xl bg-red-300 text-white;
+  }
+
+  .dropmenu-sc{
+    @apply relative w-auto h-auto;
+  }
+
+  .drop-menu{
+    @apply border-2 border-black p-2 absolute -left-[100px] top-14 w-[142px];
+  }
 }
 
 /***** Componenti Generali *****/
-
-

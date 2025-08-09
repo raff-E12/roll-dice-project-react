@@ -42,8 +42,8 @@
   }
  
   .main-sc {
-    @apply h-screen flex items-center justify-center w-screen 
-    border-2 border-white p-2 overflow-hidden bg-red-500;
+    @apply h-screen flex items-center justify-start w-screen 
+    border-2 border-white p-2 bg-red-500 overflow-auto flex-col gap-4;
   }
 
   .logo-sc{
@@ -101,7 +101,7 @@
   }
 
   .navbar-sc{
-    @apply w-full border-2 border-white absolute top-0 flex items-center justify-between p-3;
+    @apply w-full border-2 border-white relative top-0 flex items-center justify-between p-3;
 
     @apply 2xl:w-[90%] xl:w-7xl lg:w-[90%];
   }
@@ -114,8 +114,41 @@
     @apply relative w-auto h-auto;
   }
 
+  .drop-menu li{
+    @apply w-full bg-gray-300 p-2;
+  }
+
   .drop-menu{
-    @apply border-2 border-black p-2 absolute -left-[100px] top-14 w-[142px];
+    @apply border-2 border-black absolute -left-[120px] top-14 w-[162px] bg-white flex
+    items-center justify-center gap-2 flex-col rounded-2xl overflow-hidden;
+  }
+
+  .menu-sc{
+    @apply border-2 border-white w-full h-auto flex items-center justify-center flex-col p-6;
+  }
+
+  .score-sc{
+    @apply w-full flex justify-center items-center gap-2;
+  }
+
+  .dice-sc{
+    @apply bg-white w-full mt-5 flex justify-center items-center gap-3 flex-col rounded-2xl p-3;
+  }
+
+  .col-dice-sc{
+    @apply flex items-center justify-center flex-col gap-3;
+  }
+
+  .score-tab{
+    @apply w-[120px] bg-white h-[120px] flex justify-center items-center flex-col rounded-3xl gap-1;
+  }
+
+  .btn-dice{
+    @apply w-full bg-white mt-4 p-3 flex justify-center items-center rounded-2xl;
+  }
+
+  .btn-dice .btn{
+    @apply w-full bg-red-700 text-white p-3 rounded-3xl text-lg;
   }
 }
 

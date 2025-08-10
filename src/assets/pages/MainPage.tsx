@@ -30,6 +30,10 @@ export default function MaingPage() {
 
      <main className='menu-sc'>
 
+      <div className='text-msg'>
+        <h4 className='font-montserrant'>Draw!!</h4>
+      </div>
+
          <div className='score-sc'>
            <div className='score-tab'>
             <i className="bi bi-person"></i>
@@ -45,6 +49,7 @@ export default function MaingPage() {
          </div>
 
         <section className='dice-sc'>
+
             <div className='col-dice-sc'>
                   <h3 className='text-2xl font-bold'>Dado Giocatore</h3>
                   <div className="dice">
@@ -74,6 +79,16 @@ export default function MaingPage() {
         <div className='btn-dice'>
           <button className='btn font-bold'>Tira il Dado</button>
         </div>
+
+        <div className='score-point-sc'>
+          <ul>
+            <li className='score-points'><b>Partita-1°:</b> <p>0-1</p></li>
+            <li className='score-points'><b>Partita-2°:</b> <p>0-2</p></li>
+            <li className='score-points'><b>Partita-3°:</b> <p>2-3</p></li>
+            <li className='score-points'><b>Partita-4°:</b> <p>1-1</p></li>
+          </ul>
+        </div>
+
      </main>
 
    </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Dice from '../components/Dice'
 import MainLogo from "../../../public/img/logo_2.png"
 import Modals from '../components/Modals'
@@ -7,8 +7,8 @@ import StatisticsWindow from '../components/StatisticsWindow'
 
 type ScoresText = "Win Player" | "Win COM" | "Draw" | "Inizia a Girare";
 type ResultsType = { id:number, player:number, com:number };
-type ScoresTypes = { player: number, com: number, win: "Player" | "COM" | "Draw" | "Null"  };
-type StatusType = { win: number, lose: number };
+type ScoresTypes = { id?: number, player: number, com: number, win: "Player" | "COM" | "Draw" | ""  };
+type StatusType = { win: number, lose: number, draw: number };
 
 export default function MaingPage() {
     const [isPlayer, setPlayer] = useState<number>(0);
@@ -21,14 +21,14 @@ export default function MaingPage() {
     const [isReserve, setReserve] = useState<ResultsType[]>([]);
     const [isCount, setCount] = useState<number>(1);
     const [isPointList, setPointsList] = useState<ScoresTypes[]>([]);
-    const [isPoint, setPoints] = useState<ScoresTypes>({ player: 0, com: 0, win: "Null" });
+    const [isPoint, setPoints] = useState<ScoresTypes>({ player: 0, com: 0, win: "" });
     const [isResults, setResults] = useState<ScoresText>("Inizia a Girare");
     const PointPlayer = useRef<number>(0);
     const PointCOM = useRef<number>(0);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isOpenST, setOpenST] = useState<boolean>(false);
-    const isStatus = useRef<StatusType>({ win:0, lose: 0 });
-    const [isWin, setWin] = useState<"Player" | "COM" | "Draw" | "Null">("Null");
+    const isStatus = useRef<StatusType>({ win:0, lose: 0, draw: 0 });
+    const isWin = useRef<"Player" | "COM" | "Draw" | "">("");
 
       const RollDice = useMemo(() => {
     
@@ -131,31 +131,59 @@ export default function MaingPage() {
         // }
 
         setScores(ResultScores);
-        setActive(false)
-        setFinished(false);
 
         if (isPlayer > isCOM) {
           PointPlayer.current++;
           setResults("Win Player");
-          setWin("Player")
+          isWin.current = "Player";
         } else if (isPlayer < isCOM) {
           setResults("Win COM");
-          setWin("COM")
+          isWin.current = "COM";
           PointCOM.current++;
         } else if (isPlayer === isCOM) {
           setResults("Draw");
-          setWin("Draw")
+          isWin.current = "Draw";
           PointPlayer.current++;
           PointCOM.current++;
         }
         
-        setPoints(elements => ({...elements, player: PointPlayer.current, com: PointCOM.current, win: isWin }));
-        setPointsList(elements => ([...elements, { player: PointPlayer.current, com: PointCOM.current, win: isWin } ]));
+        setPoints(elements => ({...elements, player: PointPlayer.current, com: PointCOM.current, win: isWin.current }));
+        setPointsList(elements => ([...elements, { id: isCount, player: PointPlayer.current, com: PointCOM.current, win: isWin.current } ]));
         StatusSets();
+        setActive(false)
+        setFinished(false);
     }
 
     function StatusSets() {
-      console.log(isPointList);
+
+      const StatusWins = (): StatusType => {
+
+        let WinPlayer = 0;
+        let WinCOM = 0;
+        let DrawMatch = 0;
+
+        if (Object.values(isPointList).length === 0) return { win: 0, lose: 0, draw: 0 }; 
+
+        for (const key in isPointList) {
+          const elementValue = isPointList[key];
+          
+          if (elementValue.win === "Player") {
+            WinPlayer++;
+          } else if (elementValue.win === "COM") {
+            WinCOM++;
+          } else if (elementValue.win === "Draw") {
+            WinPlayer++;
+            WinCOM++;
+            DrawMatch++;
+          }
+
+        }
+
+        return { win: WinPlayer, lose: WinCOM, draw: DrawMatch };
+      }
+
+      const ResultsWins = StatusWins();
+      isStatus.current = ResultsWins;
     }
 
     const ResultsStates = (): void => {
@@ -176,7 +204,7 @@ export default function MaingPage() {
         ) {
         setPlayer(0)
         setCOM(0);
-        setPoints({ player: 0, com: 0, win: "Null" })
+        setPoints({ player: 0, com: 0, win: "" })
         setResults("Inizia a Girare")
         PointPlayer.current = 0;
         PointCOM.current = 0;
@@ -188,7 +216,7 @@ export default function MaingPage() {
 
     useEffect(ResultsStates,[isActive, isFinished]);
 
-    // console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint)
+    console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint)
 
   return (<>
    <div className='main-sc'>
@@ -277,7 +305,7 @@ export default function MaingPage() {
      </main>
      
    </div>
-     <StatisticsWindow isOpen={isOpenST} setOpen={setOpenST}/>
+     <StatisticsWindow isOpen={isOpenST} setOpen={setOpenST} isStatus={isStatus.current}/>
      <Modals />
   </>)
 }

@@ -195,7 +195,7 @@
   }
 
   .statics-structured{
-    @apply w-full border-red-700 border-2 mt-3 p-2 flex flex-col;
+    @apply w-full border-red-700 border-2 mt-3 p-2 flex flex-col h-auto;
   }
 
   .statics-structured .text-top{

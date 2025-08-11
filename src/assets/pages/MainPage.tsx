@@ -3,9 +3,12 @@ import Dice from '../components/Dice'
 import MainLogo from "../../../public/img/logo_2.png"
 import Modals from '../components/Modals'
 import "../css/Dice&Style.css"
+import StatisticsWindow from '../components/StatisticsWindow'
 
-type ResultsType = { id:number, player:number, com:number, match:number };
-type ScoresText = "Win Player" | "Win COM" | "Draw" | "";
+type ScoresText = "Win Player" | "Win COM" | "Draw" | "Inizia a Girare";
+type ResultsType = { id:number, player:number, com:number };
+type ScoresTypes = { player: number, com: number, win: "Player" | "COM" | "Draw" | "Null"  };
+type StatusType = { win: number, lose: number };
 
 export default function MaingPage() {
     const [isPlayer, setPlayer] = useState<number>(0);
@@ -17,7 +20,15 @@ export default function MaingPage() {
     const [isScores, setScores] = useState<ResultsType[]>([]);
     const [isReserve, setReserve] = useState<ResultsType[]>([]);
     const [isCount, setCount] = useState<number>(1);
-    const [isResults, setResults] = useState<ScoresText>("");
+    const [isPointList, setPointsList] = useState<ScoresTypes[]>([]);
+    const [isPoint, setPoints] = useState<ScoresTypes>({ player: 0, com: 0, win: "Null" });
+    const [isResults, setResults] = useState<ScoresText>("Inizia a Girare");
+    const PointPlayer = useRef<number>(0);
+    const PointCOM = useRef<number>(0);
+    const [isOpen, setOpen] = useState<boolean>(false);
+    const [isOpenST, setOpenST] = useState<boolean>(false);
+    const isStatus = useRef<StatusType>({ win:0, lose: 0 });
+    const [isWin, setWin] = useState<"Player" | "COM" | "Draw" | "Null">("Null");
 
       const RollDice = useMemo(() => {
     
@@ -109,33 +120,75 @@ export default function MaingPage() {
     }
 
     function addResultsScores(): void {
-      const ResultScores = Array.from(new Map(isReserve.map((element) => [element.id, element])).values());
+        const ResultScores = Array.from(new Map(isReserve.map((element) => [element.id, element])).values());
+
+        // let scoresPlayer: number = 0;
+        // let scoresCOM: number = 0;
+
+        // for (const key in isReserve) {
+        //   const element = isReserve[key];
+        //   map.set(element.id, element);
+        // }
+
         setScores(ResultScores);
         setActive(false)
         setFinished(false);
 
         if (isPlayer > isCOM) {
+          PointPlayer.current++;
           setResults("Win Player");
+          setWin("Player")
         } else if (isPlayer < isCOM) {
           setResults("Win COM");
+          setWin("COM")
+          PointCOM.current++;
         } else if (isPlayer === isCOM) {
-          setResults("Draw")
+          setResults("Draw");
+          setWin("Draw")
+          PointPlayer.current++;
+          PointCOM.current++;
         }
         
+        setPoints(elements => ({...elements, player: PointPlayer.current, com: PointCOM.current, win: isWin }));
+        setPointsList(elements => ([...elements, { player: PointPlayer.current, com: PointCOM.current, win: isWin } ]));
+        StatusSets();
+    }
+
+    function StatusSets() {
+      console.log(isPointList);
     }
 
     const ResultsStates = (): void => {
       if (!isFinished) return;
       setCount(isCount + 1);
-      const ResultsComposition: ResultsType = { id: isCount, player: isPlayer, com: isCOM, match: isCount };
+      const ResultsComposition: ResultsType = { id: isCount, player: isPlayer, com: isCOM  };
       setReserve(list => [...list, ResultsComposition]);
-      const FindMatch = isReserve.find(element => element.match === isCount);
+      const FindMatch = isReserve.find(element => element.id === isCount);
       if (!FindMatch) return addResultsScores();
     };
 
+    function ResetGameStatus(): void {
+      if (Object.values(isPoint).length !== 0 ||
+          isPlayer !== 0 && isCOM !== 0 ||
+          isResults !== "Inizia a Girare" ||
+          PointPlayer.current !== 0 ||
+          PointCOM.current !== 0
+        ) {
+        setPlayer(0)
+        setCOM(0);
+        setPoints({ player: 0, com: 0, win: "Null" })
+        setResults("Inizia a Girare")
+        PointPlayer.current = 0;
+        PointCOM.current = 0;
+        window.alert("Lo Stato è Resetta, Buona Fortuna.");
+      } else {
+        window.alert("I Valori Sono Già Stati Resetti.");
+      }
+    }
+
     useEffect(ResultsStates,[isActive, isFinished]);
 
-    console.log("Fine:", isFinished, "Attivo:", isActive, "Risultato:", isScores, "Riserva:", isReserve)
+    // console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint)
 
   return (<>
    <div className='main-sc'>
@@ -147,14 +200,15 @@ export default function MaingPage() {
 
         <div className='dropmenu-sc'>
 
-           <div className='icon-drop-menu'>
-            <i className='material-symbols-outlined'>menu</i>
+           <div className='icon-drop-menu cursor-pointer' onClick={() => setOpen(value => !value)}>
+            <i className='material-symbols-outlined pointer-events-none'>menu</i>
            </div>
 
-            <ul className='drop-menu hidden'>
-                <li>Statitiche</li>
+            <ul className={`drop-menu ${!isOpen && "hidden"}`}>
+                <li onClick={ResetGameStatus}>Resetta</li>
+                <li onClick={() => setOpenST(true)}>Statistiche</li>
                 <li>Info</li>
-                <li>Temi</li>
+                <li>Sfida Tra Giocatori</li>
             </ul>
         </div>
      </nav>
@@ -170,13 +224,13 @@ export default function MaingPage() {
            <div className='score-tab'>
             <i className="bi bi-person"></i>
               <h4>Giocatore</h4>
-              <p><b>Score:</b> 0</p>
+              <p><b>Score:</b> {isPoint.player}</p>
           </div>
 
           <div className='score-tab'>
             <i className="bi bi-robot"></i>
               <h4>COM</h4>
-              <p><b>Score:</b> 0</p>
+              <p><b>Score:</b> {isPoint.com}</p>
            </div>
          </div>
 
@@ -215,13 +269,15 @@ export default function MaingPage() {
         <div className='score-point-sc'>
           <ul>
             {isScores.map((element, index) => {
-              return(<li key={index} className='score-points'><b>Partita-{element.match}°:</b> <p>{element.player}-{element.com}</p></li>)
+              return(<li key={index} className='score-points'><b>Partita-{element.id}°:</b> <p>{element.player}-{element.com}</p></li>)
             })}
           </ul>
         </div>
 
      </main>
-
+     
    </div>
+     <StatisticsWindow isOpen={isOpenST} setOpen={setOpenST}/>
+     <Modals />
   </>)
 }

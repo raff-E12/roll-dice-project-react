@@ -5,7 +5,7 @@
 
 /***** Stile di Pagina *****/ 
 
-@layer base {
+/* @layer base {
 
   body{
     @apply h-screen flex items-center justify-center bg-red-500;
@@ -15,7 +15,7 @@
     @apply grid bg-amber-50 w-[250px]
     place-items-center p-6 rounded-2xl shadow-2xl shadow-red-900;
   }
-}
+} */
 
 @layer components {
 

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LogoPage from "./../../../public/img/logo_3.png"
 import BackFig from "../../../public/img/back_logo.png"
 
 export default function Modals() {
+  const [isOpen, setOpen] = useState<boolean>(true);
+
   return (<>
-    <section className='modal-sc'>
+    <section className={`modal-sc ${!isOpen && "hidden"}`}>
 
         <div className='modals'>
 
@@ -24,7 +26,7 @@ export default function Modals() {
                     Pronto a iniziare? Premi Gioca e lascia che il destino faccia il suo corso.</p>
             </div>
 
-            <button className='btn-modal font-montserrant'>Inizia</button>
+            <button className='btn-modal font-montserrant' onClick={() => setOpen(false)}>Inizia</button>
         </div>
 
     </section>

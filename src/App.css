@@ -37,13 +37,17 @@
 
 @layer base {
 
+  #root{
+    @apply h-screen w-screen;
+  }
+
   body {
-    @apply h-screen flex items-center justify-center bg-transparent;
+    @apply h-auto flex items-start justify-start bg-transparent;
   }
  
   .main-sc {
-    @apply h-screen flex items-center justify-start w-screen 
-    border-2 border-white p-4 bg-red-500 overflow-auto flex-col gap-4;
+    @apply h-screen flex items-center justify-start w-screen
+    border-2 border-white p-4 bg-red-500 flex-col gap-4 overflow-y-scroll;
   }
 
   .logo-sc{
@@ -85,7 +89,7 @@
   }
 
   #logo-modal img:nth-of-type(2){
-    @apply content-none w-[70px] h-auto absolute scale-200 right-[3px] top-[3px] -z-10 animate-spin;
+    @apply content-none w-[48px] h-auto absolute scale-200 right-[3px] top-[5px] -z-10 animate-spin;
 
     animation-duration: 10s;
 
@@ -115,7 +119,7 @@
   }
 
   .drop-menu li{
-    @apply w-full bg-gray-300 p-2;
+    @apply w-full bg-gray-300 p-2 hover:bg-gray-600 hover:text-white cursor-pointer;
   }
 
   .drop-menu{
@@ -170,6 +174,36 @@
   .score-points{
     @apply w-full bg-gray-700 p-4 rounded-2xl flex items-center justify-between text-white;
   }
+
 }
 
 /***** Componenti Generali *****/
+
+@layer components {
+
+  .statistics-sc{
+    @apply w-screen h-screen absolute p-4 border-2 border-white backdrop-blur-2xl top-0 z-30 flex justify-center items-center;
+  }
+
+  .statics-window{
+    @apply w-2xl bg-white p-3 rounded-2xl 
+    h-auto flex justify-center items-center flex-col;
+  }
+
+  .close-btn-st{
+    @apply w-7 h-7 bg-red-800 text-white text-xl hover:bg-red-400 hover:text-black cursor-pointer;
+  }
+
+  .statics-structured{
+    @apply w-full border-red-700 border-2 mt-3 p-2 flex flex-col;
+  }
+
+  .statics-structured .text-top{
+    @apply w-full font-extrabold capitalize text-xl;
+  }
+
+  .cols-compoonents-st{
+    @apply border-2 border-red-700 p-2;
+  }
+
+}

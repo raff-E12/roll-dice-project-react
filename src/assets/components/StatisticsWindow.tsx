@@ -1,7 +1,8 @@
 import React from 'react'
 import "../css/GraphicComponents.css"
 
-type PropsType = { isOpen: boolean, setOpen: (value: boolean) => void, isStatus: { win: number, lose: number, draw: number } }
+type StatusAllType = { wins:{ win: number, lose: number, draw: number }, combos: { couple: number, triple: number, poker: number, fullrun: number } };
+type PropsType = { isOpen: boolean, setOpen: (value: boolean) => void, isStatus: StatusAllType }
 
 export default function StatisticsWindow({isOpen, setOpen, isStatus}: PropsType) {
 
@@ -25,7 +26,7 @@ export default function StatisticsWindow({isOpen, setOpen, isStatus}: PropsType)
               <div className='cols-compoonents-st grow-2'>
                 <p className='font-extrabold text-lg'>Partite Vinte</p>
                 <div className="kpi-card highlight">
-                  <h3>{isStatus.win}</h3>
+                  <h3>{isStatus.wins.win}</h3>
                   <p>Totale Vittorie</p>
                 </div>
               </div>
@@ -33,7 +34,7 @@ export default function StatisticsWindow({isOpen, setOpen, isStatus}: PropsType)
               <div className='cols-compoonents-st'>
                 <p className='font-extrabold text-lg'>Partite Perse</p>
                 <div className="kpi-card highlight">
-                  <h3>{isStatus.lose}</h3>
+                  <h3>{isStatus.wins.lose}</h3>
                   <p>Totale Sconfitte</p>
                 </div>
               </div>
@@ -41,40 +42,48 @@ export default function StatisticsWindow({isOpen, setOpen, isStatus}: PropsType)
               <div className='cols-compoonents-st'>
                 <p className='font-extrabold text-lg'>Parità</p>
                 <div className="kpi-card highlight">
-                  <h3>{isStatus.draw}</h3>
+                  <h3>{isStatus.wins.draw}</h3>
                   <p>Totale Parità</p>
                 </div>
               </div>
             </div>
 
-            <div className='col-span-2'>
-                <div className="statistics">
-                  <div className="stats-header">
-                    <h4>Vittorie</h4>
-                    <span>Sconfitte</span>
+            <div className='col-span-2 row-span-2 flex items-center justify-center'>
+              <div className='cols-compoonents-st grow-2'>
+                <p className='font-extrabold text-lg'>Coppia</p>
+                <div className="kpi-card highlight">
+                  <h3>{isStatus.combos.couple}</h3>
+                  <p>Totale in Tutto</p>
+                </div>
+              </div>
+
+              <div className='cols-compoonents-st'>
+                <p className='font-extrabold text-lg'>Tris</p>
+                <div className="kpi-card highlight">
+                  <h3>{isStatus.combos.triple}</h3>
+                  <p>Totale in Tutto</p>
+                </div>
+              </div>
+              </div>
+
+
+              <div className='col-span-2 row-span-2 flex items-center justify-center'>
+                  <div className='cols-compoonents-st grow-2'>
+                    <p className='font-extrabold text-lg'>Poker</p>
+                    <div className="kpi-card highlight">
+                      <h3>{isStatus.combos.poker}</h3>
+                      <p>Totale in Tutto</p>
+                    </div>
                   </div>
 
-                  <div className="stats-values">
-                          <div>
-                            <h5>$150.09</h5>
-                            <p>Income</p>
-                          </div>
-                          <div>
-                            <h5>$90.23</h5>
-                            <p>Spend</p>
-                          </div>
-                        </div>
-
-                    <div className="bar-chart">
-                        <div className="bar" style={{height:"70%"}}></div>
-                        <div className="bar" style={{height:"50%"}}></div>
-                        <div className="bar" style={{height: "20%"}}></div>
-                        <div className="bar" style={{height:"30%"}}></div>
-                        <div className="bar" style={{height:"30%"}}></div>
-                        <div className="bar" style={{height:"30%"}}></div>
-                      </div>
+                  <div className='cols-compoonents-st grow-2'>
+                    <p className='font-extrabold text-lg'>FullRun</p>
+                    <div className="kpi-card highlight">
+                      <h3>{isStatus.combos.fullrun}</h3>
+                      <p>Totale in Tutto</p>
+                    </div>
                 </div>
-            </div>
+              </div>
 
           </div>
        </div>

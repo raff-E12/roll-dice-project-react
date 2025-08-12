@@ -4,11 +4,15 @@ import MainLogo from "../../../public/img/logo_2.png"
 import Modals from '../components/Modals'
 import "../css/Dice&Style.css"
 import StatisticsWindow from '../components/StatisticsWindow'
+import Popup from "reactjs-popup"
 
 type ScoresText = "Win Player" | "Win COM" | "Draw" | "Inizia a Girare";
-type ResultsType = { id:number, player:number, com:number };
+type ResultsType = { id: number, player: number, com: number };
 type ScoresTypes = { id?: number, player: number, com: number, win: "Player" | "COM" | "Draw" | ""  };
 type StatusType = { win: number, lose: number, draw: number };
+type StatusAllType = { wins:{ win: number, lose: number, draw: number }, 
+combos: { couple: number, triple: number, poker: number, fullrun: number } };
+type StatusExtra = { couple: number, triple: number, poker: number, fullrun: number };
 
 export default function MaingPage() {
     const [isPlayer, setPlayer] = useState<number>(0);
@@ -27,8 +31,11 @@ export default function MaingPage() {
     const PointCOM = useRef<number>(0);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isOpenST, setOpenST] = useState<boolean>(false);
-    const isStatus = useRef<StatusType>({ win:0, lose: 0, draw: 0 });
+    const isStatus = useRef<StatusAllType>({wins: { win: 0, lose: 0, draw: 0 }, combos:{ couple: 0, triple: 0, poker: 0, fullrun: 0}});
     const isWin = useRef<"Player" | "COM" | "Draw" | "">("");
+    const [isPopUp, setPopUp] = useState<boolean>(false);
+    const [isText, setText] = useState<string>("");
+    const [isBonus, setBonus] = useState<number>(0);
 
       const RollDice = useMemo(() => {
     
@@ -119,6 +126,8 @@ export default function MaingPage() {
         }
     }
 
+    const onClose = () => setPopUp(false);
+
     function addResultsScores(): void {
         const ResultScores = Array.from(new Map(isReserve.map((element) => [element.id, element])).values());
 
@@ -146,11 +155,11 @@ export default function MaingPage() {
           PointPlayer.current++;
           PointCOM.current++;
         }
-        
+
         setPoints(elements => ({...elements, player: PointPlayer.current, com: PointCOM.current, win: isWin.current }));
         setPointsList(elements => ([...elements, { id: isCount, player: PointPlayer.current, com: PointCOM.current, win: isWin.current } ]));
         StatusSets();
-        setActive(false)
+        setActive(false);
         setFinished(false);
     }
 
@@ -182,8 +191,64 @@ export default function MaingPage() {
         return { win: WinPlayer, lose: WinCOM, draw: DrawMatch };
       }
 
-      const ResultsWins = StatusWins();
-      isStatus.current = ResultsWins;
+      const StatusExtra = (): StatusExtra => {
+
+        let tripleBonus = 0;
+        let pokerBonus = 0;
+        let streak = 1;
+        let fullRun = 0;
+        let coupleBonus = 0;
+        const PointsPlayer = isScores.map(point => point.player);
+
+        if (isScores.length === 0) return { couple: 0, triple: 0, poker: 0, fullrun: 0 };
+
+        for (const key in PointsPlayer) {
+          const currentRoll = isScores[key].player;
+          const checkNumber = PointsPlayer[key];
+          const lastRoll = PointsPlayer[Number(key) - 1] !== undefined ? PointsPlayer[Number(key) - 1] : 0;
+
+          console.log({ NumeroCorrente: currentRoll, Confronto: checkNumber, UltimoTiro: lastRoll });
+
+          if (currentRoll === checkNumber && currentRoll === lastRoll) {
+             streak++
+
+             if (streak === 2) {
+                coupleBonus++;
+                setPopUp(true);
+                setText("Si comincia a fare sul serio!");
+             }
+             if(streak === 3) {
+              tripleBonus++
+              setPopUp(true);
+              setText("Tris spettacolare! 🔥");
+            }
+             if(streak === 4) {
+              pokerBonus++
+              setPopUp(true);
+              setText("Quattro di fila… sfida la statistica");
+            }
+             if (streak === 5) {
+              fullRun++
+              setPopUp(true);
+              setText("Streak leggendaria! ⭐");
+            };
+
+          } else {
+            streak = 1;
+            setPopUp(false);
+            setText("");
+          }
+
+        }
+
+        return { couple: coupleBonus, triple: tripleBonus, poker: pokerBonus, fullrun: fullRun }
+      }
+
+      const ResultsWins: StatusType = StatusWins();
+      const ResultsExtra: StatusExtra = StatusExtra();
+
+      console.log(ResultsExtra);
+      isStatus.current = { wins: {...ResultsWins}, combos:{...ResultsExtra} };
     }
 
     const ResultsStates = (): void => {
@@ -216,7 +281,7 @@ export default function MaingPage() {
 
     useEffect(ResultsStates,[isActive, isFinished]);
 
-    console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint)
+    // console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint, "Punti:", isPointList)
 
   return (<>
    <div className='main-sc'>
@@ -305,6 +370,12 @@ export default function MaingPage() {
      </main>
      
    </div>
+      <Popup open={isPopUp} closeOnDocumentClick onClose={onClose}>
+        <div className='popup-sc'>
+            <button onClick={onClose}>x</button>
+            <p>{isText}</p>
+        </div>
+      </Popup>
      <StatisticsWindow isOpen={isOpenST} setOpen={setOpenST} isStatus={isStatus.current}/>
      <Modals />
   </>)

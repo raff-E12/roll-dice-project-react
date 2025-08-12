@@ -206,4 +206,12 @@
     @apply border-2 border-red-700 p-2;
   }
 
+  .popup-sc{
+    @apply w-[300px] p-3 bg-amber-400 text-4xl top-0 rounded-3xl;
+  }
+
+  .popup-overlay{
+    @apply flex justify-center items-center;
+  }
+
 }

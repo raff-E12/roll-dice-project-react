@@ -48,6 +48,10 @@ export default function StatisticsWindow({isOpen, setOpen, isStatus}: PropsType)
               </div>
             </div>
 
+          <div className='text-top m-2'>
+            <h3>Bonus Coppie</h3>
+          </div>
+
             <div className='col-span-2 row-span-2 flex items-center justify-center'>
               <div className='cols-compoonents-st grow-2'>
                 <p className='font-extrabold text-lg'>Coppia</p>
@@ -85,7 +89,7 @@ export default function StatisticsWindow({isOpen, setOpen, isStatus}: PropsType)
                 </div>
               </div>
 
-          </div>
+            </div>
        </div>
     </div>
 

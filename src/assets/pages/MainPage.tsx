@@ -15,28 +15,36 @@ combos: { couple: number, triple: number, poker: number, fullrun: number } };
 type StatusExtra = { couple: number, triple: number, poker: number, fullrun: number };
 
 export default function MaingPage() {
+
+  // 1° - Riferimenti dei numeri Usciti e Riferimento delle Operazione di Fine
     const [isPlayer, setPlayer] = useState<number>(0);
     const [isCOM, setCOM] = useState<number>(0);
     const [isActive, setActive] = useState<boolean>(false);
     const [isFinished, setFinished] = useState<boolean>(false);
+
+  // 2° - Referimento dei Dadi nel DOM
     const DiceRef = useRef<HTMLDivElement | null>(null);
     const DiceCOM = useRef<HTMLDivElement | null>(null);
+
+  // 3° - Riferimento di Scorrimento Punti e Riferimento dei Lanci in ogni Tiro
     const [isScores, setScores] = useState<ResultsType[]>([]);
     const [isReserve, setReserve] = useState<ResultsType[]>([]);
     const [isCount, setCount] = useState<number>(1);
     const [isPointList, setPointsList] = useState<ScoresTypes[]>([]);
     const [isPoint, setPoints] = useState<ScoresTypes>({ player: 0, com: 0, win: "" });
     const [isResults, setResults] = useState<ScoresText>("Inizia a Girare");
+
+  // 4° - Riferimento dei Punti Applicati e Riferimento per La presentazione dati.
     const PointPlayer = useRef<number>(0);
     const PointCOM = useRef<number>(0);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isOpenST, setOpenST] = useState<boolean>(false);
-    const isStatus = useRef<StatusAllType>({wins: { win: 0, lose: 0, draw: 0 }, combos:{ couple: 0, triple: 0, poker: 0, fullrun: 0}});
+    const isStatus = useRef<StatusAllType>({wins: { win: 0, lose: 0, draw: 0 }, combos:{ couple: 0, triple: 0, poker: 0, fullrun: 0 }});
     const isWin = useRef<"Player" | "COM" | "Draw" | "">("");
     const [isPopUp, setPopUp] = useState<boolean>(false);
     const [isText, setText] = useState<string>("");
-    const [isBonus, setBonus] = useState<number>(0);
 
+    // Inizio Scelta dei Numeri e Inizio dell' animazione.
       const RollDice = useMemo(() => {
     
         if (!isActive) return;
@@ -51,8 +59,10 @@ export default function MaingPage() {
            setActive(false);
            setFinished(false);
         }
+        
       }, [isActive]);
     
+    // Animazione Integrata con il Css
       function AnimationRollDice(random: number, COM: number): void {
         DiceRef.current!.style.animation = "rolling 4s";
         DiceCOM.current!.style.animation = "rolling 4s";
@@ -128,16 +138,9 @@ export default function MaingPage() {
 
     const onClose = () => setPopUp(false);
 
+  // Gestione Punti e Rapresentazione in dati in Frontend
     function addResultsScores(): void {
         const ResultScores = Array.from(new Map(isReserve.map((element) => [element.id, element])).values());
-
-        // let scoresPlayer: number = 0;
-        // let scoresCOM: number = 0;
-
-        // for (const key in isReserve) {
-        //   const element = isReserve[key];
-        //   map.set(element.id, element);
-        // }
 
         setScores(ResultScores);
 
@@ -156,13 +159,14 @@ export default function MaingPage() {
           PointCOM.current++;
         }
 
-        setPoints(elements => ({...elements, player: PointPlayer.current, com: PointCOM.current, win: isWin.current }));
+        setPoints({ player: PointPlayer.current, com: PointCOM.current, win: isWin.current });
         setPointsList(elements => ([...elements, { id: isCount, player: PointPlayer.current, com: PointCOM.current, win: isWin.current } ]));
         StatusSets();
         setActive(false);
         setFinished(false);
     }
 
+  // Gestione dello Stato
     function StatusSets() {
 
       const StatusWins = (): StatusType => {
@@ -170,8 +174,6 @@ export default function MaingPage() {
         let WinPlayer = 0;
         let WinCOM = 0;
         let DrawMatch = 0;
-
-        if (Object.values(isPointList).length === 0) return { win: 0, lose: 0, draw: 0 }; 
 
         for (const key in isPointList) {
           const elementValue = isPointList[key];
@@ -207,31 +209,36 @@ export default function MaingPage() {
           const checkNumber = PointsPlayer[key];
           const lastRoll = PointsPlayer[Number(key) - 1] !== undefined ? PointsPlayer[Number(key) - 1] : 0;
 
-          console.log({ NumeroCorrente: currentRoll, Confronto: checkNumber, UltimoTiro: lastRoll });
-
           if (currentRoll === checkNumber && currentRoll === lastRoll) {
              streak++
 
              if (streak === 2) {
-                coupleBonus++;
-                setPopUp(true);
-                setText("Si comincia a fare sul serio!");
+                coupleBonus++
+                PointPlayer.current = PointPlayer.current + 10;
+                setPopUp(true)
+                setText("Si comincia a fare sul serio!")
              }
+            
              if(streak === 3) {
               tripleBonus++
-              setPopUp(true);
-              setText("Tris spettacolare! 🔥");
+              setPopUp(true)
+              PointPlayer.current = PointPlayer.current + 20;
+              setText("Tris spettacolare! 🔥")
             }
-             if(streak === 4) {
+             
+            if(streak === 4) {
               pokerBonus++
-              setPopUp(true);
-              setText("Quattro di fila… sfida la statistica");
+              setPopUp(true)
+              PointPlayer.current = PointPlayer.current + 30;
+              setText("Quattro di fila… sfida la statistica")
             }
-             if (streak === 5) {
+             
+            if (streak === 5) {
               fullRun++
-              setPopUp(true);
-              setText("Streak leggendaria! ⭐");
-            };
+              setPopUp(true)
+              PointPlayer.current = PointPlayer.current + 40;
+              setText("Streak leggendaria! ⭐")
+            }
 
           } else {
             streak = 1;
@@ -241,16 +248,57 @@ export default function MaingPage() {
 
         }
 
+        COMBonusPoints();
+
         return { couple: coupleBonus, triple: tripleBonus, poker: pokerBonus, fullrun: fullRun }
+      }
+
+
+      const COMBonusPoints = () => {
+        let streakCOM = 0;
+        const PointsCOM = isScores.map(points => points.com);
+        for (const key in PointsCOM) {
+          const currentRoll = isScores[key].com;
+          const checkNumber = PointsCOM[key];
+          const lastRoll = PointsCOM[Number(key) - 1] !== undefined ? PointsCOM[Number(key) - 1] : 0;
+
+          if (currentRoll === checkNumber && currentRoll === lastRoll) {
+             streakCOM++
+
+             if (streakCOM === 2) {
+              window.alert("Bonus +10 al COM");
+              PointCOM.current = PointCOM.current + 10;
+             }
+
+            if(streakCOM === 3) {
+              window.alert("Bonus +20 al COM");
+              PointCOM.current = PointCOM.current + 20;
+            }
+ 
+            if(streakCOM === 4) {
+              window.alert("Bonus +30 al COM");
+              PointCOM.current = PointCOM.current + 30;
+            }
+
+            if (streakCOM === 5) {
+              window.alert("Bonus +40 al COM");
+              PointCOM.current = PointCOM.current + 40;
+            };
+
+          } else {
+            streakCOM = 1;
+          }
+
+        }
       }
 
       const ResultsWins: StatusType = StatusWins();
       const ResultsExtra: StatusExtra = StatusExtra();
 
-      console.log(ResultsExtra);
       isStatus.current = { wins: {...ResultsWins}, combos:{...ResultsExtra} };
     }
 
+  // Gestione Riserva Dei Punti in Lista
     const ResultsStates = (): void => {
       if (!isFinished) return;
       setCount(isCount + 1);
@@ -260,6 +308,8 @@ export default function MaingPage() {
       if (!FindMatch) return addResultsScores();
     };
 
+
+  // Reset di Stato Applicato.
     function ResetGameStatus(): void {
       if (Object.values(isPoint).length !== 0 ||
           isPlayer !== 0 && isCOM !== 0 ||
@@ -271,17 +321,19 @@ export default function MaingPage() {
         setCOM(0);
         setPoints({ player: 0, com: 0, win: "" })
         setResults("Inizia a Girare")
+        setReserve([])
+        setScores([])
         PointPlayer.current = 0;
         PointCOM.current = 0;
-        window.alert("Lo Stato è Resetta, Buona Fortuna.");
+        window.alert("Lo Stato è Resettato, Buona Fortuna.")
       } else {
-        window.alert("I Valori Sono Già Stati Resetti.");
+        window.alert("I Valori Sono Già Stati Resetti.")
       }
     }
-
+    
     useEffect(ResultsStates,[isActive, isFinished]);
 
-    // console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint, "Punti:", isPointList)
+  // console.log("Fine:", isFinished, "Attivo:", isActive, "Stato:", isStatus, "Scorrimento:", isPoint, "Punti:", isPointList)
 
   return (<>
    <div className='main-sc'>
@@ -362,7 +414,7 @@ export default function MaingPage() {
         <div className='score-point-sc'>
           <ul>
             {isScores.map((element, index) => {
-              return(<li key={index} className='score-points'><b>Partita-{element.id}°:</b> <p>{element.player}-{element.com}</p></li>)
+              return(<li key={index} className='score-points'><b>Tiro-{element.id}°:</b> <p>{element.player}-{element.com}</p></li>)
             })}
           </ul>
         </div>

@@ -9,7 +9,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route index element={<MaingPage />}/>
+      <Route index element={<GamePage />}/>
     </Routes>
     </>
   )

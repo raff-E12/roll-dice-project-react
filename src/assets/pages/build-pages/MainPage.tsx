@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import Dice from '../components/Dice'
+import Dice from '../components/build-components/Dice'
 import MainLogo from "../../../public/img/logo_2.png"
-import Modals from '../components/Modals'
+import Modals from '../components/build-components/Modals'
 import "../css/Dice&Style.css"
-import StatisticsWindow from '../components/StatisticsWindow'
+import StatisticsWindow from '../components/build-components/StatisticsWindow'
 import Popup from "reactjs-popup"
 
 type ScoresText = "Win Player" | "Win COM" | "Draw" | "Inizia a Girare";

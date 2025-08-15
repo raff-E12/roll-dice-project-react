@@ -1,8 +1,8 @@
 import React from 'react'
-import Dice from '../components/build-components/Dice'
+import SideBar from '../components/SideBar'
 
 export default function GamePage() {
   return (<>
-  <Dice />
+  <SideBar />
   </>)
 }

@@ -257,6 +257,9 @@ export default function MaingPage() {
       const COMBonusPoints = () => {
         let streakCOM = 0;
         const PointsCOM = isScores.map(points => points.com);
+
+        if (isScores.length === 0) return  
+
         for (const key in PointsCOM) {
           const currentRoll = isScores[key].com;
           const checkNumber = PointsCOM[key];
@@ -304,8 +307,7 @@ export default function MaingPage() {
       setCount(isCount + 1);
       const ResultsComposition: ResultsType = { id: isCount, player: isPlayer, com: isCOM  };
       setReserve(list => [...list, ResultsComposition]);
-      const FindMatch = isReserve.find(element => element.id === isCount);
-      if (!FindMatch) return addResultsScores();
+      addResultsScores();
     };
 
 

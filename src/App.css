@@ -28,11 +28,12 @@
 @layer base {
   
   #root{
-    @apply h-screen w-screen backdrop-blur-xs;
+    @apply min-h-screen w-screen backdrop-blur-xs flex items-start justify-center;
   }
 
   body {
-    @apply h-auto flex items-start justify-start bg-[url(../public/img/bg_site.png)] bg-cover;
+    @apply min-h-screen w-screen flex items-start justify-start bg-[url(../public/img/bg_site.png)] bg-cover;
+    background-repeat: no-repeat;
   }
 }
 
@@ -40,62 +41,37 @@
 
 
 @layer components {
-
-   /***** SideBar Style *****/ 
    
    .slidebar-sc{
-    @apply w-[620px] h-screen flex flex-col items-center justify-start border-b-3 border-b-red-600;
     background-color: var(--color-bg);
     font-family: var(--font-lexend);
    }
 
-   .container-side .icon-sidebar{
-     @apply bg-red-500 z-20 w-[19px] h-[19px] p-5 flex justify-center items-center 
-     rounded-se-2xl rounded-br-2xl cursor-pointer;
-   }
-
-   .container-side .icon-brand{
-    @apply bg-red-500 w-[70px] h-[70px] flex items-center justify-center p-4 rounded-2xl mt-7 mb-7;
-   }
-
-   .sidebar-col{
-    @apply w-full bg-red-700 text-lg text-white font-bold cursor-pointer;
-   }
-
-   .drop-list{
-    @apply w-full flex flex-col text-center;
-   }
-
-   .front-col{
-     @apply flex flex-row justify-center items-center text-sm font-bold w-full p-2 hover:bg-red-600 
-    transition-all duration-300;
-   }
-
-   .sidebar-col .front-col .text-front{
-    @apply w-[90%] flex justify-between items-center p-1;
-   }
-
-   .drop-menu{
-    @apply w-full flex-col h-0 justify-center overflow-hidden transition-all duration-300;
-   }
-
-   .drop-menu.open{
-    @apply h-[134px] transition-all duration-300;
-   }
-
    .drop-menu li{
-    @apply w-full flex justify-start items-center text-[13px] p-2 border-l-6 border-l-yellow-500 hover:bg-red-600;
     font-family: var(--font-montserrant);
    }
 
-   /***** End SideBar Style *****/
+   .footer-sc{
+    @apply w-screen bg-[#bababa57] mt-7 h-auto flex flex-col p-4 2xl:flex-row xl:flex-row lg:flex-row md:flex-row gap-3;
+    font-family: var(--font-lexend);
+    @apply justify-start items-center text-white text-3xl font-bold backdrop-blur-2xl backdrop-saturate-50 border-2 border-t-white/15;
+   }
+
+   .main-sc{
+    @apply flex flex-col w-screen justify-between items-center h-screen;
+   }
+
+   .footer-logo{
+    @apply w-[100px] h-[100px] bg-[url("./../public/img/logo_3.png")] bg-contain bg-no-repeat;
+    @apply 2xl:w-[70px] 2xl:h-[70px];
+   }
    
 }
 
 @layer utilities {
 
   .icon{
-    @apply w-[34px] h-[34px] text-lg p-0.5 text-white flex items-center justify-center;
+    @apply w-[44px] h-[44px] text-lg p-0.5 text-white flex items-center justify-center;
   }
 
   .icon-max {
@@ -103,11 +79,31 @@
   }
 
   .container-side{
-    @apply w-[270px] h-screen fixed top-0 left-0 flex flex-row-reverse transition-all duration-200;
+    @apply w-[270px] h-screen z-40 fixed top-0 left-0 flex flex-row-reverse transition-all duration-200;
   }
 
   .container-side.close{
     @apply left-[-230px];
+  }
+
+  .debug-box{
+    @apply border-2 border-red-950;
+  }
+
+  .container-md{
+    @apply max-sm:w-[100%] sm:w-[60%] md:w-[60%] lg:w-[60%] xl:w-5xl 2xl:w-5xl;
+  }
+
+  .flex-box{
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .gap-col-x2{
+    @apply gap-3 flex flex-col 2xl:flex-row xl:flex-row lg:flex-row;
+  }
+
+  .container-xl{
+    @apply max-sm:w-[100%] sm:w-[100%] md:w-[99%] lg:w-[100%] xl:w-[90%] 2xl:w-[90%];
   }
 
 }

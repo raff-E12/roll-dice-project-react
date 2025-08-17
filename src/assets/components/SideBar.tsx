@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
+import { Squash as Hamburger } from 'hamburger-react'
+import "./css/SideBarStyle.css"
 
 export default function SideBar() {
-  const [isOpen, setOpen] = useState(false);
-  const [isDrop, setDrop] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [isDrop, setDrop] = useState<boolean>(false);
 
 
   return (<>
-  <section className={`container-side ${ isOpen ? "" : "close"}`} onMouseLeave={(e) => setOpen(false)}>
+  <section className={`container-side ${ isOpen ? "" : "close"}`} onMouseLeave={() => setOpen(false)}>
 
-    <div className='icon-sidebar' onClick={() => setOpen(value => !value)}>
+    <div className='icon-sidebar'>
         <span className='icon'>
-          <i className="bi bi-list"></i>
+          <Hamburger toggled={isOpen} toggle={setOpen} size={20} distance="lg" hideOutline={false}/>
         </span>
     </div>
 
@@ -24,7 +26,7 @@ export default function SideBar() {
 
         <div className='drop-list'>
 
-            <div className='sidebar-col' onMouseLeave={(e) => setDrop(false)}>
+            <div className='sidebar-col' onMouseLeave={() => setDrop(false)}>
                 <div className='front-col' onClick={() => setDrop(value => !value)}>
                    <div className='text-front'>
                       <i className="fa-solid fa-diamond"></i>

@@ -8,6 +8,7 @@
   --font-lexend: "Lexend", sans-serif;
   --font-montserrant: "Montserrat", sans-serif;
   --font-varela: "Varela Round", sans-serif;
+  --font-love-ya: "Love Ya Like A Sister";
   --color-primary: #3B82F6;
   --color-secondary: #FACC15;
   --color-accent: #22C55E; 
@@ -28,11 +29,11 @@
 @layer base {
   
   #root{
-    @apply min-h-screen w-screen backdrop-blur-xs flex items-start justify-center;
+    @apply min-h-lvh w-full backdrop-blur-xs flex items-start justify-center;
   }
 
   body {
-    @apply min-h-screen w-screen flex items-start justify-start bg-[url(../public/img/bg_site.png)] bg-cover;
+    @apply min-h-lvh w-full flex items-start justify-start bg-[url(../public/img/bg_site.png)] bg-cover;
     background-repeat: no-repeat;
   }
 }
@@ -52,18 +53,26 @@
    }
 
    .footer-sc{
-    @apply w-screen bg-[#bababa57] mt-7 h-auto flex flex-col p-4 2xl:flex-row xl:flex-row lg:flex-row md:flex-row gap-3;
+    @apply w-full bg-[#bababa57] h-auto flex flex-row p-2 gap-3;
     font-family: var(--font-lexend);
-    @apply justify-start items-center text-white text-3xl font-bold backdrop-blur-2xl backdrop-saturate-50 border-2 border-t-white/15;
+
+    @apply justify-start items-center text-white font-bold text-lg
+    backdrop-blur-2xl backdrop-saturate-50 border-t-2 border-t-white/15;
    }
 
    .main-sc{
-    @apply flex flex-col w-screen justify-between items-center h-screen;
+    @apply flex flex-col w-full justify-between items-center min-h-lvh
+    2xl:justify-between xl:justify-between gap-4;
    }
 
    .footer-logo{
     @apply w-[100px] h-[100px] bg-[url("./../public/img/logo_3.png")] bg-contain bg-no-repeat;
-    @apply 2xl:w-[70px] 2xl:h-[70px];
+
+    @apply 2xl:w-[70px] 2xl:h-[70px] lg:w-[50px] lg:h-[50px];
+   }
+
+   .text-board, .roll-index h4{
+    font-family: var(--font-love-ya)
    }
    
 }
@@ -79,7 +88,7 @@
   }
 
   .container-side{
-    @apply w-[270px] h-screen z-40 fixed top-0 left-0 flex flex-row-reverse transition-all duration-200;
+    @apply h-dvh z-40 fixed top-0 left-0 flex flex-row-reverse transition-all duration-200 w-[270px];
   }
 
   .container-side.close{
@@ -91,7 +100,7 @@
   }
 
   .container-md{
-    @apply max-sm:w-[100%] sm:w-[60%] md:w-[60%] lg:w-[60%] xl:w-5xl 2xl:w-5xl;
+    @apply max-sm:w-[100%] sm:w-[60%] md:w-[60%] lg:w-[60%] xl:w-5xl 2xl:w-5xl h-auto;
   }
 
   .flex-box{

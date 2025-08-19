@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import "./css/DiceStyle.css"
 
-export default function Dice() {
+export default function Dice({DiceRef}) {
   return (<>
-    <div className="dice" style={{transform:"rotateX(90deg) rotateY(0deg)"}}>
+    <div className="dice" ref={DiceRef}>
         <div className="face front"></div>
         <div className="face back"></div>
         <div className="face top"></div>

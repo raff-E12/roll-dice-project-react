@@ -4,7 +4,7 @@
 /***** Dice Styles *****/ 
 
  .dice{
-    @apply relative w-[100px] h-[100px] transform-3d transition-normal duration-500 ease-in-out shadow-2xl;
+    @apply relative w-[100px] h-[100px] transform-3d transition-normal duration-500 ease-in-out;
 
     @apply 2xl:scale-100 xl:scale-100 lg:scale-75 md:scale-75 sm:scale-75 max-sm:scale-75;
   }
@@ -85,7 +85,7 @@
 
   @keyframes rolling {
       50% {
-          transform: rotateX(455deg) rotateY(455deg);
+        transform: rotateX(455deg) rotateY(455deg);
       }
   }
 

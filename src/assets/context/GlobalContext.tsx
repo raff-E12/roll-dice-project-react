@@ -1,10 +1,18 @@
 import React, { createContext, useContext } from 'react'
 import useDiceScheme from '../hooks/UseDiceGame';
+import type { ExportTypes } from '../types/ComponentsExportsTypes';
 
 type PropsTypes = React.PropsWithChildren;
-type ExportValuesTypes = { RollDice: () => void };
 
-const contextCreateGlobal = createContext<ExportValuesTypes | {}>({});
+const contextCreateGlobal = createContext<ExportTypes>( { 
+  RollDice: () => {},
+  DiceTotalRef: { current: { first: null, second: null } },
+  isActive: false,
+  isTotal: 0,
+  isScores: { current: [] },
+  isFirst: 0,
+  isSecond: 0
+} );
 
 function GlobalContext({children}: PropsTypes) {
 

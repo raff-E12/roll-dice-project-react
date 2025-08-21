@@ -72,7 +72,11 @@
    }
 
    .text-board, .roll-index h4{
-    font-family: var(--font-love-ya)
+    font-family: var(--font-love-ya);
+   }
+
+   .text-roll-front, .icon-dice{
+    font-family: var(--font-montserrant);
    }
    
 }

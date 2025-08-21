@@ -30,6 +30,7 @@
   .interaction-board .btn.roll{
     @apply bg-green-700 bg-linear-to-b from-green-400 from-20% via-50% via-green-600 to-90% to-green-900;
     @apply border-3 border-green-950;
+    @apply disabled:bg-green-700 disabled:from-gray-700 disabled:via-gray-700 disabled:to-gray-700 disabled:pointer-events-none;
   }
 
   .interaction-board .btn.reset{

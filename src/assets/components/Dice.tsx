@@ -1,7 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, type Ref } from 'react'
 import "./css/DiceStyle.css"
+import type { RefDice } from '../types/ComponentsExportsTypes'
 
-export default function Dice({DiceRef}) {
+type PropsDice = { DiceRef: (dice: HTMLDivElement) => void };
+
+export default function Dice({DiceRef}: PropsDice ) {
   return (<>
     <div className="dice" ref={DiceRef}>
         <div className="face front"></div>

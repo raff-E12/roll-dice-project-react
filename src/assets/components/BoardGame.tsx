@@ -2,15 +2,16 @@ import React from 'react'
 import Dice from './Dice'
 import "./css/BoardBoxStyle.css";
 import { ExportGlobalContext } from '../context/GlobalContext';
+import type { ExportTypes } from '../types/ComponentsExportsTypes';
 
 export default function BoardGame() {
-  const { RollDice, DiceTotalRef } = ExportGlobalContext();
-
+  const { RollDice, DiceTotalRef, isActive } = ExportGlobalContext();
+   
   return (<>
   <section className='box-border'>
     <aside className='box-board'>
       <div className='interaction-board'>
-            <button className="btn roll" onClick={() => RollDice()}><i className="fa-solid fa-dice"></i></button>
+            <button className="btn roll" onClick={() => RollDice()} disabled={isActive}><i className="fa-solid fa-dice"></i></button>
             <button className="btn reset"><i className="fa-solid fa-arrow-rotate-left"></i></button>
         </div>
         <div className='board-dice flex-dice'>

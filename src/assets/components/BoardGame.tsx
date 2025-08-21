@@ -5,14 +5,14 @@ import { ExportGlobalContext } from '../context/GlobalContext';
 import type { ExportTypes } from '../types/ComponentsExportsTypes';
 
 export default function BoardGame() {
-  const { RollDice, DiceTotalRef, isActive } = ExportGlobalContext();
+  const { RollDice, DiceTotalRef, isActive, ResetGameMode } = ExportGlobalContext();
    
   return (<>
   <section className='box-border'>
     <aside className='box-board'>
       <div className='interaction-board'>
             <button className="btn roll" onClick={() => RollDice()} disabled={isActive}><i className="fa-solid fa-dice"></i></button>
-            <button className="btn reset"><i className="fa-solid fa-arrow-rotate-left"></i></button>
+            <button className="btn reset" onClick={() => ResetGameMode()}><i className="fa-solid fa-arrow-rotate-left"></i></button>
         </div>
         <div className='board-dice flex-dice'>
               <Dice DiceRef={(dice) => (DiceTotalRef.current.first = dice)}/>

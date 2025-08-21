@@ -7,7 +7,6 @@ export default function useDiceScheme() {
     const [isSecond, setSecond] = useState<number>(0);
     const DiceTotalRef = useRef<TypesDice>({ first: null, second: null });
     const isScores = useRef<TypesScores[]>([]);
-    const [isAlternative, setAlternative] = useState<TypesScores[]>([]);
     const [isActive, setActive] = useState<boolean>(false);
     const [isID, setID] = useState<number>(1);
     const [isTotal, setTotal] = useState<number>(0);
@@ -48,7 +47,7 @@ export default function useDiceScheme() {
             let AlternativeList = FindElement ? [...isScores.current] : [...isScores.current, BuildsList];
             isScores.current = AlternativeList;
         }, 4050);
-        
+
     }
 
     function DiceInput(first: number, second: number): void {
@@ -99,11 +98,16 @@ export default function useDiceScheme() {
 
     }
 
-    // function ResetGameMode(params:type) {
-        
-    // }
+    function ResetGameMode() {
+        setFirst(0);
+        setSecond(0);
+        setTotal(0);
+        MotionDice(DiceTotalRef.current.first, 1);
+        MotionDice(DiceTotalRef.current.second, 1);
+        window.alert("Resettato il valore di gioco!!");
+    }
 
     console.log(isScores);
 
-    return { RollDice, DiceTotalRef, isActive, isTotal, isScores, isFirst, isSecond };
+    return { RollDice, DiceTotalRef, isActive, isTotal, isScores, isFirst, isSecond, ResetGameMode };
 }

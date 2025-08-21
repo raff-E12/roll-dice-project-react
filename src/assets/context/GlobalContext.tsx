@@ -11,7 +11,8 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isTotal: 0,
   isScores: { current: [] },
   isFirst: 0,
-  isSecond: 0
+  isSecond: 0,
+  ResetGameMode: () => {}
 } );
 
 function GlobalContext({children}: PropsTypes) {

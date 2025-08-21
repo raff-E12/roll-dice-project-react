@@ -11,7 +11,7 @@ export default function GamePage() {
   const { isTotal, isScores, isActive, isFirst, isSecond } = ExportGlobalContext();
 
   return (<>
-  <div className='container-md debug-box p-3 flex-col'>
+  <div className='container-md p-3 flex-col'>
     <div className='w-full flex-col flex gap-3 2xl:flex-row xl:flex-row lg:flex-row'>
       <div className='w-full flex-col flex gap-3'>
           <TextBoard isActive={isActive}/>

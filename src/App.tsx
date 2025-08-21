@@ -13,7 +13,7 @@ function App() {
     <SideBar />
     <GlobalContext>
       <main className='main-sc'>
-            <div className='container-xl flex-box'>
+            <div className='container-xl flex-box min-h-lvh'>
             <Routes>
               <Route index element={<GamePage />}/>
             </Routes>

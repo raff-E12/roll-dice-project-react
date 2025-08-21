@@ -15,5 +15,6 @@ export interface ExportTypes {
     isTotal: number,
     isScores: React.RefObject<TypesScores[] | []>,
     isFirst: number,
-    isSecond: number
+    isSecond: number,
+    ResetGameMode: () => void
 };

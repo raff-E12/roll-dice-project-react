@@ -112,8 +112,12 @@
       box-shadow: inset 0px 0px 18px var(--color-black);
     }
 
+    .text-res {
+      @apply 2xl:text-3xl xl:text-3xl lg:text-2xl md:text-lg w-[50%] h-auto 2xl:w-[60%] xl:w-[60%]
+    }
+
     .board-rs{
-      @apply bg-cover h-[80px] items-center;
+      @apply bg-cover h-[110px] items-center 2xl:h-[80px] 2xl:text-left;
     }
     
 }

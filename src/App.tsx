@@ -5,6 +5,7 @@ import GamePage from './assets/pages/GamePage'
 import SideBar from './assets/components/SideBar'
 import Footer from './assets/components/Footer'
 import { GlobalContext } from './assets/context/GlobalContext'
+import StartBanner from './assets/components/StartBanner'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             </Routes>
           </div>
         <Footer />
+        <StartBanner />
       </main>
     </GlobalContext>
     </>

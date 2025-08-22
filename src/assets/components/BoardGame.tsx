@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dice from './Dice'
 import "./css/BoardBoxStyle.css";
 import { ExportGlobalContext } from '../context/GlobalContext';
 import type { ExportTypes } from '../types/ComponentsExportsTypes';
+import ModalAdv from './ModalAdv';
 
 export default function BoardGame() {
-  const { RollDice, DiceTotalRef, isActive, ResetGameMode } = ExportGlobalContext();
+  const { RollDice, DiceTotalRef, isActive, ResetGameMode, isOpen, onClose, setOpen } = ExportGlobalContext();
    
   return (<>
   <section className='box-border'>
     <aside className='box-board'>
       <div className='interaction-board'>
             <button className="btn roll" onClick={() => RollDice()} disabled={isActive}><i className="fa-solid fa-dice"></i></button>
-            <button className="btn reset" onClick={() => ResetGameMode()}><i className="fa-solid fa-arrow-rotate-left"></i></button>
+            <button className="btn reset" onClick={() => setOpen(true)}><i className="fa-solid fa-arrow-rotate-left"></i></button>
         </div>
         <div className='board-dice flex-dice'>
               <Dice DiceRef={(dice) => (DiceTotalRef.current.first = dice)}/>
@@ -24,5 +25,12 @@ export default function BoardGame() {
         </div>
     </aside>
   </section>
+  <ModalAdv 
+    isOpen={isOpen} 
+    onClose={onClose} 
+    isTitle={"Avvertimento"}
+    isMessage={"Sicuro di Voler Resettare la Partita in Corso."}
+    isOption={ResetGameMode}
+    />
   </>)
 }

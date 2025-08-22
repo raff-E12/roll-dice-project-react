@@ -65,7 +65,7 @@
    }
 
    .footer-logo{
-    @apply w-[100px] h-[100px] bg-[url("./../public/img/logo_3.png")] bg-contain bg-no-repeat;
+    @apply w-[70px] h-[70px] bg-[url("./../public/img/logo_3.png")] bg-contain bg-no-repeat;
 
     @apply 2xl:w-[70px] 2xl:h-[70px] lg:w-[50px] lg:h-[50px];
    }
@@ -76,6 +76,10 @@
 
    .text-roll-front, .icon-dice{
     font-family: var(--font-montserrant);
+   }
+
+   .popup-layout{
+    font-family: var(--font-lexend);
    }
    
 }

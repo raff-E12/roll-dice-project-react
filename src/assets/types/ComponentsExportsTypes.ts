@@ -16,5 +16,8 @@ export interface ExportTypes {
     isScores: React.RefObject<TypesScores[] | []>,
     isFirst: number,
     isSecond: number,
-    ResetGameMode: () => void
+    ResetGameMode: () => void,
+    isOpen: boolean,
+    onClose: () => void,
+    setOpen: (value: boolean) => void
 };

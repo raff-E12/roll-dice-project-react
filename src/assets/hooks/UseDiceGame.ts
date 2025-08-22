@@ -10,6 +10,8 @@ export default function useDiceScheme() {
     const [isActive, setActive] = useState<boolean>(false);
     const [isID, setID] = useState<number>(1);
     const [isTotal, setTotal] = useState<number>(0);
+    const [isOpen, setOpen] = useState<boolean>(false);
+    const onClose = () => setOpen(false);
 
     function RollDice() {
 
@@ -104,10 +106,19 @@ export default function useDiceScheme() {
         setTotal(0);
         MotionDice(DiceTotalRef.current.first, 1);
         MotionDice(DiceTotalRef.current.second, 1);
-        window.alert("Resettato il valore di gioco!!");
+        setOpen(false);
+        isScores.current = [];
     }
 
-    console.log(isScores);
-
-    return { RollDice, DiceTotalRef, isActive, isTotal, isScores, isFirst, isSecond, ResetGameMode };
+    return { RollDice, 
+             DiceTotalRef, 
+             isActive, 
+             isTotal, 
+             isScores, 
+             isFirst, 
+             isSecond, 
+             ResetGameMode, 
+             isOpen, 
+             onClose,
+             setOpen };
 }

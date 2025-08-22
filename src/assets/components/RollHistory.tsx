@@ -12,7 +12,7 @@ export default function RollHistory({ isScores }: PropsTypes) {
                 <h3>Lanci Effetuati</h3>
             </div>
             <ul className='list-rolls'>
-                {isScores.map((element, index) => {
+              {isScores.length !== 0 ? isScores.map((element, index) => {
                     return(
                     <li className='roll-index flex-index' key={index}>
                         <div className='icon-dice'>{element.id}</div>
@@ -22,7 +22,9 @@ export default function RollHistory({ isScores }: PropsTypes) {
                         </span>
                     </li>
                     )
-                })}
+                }) : <li className='roll-index flex items-center justify-center'>
+                 <h4 className='text-1xl font-bold text-white'>Tira i Dadi per Iniziare.</h4>
+                </li>}
             </ul>
         </aside>
     </div>

@@ -12,7 +12,10 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isScores: { current: [] },
   isFirst: 0,
   isSecond: 0,
-  ResetGameMode: () => {}
+  ResetGameMode: () => {},
+  isOpen: false,
+  onClose: () => {},
+  setOpen: () => {}
 } );
 
 function GlobalContext({children}: PropsTypes) {

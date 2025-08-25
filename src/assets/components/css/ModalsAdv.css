@@ -57,3 +57,47 @@
    animation-duration: 10s;
    @apply 2xl:w-[100px] 2xl:h-[100px] xl:w-[50px] xl:h-auto;
 }
+
+#popup-welcome.fade-in{
+   animation-name: Open-Window;
+   animation-duration: 2s;
+   animation-timing-function: ease-in-out;
+}
+
+#popup-welcome.fade-out{
+   animation-name: Open-Window;
+   animation-duration: 2s;
+   animation-direction: reverse;
+   animation-timing-function: ease-in-out;
+}
+
+#modal.fade-in{
+   animation-name: Modal-Animation;
+   animation-duration: 1s;
+   animation-direction: normal;
+   animation-timing-function: ease-in-out;
+}
+
+@keyframes Open-Window {
+   0% {
+      transform: translateY(-200px);
+      filter: opacity(0%);
+   }
+
+   100% {
+      transform: translateY(0px);
+      filter: opacity(100%);
+   }
+}
+
+@keyframes Modal-Animation { 
+  0%   { transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  3.4% { transform: matrix3d(0.316, 0, 0, 0, 0, 0.407, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  4.3% { transform: matrix3d(0.408, 0, 0, 0, 0, 0.54, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  6.81% { transform: matrix3d(0.659, 0, 0, 0, 0, 0.893, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  12.91% { transform: matrix3d(1.094, 0, 0, 0, 0, 1.328, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  18.72% { transform: matrix3d(1.212, 0, 0, 0, 0, 1.187, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  35.54% { transform: matrix3d(0.979, 0, 0, 0, 0, 0.962, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  63.26% { transform: matrix3d(1.007, 0, 0, 0, 0, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100%  { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+}

@@ -4,13 +4,13 @@ import "./css/ModalsAdv.css"
 import BackFig from "../../../public/img/back_logo.png"
 import LogoPage from "../../../public/img/logo_3.png"
 
-export default function StartBanner() {
-  const [isOpen, setOpen] = useState(true);
-  const onClose = () => setOpen(false);
+interface PropsTypes { isOpen: boolean, onClose: () => void };
+
+export default function StartBanner({isOpen, onClose}: PropsTypes) {
 
   return (<>
   <Popup open={isOpen} closeOnDocumentClick  onClose={onClose}>
-     <div className='popup-layout' id='popup-welcome'>
+     <div className={`popup-layout ${isOpen ? "fade-in" : "fade-out"}`} id='popup-welcome'>
         <div id='logo-modal'>
             <img src={LogoPage} alt="logo" />
             <img src={BackFig} alt="fig"/>
@@ -28,7 +28,7 @@ export default function StartBanner() {
             Pronto a iniziare? Premi Gioca e lascia che il destino faccia il suo corso.</p>
        </div>
        <div className='popup-btns'>
-         <button className='btn confirm' onClick={onClose}>skip</button>
+         <button className='btn confirm' onClick={onClose}>Ritorna</button>
        </div>
      </div>
   </Popup>

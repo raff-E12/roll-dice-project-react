@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import type { TextDiceThrowing, TypesDice, TypesScores } from '../types/ComponentsExportsTypes';
 
-export default function useDiceScheme() {
+export default function useClassicGame() {
 
     const [isFirst, setFirst] = useState<number>(0);
     const [isSecond, setSecond] = useState<number>(0);
@@ -66,6 +66,7 @@ export default function useDiceScheme() {
 
      function MotionDice(dice: HTMLDivElement | null, number: number) {
         dice!.style.animation = "rolling 4s";
+        dice!.classList.add("roll");
 
         switch (number) {
                 case 1:
@@ -95,6 +96,7 @@ export default function useDiceScheme() {
 
       setTimeout(() => {
             dice!.style.animation = "none";
+            dice!.classList.remove("roll");
             setActive(false);
        }, 4000);
 
@@ -104,6 +106,7 @@ export default function useDiceScheme() {
         setFirst(0);
         setSecond(0);
         setTotal(0);
+        setID(1);
         MotionDice(DiceTotalRef.current.first, 1);
         MotionDice(DiceTotalRef.current.second, 1);
         setOpen(false);

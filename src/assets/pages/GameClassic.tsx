@@ -7,8 +7,8 @@ import ResultBoard from '../components/ResultBoard'
 import Footer from '../components/Footer'
 import { ExportGlobalContext } from '../context/GlobalContext'
 
-export default function GamePage() {
-  const { isTotal, isScores, isActive, isFirst, isSecond } = ExportGlobalContext();
+export default function GameClassic() {
+  const { isTotal, isScores, isFirst, isSecond, isActive } = ExportGlobalContext();
 
   return (<>
   <div className='container-md p-3 flex-col'>

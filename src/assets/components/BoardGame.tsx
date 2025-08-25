@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import Dice from './Dice'
 import "./css/BoardBoxStyle.css";
-import { ExportGlobalContext } from '../context/GlobalContext';
-import type { ExportTypes } from '../types/ComponentsExportsTypes';
+import type { ExportTypes, RefDice } from '../types/ComponentsExportsTypes';
 import ModalAdv from './ModalAdv';
+import { ExportGlobalContext } from '../context/GlobalContext';
+
 
 export default function BoardGame() {
   const { RollDice, DiceTotalRef, isActive, ResetGameMode, isOpen, onClose, setOpen } = ExportGlobalContext();
-   
+
   return (<>
   <section className='box-border'>
     <aside className='box-board'>
@@ -25,6 +26,7 @@ export default function BoardGame() {
         </div>
     </aside>
   </section>
+  
   <ModalAdv 
     isOpen={isOpen} 
     onClose={onClose} 

@@ -5,6 +5,9 @@ export type RefDice = React.RefObject<{ first: HTMLDivElement | null, second: HT
 export type TypesScores =  { id: number, first: number, second: number, total: number };
 export type TypesDice = { first: HTMLDivElement | null, second: HTMLDivElement | null };
 export type TextDiceThrowing = "Pronto al lancio?" | "Occhio al risultato…" | "";
+export type MathType = { player: HTMLDivElement | null, com: HTMLDivElement | null };
+export type PointsTypes = { id?: number, player: number, com: number, bonus: { couple: number, triple: number, poker: number, fullrun: number } };
+export type MathScoresType = { id: number, player: number, com: number, win: "Player" | "COM" | "Draw" | "" };
 
 // Tipizzazione del Contesto
 
@@ -19,5 +22,6 @@ export interface ExportTypes {
     ResetGameMode: () => void,
     isOpen: boolean,
     onClose: () => void,
-    setOpen: (value: boolean) => void
+    setOpen: (value: boolean) => void,
+    RollDiceMatch: () => void
 };

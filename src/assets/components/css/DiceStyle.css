@@ -83,6 +83,10 @@
     box-shadow: 25px 25px, 50px 50px;
   }
 
+  .dice.roll{
+    @apply scale-75;
+  }
+
   @keyframes rolling {
       50% {
         transform: rotateX(455deg) rotateY(455deg);

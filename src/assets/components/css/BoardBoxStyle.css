@@ -3,7 +3,7 @@
 
 @layer components {
 
-   .box-border{
+  .box-border{
     @apply w-full bg-[url("../../../../public/img/wood_txt.jpg")] p-3 rounded-4xl overflow-hidden shadow-2xl;
    }
 

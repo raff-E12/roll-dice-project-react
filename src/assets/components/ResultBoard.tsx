@@ -3,7 +3,7 @@ import "./css/BoardBoxStyle.css"
 
 interface PropsTypes { isTotal: number, isFirst: number, isSecond: number };
 
-export default function ResultBoard({isTotal, isFirst, isSecond}: PropsTypes) {
+function ResultBoard({isTotal, isFirst, isSecond}: PropsTypes) {
   return (<>
    <section className='box-border mt-2'>
       <aside className='text-board board-rs'>
@@ -14,3 +14,6 @@ export default function ResultBoard({isTotal, isFirst, isSecond}: PropsTypes) {
     </section>
   </>)
 }
+
+
+export default React.memo(ResultBoard)

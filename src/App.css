@@ -81,6 +81,10 @@
    .popup-layout{
     font-family: var(--font-lexend);
    }
+
+   .start-screen{
+    font-family: var(--font-lexend);
+   }
    
 }
 

@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react'
-import useDiceScheme from '../hooks/UseDiceGame';
 import type { ExportTypes } from '../types/ComponentsExportsTypes';
+import useClassicGame from '../hooks/UseClassicGame';
+import useMatchGame from '../hooks/useCOMGame';
 
 type PropsTypes = React.PropsWithChildren;
 
@@ -15,14 +16,16 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   ResetGameMode: () => {},
   isOpen: false,
   onClose: () => {},
-  setOpen: () => {}
+  setOpen: () => {},
+  RollDiceMatch: () => {}
 } );
 
 function GlobalContext({children}: PropsTypes) {
 
-  const useDiceGame = useDiceScheme();
+  const useClassic = useClassicGame();
+  const useMatch = useMatchGame();
 
-  const ExportValues = { ...useDiceGame };
+  const ExportValues = { ...useClassic, ...useMatch };
 
   return (<>
   <contextCreateGlobal.Provider value={ExportValues}>

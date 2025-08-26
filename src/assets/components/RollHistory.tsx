@@ -1,10 +1,43 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import "./css/BoardBoxStyle.css"
-import type { TypesScores } from '../types/ComponentsExportsTypes'
+import type { MatchScoresType, TypesScores } from '../types/ComponentsExportsTypes'
 
-interface PropsTypes { isScores: TypesScores[] };
+interface PropsTypes { isScores?: TypesScores[], isMatch?: MatchScoresType[] };
 
-export default function RollHistory({ isScores }: PropsTypes) {
+function RollHistory({ isScores, isMatch }: PropsTypes) {
+  const [isGameset, setGameSet] = useState<"MatchGame" | "ClassicGame" | "">("");
+  const [isAlternate, setAlternate] = useState<boolean>(false);
+
+  useEffect(() => {
+
+    const pathPage = window.location.pathname;
+    const checkEmpty = (list?: any[]) => !list || list.length === 0;
+
+    switch (pathPage) {
+
+        case "/vs-com":
+        setGameSet("MatchGame");
+        if (isScores) {
+            setAlternate(prev => !prev)
+        }
+
+        break;
+
+        case "/classic":
+        setGameSet("ClassicGame");        
+        if (isMatch) {
+            setAlternate(prev => !prev)
+        } 
+
+        break;
+
+    }
+
+},[isScores, isMatch]);
+
+  
+  console.log(isAlternate, isGameset);
+
   return (
     <div className='box-border'>
         <aside className='board-imp flex gap-3 flex-col'>
@@ -12,7 +45,7 @@ export default function RollHistory({ isScores }: PropsTypes) {
                 <h3>Lanci Effetuati</h3>
             </div>
             <ul className='list-rolls'>
-              {isScores.length !== 0 ? isScores.map((element, index) => {
+              {isGameset === "ClassicGame" && isScores?.map((element, index) => {
                     return(
                     <li className='roll-index flex-index' key={index}>
                         <div className='icon-dice'>{element.id}</div>
@@ -22,7 +55,21 @@ export default function RollHistory({ isScores }: PropsTypes) {
                         </span>
                     </li>
                     )
-                }) : <li className='roll-index flex items-center justify-center'>
+                })}
+
+                {isGameset === "MatchGame" && isMatch?.map((element, index) => {
+                    return(
+                    <li className='roll-index flex-index' key={index}>
+                        <div className='icon-dice'>{element.id}</div>
+                        <span className='flex w-[160px] justify-between items-center gap-1'>
+                            <h4 className='text-1xl font-bold text-white'>Vincitore: {element.win}</h4>
+                            <h4 className='text-1xl font-bold text-white'>{element.player}-{element.com}</h4>
+                        </span>
+                    </li>
+                    )
+                })}
+
+                { isAlternate && <li className='roll-index flex items-center justify-center'>
                  <h4 className='text-1xl font-bold text-white'>Tira i Dadi per Iniziare.</h4>
                 </li>}
             </ul>
@@ -30,3 +77,5 @@ export default function RollHistory({ isScores }: PropsTypes) {
     </div>
   )
 }
+
+export default React.memo(RollHistory)

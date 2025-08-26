@@ -17,7 +17,15 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isOpen: false,
   onClose: () => {},
   setOpen: () => {},
-  RollDiceMatch: () => {}
+  RollDiceMatch: () => {},
+  isScoresMatch: { current: [] },
+  isPoints: { current: { player: 0, com: 0, points: { player: 0, com: 0, win: "" } } },
+  isStatics: { current: [] },
+  MatchRef: { current: { player: null, com: null }},
+  isActiveMatch: false, 
+  isPlayer: 0, 
+  isCOM: 0, 
+  isWin: "",
 } );
 
 function GlobalContext({children}: PropsTypes) {

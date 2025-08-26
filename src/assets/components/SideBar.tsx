@@ -35,8 +35,7 @@ export default function SideBar() {
                 </div>
                 <ul className={`drop-menu ${ isDrop ? "open" : ""}`}>
                   <li><NavLink to={"/classic"}>Classico</NavLink></li>
-                  <li><NavLink to="/vs-com">vs. COM</NavLink></li>
-                  <li>Tiro Libero</li>
+                  <li><NavLink to={"/vs-com"}>vs. COM</NavLink></li>
                 </ul>
             </div>
 

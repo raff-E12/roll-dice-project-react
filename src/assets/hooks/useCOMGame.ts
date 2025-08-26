@@ -11,7 +11,7 @@ export default function useMatchGame() {
     const isPoints = useRef<PointsTypes>({ player: 0, com: 0, points: { player: 0, com: 0, win: "" }});
     const isStatics = useRef<PointsTypes[]>([]);
     const [isActiveMatch, setActiveMatch] = useState<boolean>(false);
-    const [isID, setID] = useState<number>(0);
+    const [isID, setID] = useState<number>(1);
     const [isWin, setWin] = useState<string>("");
     const [isOpen, setOpen] = useState(false);
 

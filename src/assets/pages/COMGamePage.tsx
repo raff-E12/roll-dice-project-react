@@ -5,9 +5,10 @@ import RollHistory from '../components/RollHistory'
 import ResultBoard from '../components/ResultBoard'
 import COMBoardGame from '../components/COMBoardGame'
 import { ExportGlobalContext } from '../context/GlobalContext'
+import BonusPop from '../components/extra/BonusPop'
 
 export default function COMGamePage() {
-  const { isPoints, isScoresMatch, isStatics, isWin, isPlayer, isCOM, isActiveMatch } = ExportGlobalContext();
+  const { isScoresMatch, isWin, isPlayer, isCOM, isActiveMatch } = ExportGlobalContext();
 
   return (<>
    <div className='container-md p-3 flex-col'>
@@ -16,9 +17,10 @@ export default function COMGamePage() {
             <TextBoard isActive={isActiveMatch}/>
             <COMBoardGame />
         </div>
-        <RollHistory isMatch={isScoresMatch.current}/>
+        <RollHistory isMatch={isScoresMatch.current} isScores={[]}/>
       </div>
       <ResultBoard Win={isWin} PointPlayer={isPlayer} PointCOM={isCOM}/>
     </div>
+    <BonusPop />
   </>)
 }

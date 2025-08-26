@@ -11,24 +11,15 @@ function RollHistory({ isScores, isMatch }: PropsTypes) {
   useEffect(() => {
 
     const pathPage = window.location.pathname;
-    const checkEmpty = (list?: any[]) => !list || list.length === 0;
 
     switch (pathPage) {
 
         case "/vs-com":
         setGameSet("MatchGame");
-        if (isScores) {
-            setAlternate(prev => !prev)
-        }
-
         break;
 
         case "/classic":
-        setGameSet("ClassicGame");        
-        if (isMatch) {
-            setAlternate(prev => !prev)
-        } 
-
+        setGameSet("ClassicGame");
         break;
 
     }
@@ -36,7 +27,7 @@ function RollHistory({ isScores, isMatch }: PropsTypes) {
 },[isScores, isMatch]);
 
   
-  console.log(isAlternate, isGameset);
+//   console.log(isAlternate, isGameset);
 
   return (
     <div className='box-border'>
@@ -69,7 +60,7 @@ function RollHistory({ isScores, isMatch }: PropsTypes) {
                     )
                 })}
 
-                { isAlternate && <li className='roll-index flex items-center justify-center'>
+                { isScores?.length === 0 && isMatch?.length === 0 && <li className='roll-index flex items-center justify-center'>
                  <h4 className='text-1xl font-bold text-white'>Tira i Dadi per Iniziare.</h4>
                 </li>}
             </ul>

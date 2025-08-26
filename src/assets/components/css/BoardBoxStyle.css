@@ -64,36 +64,36 @@
     @apply text-yellow-100 text-shadow-2xs text-shadow-yellow-950 inset-shadow-sm inset-shadow-yellow-700;
   }
 
-.list-rolls{
-  @apply w-full backdrop-blur-3xl flex flex-col justify-start items-center bg-[#2bff0019] 
-  p-3 border-2 border-green-300 gap-3 overflow-y-scroll h-[110px] overflow-x-hidden rounded-2xl;
-  @apply 2xl:h-[340px] xl:h-[340px] lg:h-[340px];
-  box-shadow: inset 5px 4px 4px var(--color-green-950), inset -3px -3px 4px var(--color-green-950);
-}
+  .list-rolls{
+    @apply w-full backdrop-blur-3xl flex flex-col justify-start items-center bg-[#2bff0019] 
+    p-3 border-2 border-green-300 gap-3 overflow-y-scroll h-[110px] overflow-x-hidden rounded-2xl;
+    @apply 2xl:h-[340px] xl:h-[340px] lg:h-[340px];
+    box-shadow: inset 5px 4px 4px var(--color-green-950), inset -3px -3px 4px var(--color-green-950);
+  }
 
-.list-rolls::-webkit-scrollbar {
-  width: 4px;
-}
+  .list-rolls::-webkit-scrollbar {
+    width: 4px;
+  }
 
-.list-rolls::-webkit-scrollbar-thumb {
-  background-color: var(--color-green-700);
-  border-radius: 20px;
-}
+  .list-rolls::-webkit-scrollbar-thumb {
+    background-color: var(--color-green-700);
+    border-radius: 20px;
+  }
 
-.list-rolls::-webkit-scrollbar-track {
-  background: transparent;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-}
+  .list-rolls::-webkit-scrollbar-track {
+    background: transparent;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+  }
 
-.roll-index{
-   @apply w-full border-2 border-yellow-50 p-3 backdrop-blur-md bg-[#ffffff24] rounded-2xl shadow-2xs;
-}
+  .roll-index{
+    @apply w-full border-2 border-yellow-50 p-3 backdrop-blur-md bg-[#ffffff24] rounded-2xl shadow-2xs;
+  }
 
-.icon-dice{
-  @apply w-[30px] h-[30px] text-white bg-amber-500 flex relative justify-center items-center rounded-xl p-3;
-  box-shadow: inset 0px 2px 3px var(--color-yellow-950);
-}
+  .icon-dice{
+    @apply w-[30px] h-[30px] text-white bg-amber-500 flex relative justify-center items-center rounded-xl p-3;
+    box-shadow: inset 0px 2px 3px var(--color-yellow-950);
+  }
 
 }
 
@@ -118,6 +118,10 @@
 
     .board-rs{
       @apply bg-cover h-[110px] items-center 2xl:h-[80px] 2xl:text-left;
+    }
+
+    .container-pop{
+      @apply w-[400px];
     }
     
 }

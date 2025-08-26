@@ -52,7 +52,7 @@ export default function SideBar() {
               <div className='front-col'>
                 <div className='text-front'>
                     <i className="fa-solid fa-diamond"></i>
-                    <h4>Informazioni</h4>
+                    <h4>Statistiche</h4>
                 </div>
               </div>
             </div>

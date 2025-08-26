@@ -17,7 +17,7 @@ export default function GameClassic() {
           <TextBoard isActive={isActive}/>
           <BoardGame />
       </div>
-      <RollHistory isScores={isScores.current}/>
+      <RollHistory isScores={isScores.current} isMatch={[]}/>
     </div>
     <ResultBoard isTotal={isTotal} isFirst={isFirst} isSecond={isSecond}/>
   </div>

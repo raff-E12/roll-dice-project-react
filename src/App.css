@@ -106,6 +106,10 @@
     @apply left-[-230px];
   }
 
+  .container-full{
+    @apply w-full h-lvh flex;
+  }
+
   .debug-box{
     @apply border-2 border-red-950;
   }

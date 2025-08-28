@@ -1,7 +1,14 @@
 import React from 'react'
 
 export default function LoadingPage() {
-  return (
-    <div>LoadingPage</div>
-  )
+  return (<>
+    <section className='loading-sc container-full debug-box'>
+       <div>
+         <div></div>
+         <div>
+            <div></div>
+         </div>
+       </div>
+    </section>
+  </>)
 }

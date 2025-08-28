@@ -3,6 +3,7 @@ import SideBar from '../components/SideBar'
 import { Outlet } from 'react-router'
 import Footer from '../components/Footer'
 import { GlobalContext } from '../context/GlobalContext'
+import LoadingPage from '../components/extra/LoadingPage'
 
 export default function GameLayout() {
   return (<>
@@ -15,5 +16,6 @@ export default function GameLayout() {
       </GlobalContext>
     <Footer />
     </main>
+    <LoadingPage />
   </>)
 }

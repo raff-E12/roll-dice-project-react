@@ -14,12 +14,12 @@ export default function COMGamePage() {
    <div className='container-md p-3 flex-col'>
       <div className='w-full flex-col flex gap-3 2xl:flex-row xl:flex-row lg:flex-row'>
         <div className='w-full flex-col flex gap-3'>
-            <TextBoard isActive={false}/>
+            <TextBoard isActive={isActiveMatch}/>
             <COMBoardGame />
         </div>
-        <RollHistory isMatch={[]} isScores={[]}/>
+        <RollHistory isMatch={isScoresMatch.current} isScores={[]}/>
       </div>
-      <ResultBoard Win={""} PointPlayer={0} PointCOM={0}/>
+      <ResultBoard Win={isWin} PointPlayer={isPlayer} PointCOM={isCOM}/>
     </div>
     <BonusPop />
   </>)

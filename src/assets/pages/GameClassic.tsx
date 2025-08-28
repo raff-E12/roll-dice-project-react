@@ -14,12 +14,12 @@ export default function GameClassic() {
   <div className='container-md p-3 flex-col'>
     <div className='w-full flex-col flex gap-3 2xl:flex-row xl:flex-row lg:flex-row'>
       <div className='w-full flex-col flex gap-3'>
-          <TextBoard isActive={false}/>
+          <TextBoard isActive={isActive}/>
           <BoardGame />
       </div>
-      <RollHistory isScores={[]} isMatch={[]}/>
+      <RollHistory isScores={isScores.current} isMatch={[]}/>
     </div>
-    <ResultBoard isTotal={0} isFirst={0} isSecond={0}/>
+    <ResultBoard isTotal={isTotal} isFirst={isFirst} isSecond={isSecond}/>
   </div>
   </>)
 }

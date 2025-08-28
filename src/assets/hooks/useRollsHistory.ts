@@ -60,7 +60,7 @@ export default function useRollsHistory(isActive: boolean) {
 
             AlternativeList = FindElement ? [...isScoresMatch.current] : [...isScoresMatch.current, { id: isID, ...isMatch.current }];
             isScoresMatch.current = AlternativeList; 
-            }, 4010)
+            }, 4040)
 
             for (let key = 0; key < PointsList.length; key++) {
             const currentRoll = isScoresMatch.current[key].player;

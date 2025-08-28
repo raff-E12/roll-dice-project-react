@@ -31,20 +31,31 @@ export default function useMatchGame() {
             if (PlayerDice > COMDice) {
               PointsPlayer++;
               WinMatch = "Player";
-              setPlayer(isPlayer + 1)
-              setWin(WinMatch)
+
+              setTimeout(() => {
+                setPlayer(isPlayer + 1)
+                setWin(WinMatch)
+              }, 4010);
+
             } else if (PlayerDice < COMDice) {
               WinMatch = "COM";
               PointsCOM++;
+              
+              setTimeout(() => {
               setCOM(isCOM + 1)
               setWin(WinMatch)
+              }, 4010);
+
             } else if (PlayerDice === COMDice) {
               WinMatch = "Draw";
               PointsPlayer++;
               PointsCOM++;
-              setPlayer(isPlayer + 1)
-              setCOM(isCOM + 1)
-              setWin(WinMatch)
+              
+              setTimeout(() => {
+                setPlayer(isPlayer + 1)
+                setCOM(isCOM + 1)
+                setWin(WinMatch)
+              }, 4010);
             }
 
           setTarget("MatchMode");
@@ -52,22 +63,22 @@ export default function useMatchGame() {
            setTimeout(() => {
             setDiceOne(PlayerDice);
             setDiceTwo(COMDice);
-           }, 4010);
+           }, 500);
             
 
           setMode("MatchMode");
 
-           setTimeout(() => {
+          setTimeout(() => {
             isMatch.current.player = PlayerDice;
             isMatch.current.com = COMDice;
             isMatch.current.win = WinMatch;
             isMatch.current.count.player = PointsPlayer;
             isMatch.current.count.com = PointsCOM;
-           }, 4030);
+           }, 4020);
 
            setTimeout(() => {
              setActiveMatch(false);
-           }, 4050);
+           }, 4030);
 
         }
 

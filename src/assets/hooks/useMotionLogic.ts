@@ -63,9 +63,7 @@ function useMotionLogic(DiceRefGame: TypesDice | MatchType) {
        }, 4039);
 
     }
-
-    console.log(isTarget)
-
+    
     return { setTarget, setDiceOne, setDiceTwo };
 }
 

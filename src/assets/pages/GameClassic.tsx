@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SideBar from '../components/SideBar'
 import BoardGame from '../components/BoardGame'
 import TextBoard from '../components/TextBoard'
@@ -14,12 +14,12 @@ export default function GameClassic() {
   <div className='container-md p-3 flex-col'>
     <div className='w-full flex-col flex gap-3 2xl:flex-row xl:flex-row lg:flex-row'>
       <div className='w-full flex-col flex gap-3'>
-          <TextBoard isActive={isActive}/>
+          <TextBoard isActive={false}/>
           <BoardGame />
       </div>
-      <RollHistory isScores={isScores.current} isMatch={[]}/>
+      <RollHistory isScores={[]} isMatch={[]}/>
     </div>
-    <ResultBoard isTotal={isTotal} isFirst={isFirst} isSecond={isSecond}/>
+    <ResultBoard isTotal={0} isFirst={0} isSecond={0}/>
   </div>
   </>)
 }

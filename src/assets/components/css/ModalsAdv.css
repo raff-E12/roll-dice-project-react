@@ -8,7 +8,7 @@
 .popup-layout{
    @apply bg-white w-[250px] h-auto relative flex flex-col p-6 rounded-2xl border-2 border-red-500/35 gap-5;
 
-   @apply 2xl:w-[620px] xl:w-[520px] lg:w-[540px] md:w-[560px] sm:w-[560px] min-sm:w-[450px];
+   @apply sm:w-[560px] min-sm:w-[450px] md:w-[560px] lg:w-[540px] xl:w-[520px] 2xl:w-[620px];
 }
 
 .popup-title{
@@ -43,7 +43,7 @@
 #logo-modal{
    @apply rotate-[20deg] w-[50px] h-[60px] absolute left-[-20px] top-[-3px];
 
-   @apply 2xl:w-[120px] 2xl:h-[120px] xl:w-[51px] xl:h-[80px];
+   @apply xl:w-[51px] xl:h-[80px] 2xl:w-[120px] 2xl:h-[120px];
 }
 
 #logo-modal img:nth-of-type(1){
@@ -55,7 +55,7 @@
 #logo-modal img:nth-of-type(2){
    @apply content-none w-[40px] h-auto absolute scale-200 right-[3px] top-[5px] -z-10 animate-spin;
    animation-duration: 10s;
-   @apply 2xl:w-[100px] 2xl:h-[100px] xl:w-[50px] xl:h-auto;
+   @apply xl:w-[50px] xl:h-auto 2xl:w-[100px] 2xl:h-[100px];
 }
 
 #popup-welcome.fade-in{

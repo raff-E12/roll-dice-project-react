@@ -67,7 +67,7 @@
   .list-rolls{
     @apply w-full backdrop-blur-3xl flex flex-col justify-start items-center bg-[#2bff0019] 
     p-3 border-2 border-green-300 gap-3 overflow-y-scroll h-[110px] overflow-x-hidden rounded-2xl;
-    @apply 2xl:h-[340px] xl:h-[340px] lg:h-[340px];
+    @apply lg:h-[340px] xl:h-[340px] 2xl:h-[340px];
     box-shadow: inset 5px 4px 4px var(--color-green-950), inset -3px -3px 4px var(--color-green-950);
   }
 
@@ -113,7 +113,7 @@
     }
 
     .text-res {
-      @apply 2xl:text-3xl xl:text-3xl lg:text-2xl md:text-lg w-[50%] h-auto 2xl:w-[60%] xl:w-[60%]
+      @apply h-auto md:text-lg w-[50%] lg:text-2xl xl:text-3xl xl:w-[60%] 2xl:text-3xl 2xl:w-[60%];
     }
 
     .board-rs{

@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react'
 import type { ExportTypes } from '../types/ComponentsExportsTypes';
-import useClassicGame from '../hooks/useClassicMode';
-import useMatchGame from '../hooks/useCOMGame';
+import useClassicMode from '../hooks/useClassicMode';
+import useMatchMode from '../hooks/useMatchMode';
 
 type PropsTypes = React.PropsWithChildren;
 
@@ -30,8 +30,8 @@ const contextCreateGlobal = createContext<ExportTypes>( {
 
 function GlobalContext({children}: PropsTypes) {
 
-  const useClassic = useClassicGame();
-  const useMatch = useMatchGame();
+  const useClassic = useClassicMode();
+  const useMatch = useMatchMode();
 
   const ExportValues = { ...useClassic, ...useMatch };
 

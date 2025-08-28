@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
 import type { ExportTypes } from '../types/ComponentsExportsTypes';
-import useClassicGame from '../hooks/UseClassicGame';
+import useClassicGame from '../hooks/useClassicMode';
 import useMatchGame from '../hooks/useCOMGame';
 
 type PropsTypes = React.PropsWithChildren;

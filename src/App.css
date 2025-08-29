@@ -61,12 +61,11 @@
 
    .main-sc{
     @apply flex flex-col w-full justify-between items-center h-auto
-    2xl:justify-between xl:justify-between gap-4;
+    2xl:justify-between xl:justify-between gap-4 relative;
    }
 
    .footer-logo{
     @apply w-[70px] h-[70px] bg-[url("./../public/img/logo_3.png")] bg-contain bg-no-repeat;
-
     @apply 2xl:w-[70px] 2xl:h-[70px] lg:w-[50px] lg:h-[50px];
    }
 
@@ -120,6 +119,10 @@
 
   .gap-col-x2{
     @apply gap-3 flex flex-col 2xl:flex-row xl:flex-row lg:flex-row;
+  }
+
+  .container-full{
+    @apply w-full h-full flex;
   }
 
   .container-xl{

@@ -1,0 +1,25 @@
+
+@import "tailwindcss";
+
+.loading-sc {
+    @apply absolute top-0 left-0 z-50 items-center justify-center overflow-hidden
+    bg-red-700 bg-radial from-red-500 from-14% to-red-700 to-70%;
+}
+
+.loading-box{
+    @apply w-[40%] h-auto gap-3 flex items-center justify-center flex-col;
+    @apply sm:w-[50%] md:w-[57%] lg:w-[40%] xl:w-[28%] 2xl:w-[31%];
+}
+
+.loading-box .logo-loading {
+    @apply w-[100px] h-[100px] bg-[url("../../../../public/img/logo_3.png")] bg-cover bg-no-repeat bg-center;
+    @apply lg:w-[130px] lg:h-[130px] xl:w-[190px] xl:h-[190px];
+}
+
+.icon-ld-box {
+    @apply w-[90px] h-[80px] flex items-center justify-center p-2;
+}
+
+.icon-ld-box #icon-loading{
+    @apply text-6xl text-white;
+}

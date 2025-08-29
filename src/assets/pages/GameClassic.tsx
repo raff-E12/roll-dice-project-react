@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import SideBar from '../components/SideBar'
 import BoardGame from '../components/BoardGame'
 import TextBoard from '../components/TextBoard'

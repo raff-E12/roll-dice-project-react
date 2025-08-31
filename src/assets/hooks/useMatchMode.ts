@@ -9,12 +9,12 @@ export default function useMatchGame() {
     const MatchRef = useRef<MatchType>({ player: null, com: null });
     const [isActiveMatch, setActiveMatch] = useState<boolean>(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(MatchRef.current);
-    const { isMatch, isScoresMatch, setMode, isPoints, isStatics } = useRollsHistory(isActiveMatch);
+    const { isMatch, isScoresMatch, setMode, isPoints, isStatics, setID } = useRollsHistory(isActiveMatch);
     
     const [isPlayer, setPlayer] = useState<number>(0);
     const [isCOM, setCOM] = useState<number>(0);
     const [isWin, setWin] = useState<string>("");
-    const [isOpen, setOpen] = useState(false);
+    const [isReset, setReset] = useState(false);
 
      function RollDiceMatch() {
 
@@ -84,7 +84,21 @@ export default function useMatchGame() {
 
     }
 
-    useCallback(RollDiceMatch, []);
+      function ResetMatchMode() {
+        setPlayer(0)
+        setCOM(0)
+        setTarget("MatchMode")
+        setDiceOne(1)
+        setID(1);
+        setDiceTwo(1)
+        setReset(false);
+        setMode("MatchMode");
+        isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }};
+        isScoresMatch.current = [];
+        isStatics.current = [];
+    }
+
+    console.log(isStatics.current, isPoints.current, isScoresMatch.current)
 
     return { RollDiceMatch, 
              isPoints, 
@@ -94,5 +108,8 @@ export default function useMatchGame() {
              isActiveMatch, 
              isPlayer, 
              isCOM, 
-             isWin }
+             isWin,
+             isReset,
+             setReset,
+             ResetMatchMode }
 }

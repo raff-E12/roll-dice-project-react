@@ -21,6 +21,5 @@ export default function COMGamePage() {
       </div>
       <ResultBoard Win={isWin} PointPlayer={isPlayer} PointCOM={isCOM}/>
     </div>
-    <BonusPop />
   </>)
 }

@@ -10,9 +10,11 @@ import GameClassic from './assets/pages/GameClassic'
 import GameStartPage from './assets/pages/GameStartPage'
 import GameLayout from './assets/layout/GameLayout'
 import LoadingPage from './assets/components/extra/LoadingPage'
+import StaticsPages from './assets/pages/StaticsPages.tsx'
 
-  const GamePageClassic = lazy(() => import("./assets/pages/GameStartPage.tsx"));
-  const GamePageMatch = lazy(() => import("./assets/pages/COMGamePage.tsx"));
+/* Caricamento Lazy Mode */
+const GamePageClassic = lazy(() => (import("./assets/pages/GameStartPage.tsx")));
+const GamePageMatch = lazy(() => import("./assets/pages/COMGamePage.tsx"));
 
 function App() {
   const [isLoading, setLoading] = useState(true);
@@ -36,6 +38,8 @@ function App() {
           <Route path='/classic' element={<GameClassic/>}/>
           <Route path='/vs-com' element={<COMGamePage/>}/>
         </Route>
+
+        <Route path='/statics-game' element={<StaticsPages />}/>
 
       </Routes>
     </Suspense>

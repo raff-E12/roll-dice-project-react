@@ -34,4 +34,7 @@ export interface ExportTypes {
     isPlayer: number, 
     isCOM: number, 
     isWin: string,
+    setReset: (value: boolean) => void,
+    isReset: boolean,
+    ResetMatchMode: () => void
 };

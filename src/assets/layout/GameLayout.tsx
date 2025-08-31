@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import { GlobalContext } from '../context/GlobalContext'
 import LoadingPage from '../components/extra/LoadingPage'
 
+  /* Caricamento Lazy Mode */
   const GamePageClassic = lazy(() => import("../pages/GameClassic.tsx"));
   const GamePageMatch = lazy(() => import("../pages/COMGamePage.tsx"));
   const BoardClassic = lazy(() => import("../components/BoardGame.tsx"));

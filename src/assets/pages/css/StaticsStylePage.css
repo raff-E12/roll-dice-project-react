@@ -1,0 +1,174 @@
+
+@import "tailwindcss";
+
+@layer components {
+    .staics-page{
+        @apply bg-red-700 bg-radial from-red-500 from-14% to-red-700 to-70% flex-col;
+    }
+
+    .statics-container{
+        @apply h-auto flex items-center justify-center flex-col gap-3;
+    }
+
+    .statics-gradient{
+        @apply bg-gradient-to-b from-20% from-yellow-200 via-79% via-yellow-400 to-90% to-yellow-500 
+        w-[80%] flex justify-center items-center rounded-3xl shadow-2xl shadow-black;
+    }
+
+    .btn-switch{
+        @apply p-2 items-end justify-end gap-3 bg-gradient-to-b from-5% from-orange-300/45 via-60% via-orange-400 to-90% to-yellow-600;
+    }
+
+    .btn-switch .btn{
+        @apply p-2 w-[70px] rounded-3xl bg-black text-white text-xl text-center cursor-pointer relative overflow-hidden;
+        @apply active:scale-90 active:transition-transform active:duration-75 active:ease-out not-active:scale-100;
+    }
+
+    .btn-switch .btn::after{
+        content: "";
+        @apply bg-gradient-to-b w-[83px] h-[90px] p-2 absolute top-0 z-100 left-0 rounded-3xl from-20% 
+        to-white/40 via-10% via-transparent/60 to-40% from-transparent/30;
+    }
+
+    .btn-switch .btn.classic{
+        @apply bg-gradient-to-b from-15% from-yellow-400 to-105% to-yellow-200 border-2 border-yellow-400 inset-shadow-sm inset-shadow-yellow-700;
+    }
+
+    .btn-switch .btn.match{
+        @apply bg-gradient-to-b from-15% from-red-400 to-105% to-red-200 border-2 border-red-500 inset-shadow-sm inset-shadow-red-700;
+    }
+
+    .btn-switch .btn.status{
+        @apply bg-gradient-to-b from-15% from-blue-400 to-105% to-blue-200 border-2 border-blue-500 inset-shadow-sm inset-shadow-blue-700;
+    }
+
+    .statics-gradient .text-section{
+        @apply w-full bg-red-800 rounded-3xl p-2 h-auto flex items-center justify-center inset-shadow-sm inset-shadow-black;
+    }
+
+    .list-sc{
+        @apply flex w-full bg-blue-700 justify-center items-start flex-col;
+    }
+
+    .list-index{
+        @apply w-full bg-blue-600/70 p-3 flex items-center justify-center;
+    }
+
+    .list-index ul{
+        @apply flex justify-center items-center text-white font-bold text-sm gap-2;
+        @apply w-[100%];
+    }
+
+    .list-index .rows-mod{
+        @apply flex justify-center gap-2 items-center w-[190px] sm:w-[180px] md:w-[180px] lg:w-[259px] xl:w-[420px] 2xl:w-[518px];
+    }
+
+    .list-index ul li:nth-child(1){
+        @apply w-[120px] sm:w-[120px];
+    }
+
+    .list-index ul li:nth-child(2){
+        @apply w-full;
+    }
+
+    .list-grid{
+        @apply flex justify-start items-center flex-col w-full h-[150px] relative overflow-y-scroll;
+    }
+
+    .list-grid::-webkit-scrollbar {
+        @apply bg-blue-800;
+    }
+
+    .list-grid::-webkit-scrollbar-thumb {
+        @apply bg-gradient-to-b from-15%
+        from-yellow-400 to-105% to-yellow-200 rounded-2xl border-2 border-yellow-500;
+    }
+
+    .col-stat {
+        @apply flex w-full flex-row h-[60px] gap-2 p-2;
+    }
+
+    .col-stat .row-icon{
+        @apply w-[120px] bg-blue-400 flex items-center justify-center p-3 
+        rounded-2xl font-bold text-white text-xl;
+    }
+
+    .col-stat .row-text{
+        @apply w-full text-center flex p-3 justify-center items-center bg-blue-400 rounded-2xl;
+    }
+
+    .col-stat .row-text ul{
+        @apply flex flex-row gap-2 w-[190px] sm:w-[180px] md:w-[180px] lg:w-[240px] xl:w-[440px] 2xl:w-[537px];
+        @apply justify-between items-center font-bold text-white text-xl;
+    }
+
+    .list-grid .enblem-bonus{
+        @apply absolute -right-2 top-2.5 bg-gradient-to-b from-15% from-orange-400 to-105% to-orange-200 border-2 border-orange-400 w-[60px] h-[40px] sm:-right-0 lg:w-[90px] 
+        flex justify-center items-center rounded-l-2xl text-white text-xl shadow-xl shadow-blue-950;
+    }
+
+    .row-empty{
+        @apply w-full text-center flex p-3 justify-center
+        items-center rounded-2xl font-bold text-white text-xl;
+    }
+
+    .row-empty p{
+        @apply w-full text-center flex p-2 justify-center
+        items-center bg-blue-400 rounded-2xl font-bold text-white text-xl;
+    }
+
+    .btn-sections {
+        @apply flex justify-center items-center gap-2;
+    }
+
+    .btn-sections .btn{
+    box-shadow: inset 0 3px 6px rgba(255,255,255,0.4),
+              inset 0 -3px 6px rgba(0,0,0,0.3),
+              0 4px 6px rgba(0,0,0,0.4);
+    @apply text-2xl text-white w-[60px] h-[60px] p-3 rounded-4xl flex justify-center items-center cursor-pointer;
+    text-shadow: 0 1px 1px rgba(64, 64, 64, 0.7);
+
+    @apply active:scale-75 active:transition-transform active:duration-75 active:ease-in-out;
+  }
+
+   .btn-sections .btn.home{
+    @apply bg-green-700 bg-linear-to-b from-green-400 from-20% via-50% via-green-600 to-90% to-green-900;
+    @apply border-3 border-green-950;
+    @apply disabled:bg-green-700 disabled:from-gray-700 disabled:via-gray-700 disabled:to-gray-700 disabled:pointer-events-none;
+  }
+
+}
+
+@layer utilities {
+    .flex-center {
+        @apply flex items-center justify-center;
+    }
+
+    .st-responsive {
+        @apply sm:w-[100%] md:w-[90%] lg:w-[89%] xl:w-[90%] 2xl:w-[90%];
+    }
+
+    .st-responsive.md{
+        @apply sm:w-[80%] md:w-[70%] min-lg:w-[80%] lg:w-[80%] xl:w-[60%] 2xl:w-[60%];
+    }
+
+    .st-full{
+        @apply w-full h-full flex;
+    }
+
+    .inset-st{
+        @apply inset-shadow-sm inset-shadow-black rounded-2xl overflow-hidden border-2 border-yellow-200/20;
+    }
+
+    .logo-st{
+        @apply bg-[url("../../../../public/img/Statics_logo.png")] bg-cover bg-center bg-no-repeat w-[260px] h-[130px];
+    }
+
+    .st-box-in{
+        @apply bg-red-700 p-3 rounded-3xl flex items-center justify-end;
+    }
+
+    .st-flex-col{
+        @apply flex items-center justify-center flex-col;
+    }
+}

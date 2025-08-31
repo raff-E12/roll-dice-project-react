@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 .loading-sc {
-    @apply absolute top-0 left-0 z-50 items-center justify-center overflow-hidden
+    @apply absolute h-full top-0 left-0 z-50 items-center justify-center overflow-hidden
     bg-red-700 bg-radial from-red-500 from-14% to-red-700 to-70%;
 }
 

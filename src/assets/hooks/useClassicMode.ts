@@ -15,7 +15,7 @@ export default function useClassicGame() {
 
     const onClose = () => setOpen(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(DiceTotalRef.current);
-    const { isScores, isClassic, setMode } = useRollsHistory(isActive);
+    const { isScores, isClassic, setMode, setID } = useRollsHistory(isActive);
 
     function RollDice () {
 
@@ -53,7 +53,15 @@ export default function useClassicGame() {
         setFirst(0);
         setSecond(0);
         setTotal(0);
+        setTarget("ClassicMode")
+        setDiceOne(1)
+        setID(1);
+        setDiceTwo(1)
         setOpen(false);
+        setMode("ClassicMode");
+        isClassic.current.first = 0;
+        isClassic.current.second = 0;
+        isClassic.current.total = 0;
         isScores.current = [];
     }
 

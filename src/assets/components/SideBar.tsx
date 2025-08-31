@@ -49,12 +49,12 @@ export default function SideBar() {
             </div>
 
             <div className='sidebar-col'>
-              <div className='front-col'>
+             <NavLink className={"front-col"} to={"/statics-game"}>
                 <div className='text-front'>
                     <i className="fa-solid fa-diamond"></i>
                     <h4>Statistiche</h4>
                 </div>
-              </div>
+             </NavLink>
             </div>
 
             <div className='sidebar-col'>

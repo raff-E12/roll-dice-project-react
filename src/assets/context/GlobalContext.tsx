@@ -26,6 +26,9 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isPlayer: 0, 
   isCOM: 0, 
   isWin: "",
+  isReset: false,
+  setReset: () => {},
+  ResetMatchMode: () => {}
 } );
 
 function GlobalContext({children}: PropsTypes) {

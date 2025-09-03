@@ -1,0 +1,74 @@
+
+@import "tailwindcss";
+
+.window-container {
+    @apply absolute z-20 w-full h-full top-0 left-0 backdrop-blur-xl;
+}
+
+.points-player-window {
+    @apply flex justify-center rounded-2xl p-3 items-center relative flex-col bg-gradient-to-b from-15% from-yellow-400 to-105% to-yellow-200 border-2 border-yellow-400 inset-shadow-sm inset-shadow-yellow-700;
+    @apply max-sm:w-[440px] sm:w-[440px] md:w-[450px] lg:w-[440px] xl:w-[530px] 2xl:w-[690px] gap-2 z-20;
+}
+
+.window-cont{
+    @apply w-full p-1 bg-yellow-600 rounded-2xl inset-shadow-sm inset-shadow-yellow-950 grid grid-cols-2 gap-1 overflow-hidden;
+}
+
+.col-window-sc{
+    @apply bg-yellow-200 p-3 flex items-center justify-start gap-4 rounded-2xl;
+}
+
+.dice-icon{
+    @apply w-[50px] h-[50px] bg-yellow-500/55 rounded-xl flex justify-center
+    items-center text-2xl text-yellow-100 border-2 border-yellow-500;
+}
+
+.dice-icon::after {
+    content: "";
+    @apply p-3 w-[40px] h-[40px] bg-amber-500/50 rounded-xl;
+}
+
+.window-text{
+    @apply flex justify-center items-start flex-col;
+}
+
+.window-text h4{
+    @apply font-bold capitalize text-sm;
+}
+
+.dice-icon i{
+    @apply text-shadow-lg text-shadow-amber-600 absolute;
+}
+
+.col-medium-rs{
+    @apply w-full grid grid-cols-2 gap-1 col-span-2;
+}
+
+.col-medium-rs .col-md{
+    @apply p-2 bg-yellow-500 font-bold text-white flex items-center justify-center rounded-xl;
+}
+
+.left-selection{
+    @apply absolute -right-9 top-10 -z-10 w-[120px] h-auto flex justify-end bg-yellow-700 items-end border-3 border-yellow-700 rounded-2xl;
+}
+
+.cont-left{
+    @apply w-[50px] h-[120px] flex justify-start items-center flex-col overflow-hidden rounded-tr-2xl rounded-br-2xl;
+}
+
+.cont-left .sel-btn{
+    @apply w-[60px] h-[60px] flex items-center justify-center text-white text-shadow-2xs inset-shadow-sm inset-shadow-yellow-700;
+    @apply active:scale-95 active:inset-shadow-2xs;
+}
+
+.sel-btn.classic{
+    @apply bg-gradient-to-b from-1% via-120% via-blue-200 from-blue-400 to-1% to-blue-600;
+}
+
+.sel-btn.match{
+    @apply bg-gradient-to-b from-1% via-120% via-green-200 from-green-400 to-1% to-green-600;
+}
+
+.sel-btn.exit{
+    @apply bg-gradient-to-b from-1% via-120% via-red-200 from-red-400 to-1% to-red-600;
+}

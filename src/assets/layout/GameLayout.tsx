@@ -21,7 +21,7 @@ export default function GameLayout() {
   const [isLoading, setLoading] = useState(true);
   
     useEffect(() => {
-     let interval = setTimeout(() => setLoading(false), 7300);
+     let interval = setTimeout(() => setLoading(false), 1300);
      return () => clearTimeout(interval)
     },[])
   
@@ -34,11 +34,9 @@ export default function GameLayout() {
     <Suspense fallback={<LoadingPage />}>
       <SideBar />
       <main className='main-sc'>
-        <GlobalContext>
           <div className='container-xl flex-box min-h-dvh'>
             <Outlet />
           </div>
-        </GlobalContext>
       <Footer />
       </main>
     </Suspense>

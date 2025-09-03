@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import "./css/StaticsStylePage.css"
 import { ExportGlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router';
-import Footer from '../components/Footer';
+import WindowResume from '../components/extra/WindowResume';
 
 type TargetStatus = "ClassicMode" | "MatchMode";
 
@@ -10,26 +10,7 @@ export default function StaticsPages() {
   const [isTarget, setTagert] = useState<TargetStatus>("ClassicMode");
   const { isScores, isScoresMatch, isPoints, isStatics } = ExportGlobalContext();
   const navigate = useNavigate();
-
-  useEffect(() => {
-   const PointsLocal = sessionStorage.getItem("Scores");
-   const StaticsLocal = sessionStorage.getItem("Statics");
-
-    if (PointsLocal !== null) {
-      isScores.current = JSON.parse(PointsLocal);
-    } else {
-      isScores.current = [];
-    }
-
-   if (StaticsLocal !== null) {
-      isStatics.current = JSON.parse(StaticsLocal);
-    } else {
-      isStatics.current = [];
-    }
-
-  },[])
-
-  console.log(isScores.current, isStatics.current)
+  const [isClose, setClose] = useState<boolean>(false);
 
   return (<>
    <section className='container-full staics-page flex-center'>
@@ -50,7 +31,7 @@ export default function StaticsPages() {
                  <div className='btn-switch st-full'>
                     <button className='btn classic' onClick={() => setTagert("ClassicMode")}><i className="fa-solid fa-dice-d6"></i></button>
                     <button className='btn match' onClick={() => setTagert("MatchMode")}><i className="fa-solid fa-web-awesome"></i></button>
-                    <button className='btn status'><i className="fa-solid fa-list-ul"></i></button>
+                    <button className='btn status' onClick={() => setClose(true)}><i className="fa-solid fa-list-ul"></i></button>
                  </div>
 
                 {isTarget === "ClassicMode" &&  <div className='list-sc'>
@@ -71,9 +52,9 @@ export default function StaticsPages() {
                   </div>
                    
                    <div className='list-grid'>
-                    {isScores.current.map((element) => {
+                    {isScores.current.map((element, index) => {
                        return(
-                     <div className='col-stat'>
+                     <div className='col-stat' key={index}>
                            <div className='row-icon'>
                               <p>{element.id}</p>
                            </div>
@@ -114,14 +95,14 @@ export default function StaticsPages() {
                    
                   <div className='list-grid'>
                      
-                     {isStatics.current.map((element) => {
+                     {isStatics.current.map((element, index) => {
 
                         const conditionBonus = element.bonus?.poker !== 0 || 
                         element.bonus?.triple !== 0 || element.bonus?.fullrun !== 0 
                         || element.bonus?.couple !== 0;
 
                         return(
-                        <div className='col-stat'>
+                        <div className='col-stat' key={index}>
                               <div className='row-icon'>
                                  <p>{element.id}</p>
                               </div>
@@ -159,6 +140,17 @@ export default function StaticsPages() {
             </span>
          </div>
       </div>
+      
+   <WindowResume 
+   StatusScheme={ { 
+   Points: isPoints.current, 
+   ScoresMatch: isScoresMatch.current, 
+   Scores: isScores.current, 
+   Statics: isStatics.current 
+   } }
+   isClose={isClose}
+   setClose={setClose}
+   />
    </section>
   </>)
 }

@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import "./css/BoardBoxStyle.css"
 import type { MatchScoresType, TypesScores } from '../types/ComponentsExportsTypes'
+import { ExportGlobalContext } from '../context/GlobalContext';
 
 interface PropsTypes { isScores?: TypesScores[], isMatch?: MatchScoresType[] };
 
 function RollHistory({ isScores, isMatch }: PropsTypes) {
   const [isGameset, setGameSet] = useState<"MatchGame" | "ClassicGame" | "">("");
-  const [isAlternate, setAlternate] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -22,12 +22,7 @@ function RollHistory({ isScores, isMatch }: PropsTypes) {
         setGameSet("ClassicGame");
         break;
 
-    }
-
-},[isScores, isMatch]);
-
-  
-//   console.log(isAlternate, isGameset);
+    }},[isScores, isMatch]);
 
   return (
     <div className='box-border'>

@@ -42,7 +42,7 @@ export default function useRollsHistory(isActive: boolean) {
                 AlternativeList = FindElement ? [...isScores.current] : [...isScores.current, { id: isID, ...isClassic.current }];
                 isScores.current = AlternativeList;
 
-                sessionStorage.setItem("Scores", JSON.stringify(isScores.current))
+                SaveGameSession("Scores", isScores.current)
             }, 4010);
 
         }
@@ -92,13 +92,18 @@ export default function useRollsHistory(isActive: boolean) {
             isPoints.current = { player: isMatch.current.count.player, com: isMatch.current.count.com, bonus: BonusObject };
             isStatics.current = [...isStatics.current, { id: isID, player: isMatch.current.player, com: isMatch.current.com, bonus: BonusObject, points: { player: isMatch.current.count.player, com: isMatch.current.count.com } }];
 
-            sessionStorage.setItem("Points", JSON.stringify(isPoints.current));
-            sessionStorage.setItem("Statics", JSON.stringify(isStatics.current));
+            SaveGameSession("Points", isPoints.current);
+            SaveGameSession("Statics", isStatics.current);
+            SaveGameSession("Match", isScoresMatch.current);
             }, 4050);
             
         }
 
      }, [isActive])
+
+     function SaveGameSession(section: string, list: TypesScores[] | MatchScoresType[] | PointsTypes[] | PointsTypes) {
+        return sessionStorage.setItem(section, JSON.stringify(list));
+     }
     
     return { isScores, isScoresMatch, isMatch, isClassic, setMode, isPoints, isStatics, setID }
 }

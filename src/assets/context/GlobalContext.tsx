@@ -21,7 +21,7 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isScoresMatch: { current: [] },
   isPoints: { current: { player: 0, com: 0, points: { player: 0, com: 0, win: "" } } },
   isStatics: { current: [] },
-  MatchRef: { current: { player: null, com: null }},
+  MatchRef: { current: { player: null, com: null } },
   isActiveMatch: false, 
   isPlayer: 0, 
   isCOM: 0, 

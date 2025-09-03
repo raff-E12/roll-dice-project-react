@@ -25,6 +25,7 @@ export default function COMBoardGame() {
           </div>
       </aside>
     </section>
+    
     <ModalAdv 
       isOpen={isReset}
       isMessage='Sicuro di Voler Resettare la Partita in Corso.'

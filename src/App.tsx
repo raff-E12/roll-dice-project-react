@@ -20,7 +20,7 @@ function App() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-   let interval = setTimeout(() => setLoading(false), 6300);
+   let interval = setTimeout(() => setLoading(false), 1300);
    return () => clearTimeout(interval)
   },[])
 
@@ -30,20 +30,21 @@ function App() {
 
   return (
     <>
-    <Suspense fallback={isLoading}>
-      <Routes>
-        <Route index element={<GameStartPage />} />
+      <Suspense fallback={isLoading}>
+        <GlobalContext>
+          <Routes>
+            <Route index element={<GameStartPage />} />
 
-        <Route element={<GameLayout />}>
-          <Route path='/classic' element={<GameClassic/>}/>
-          <Route path='/vs-com' element={<COMGamePage/>}/>
-        </Route>
+            <Route element={<GameLayout />}>
+              <Route path='/classic' element={<GameClassic/>}/>
+              <Route path='/vs-com' element={<COMGamePage/>}/>
+            </Route>
 
-        <Route path='/statics-game' element={<StaticsPages />}/>
+          <Route path='/statics-game' element={<StaticsPages />}/>
 
-      </Routes>
-    </Suspense>
-      
+        </Routes>
+        </GlobalContext>
+      </Suspense>  
     </>
   )
 }

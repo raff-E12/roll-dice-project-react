@@ -3,7 +3,7 @@
 
 @layer components {
     .staics-page{
-        @apply bg-red-700 bg-radial from-red-500 from-14% to-red-700 to-70% flex-col;
+        @apply bg-red-700 relative bg-radial from-red-500 from-14% to-red-700 to-70% flex-col p-5;
     }
 
     .statics-container{

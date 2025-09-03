@@ -12,10 +12,15 @@ export default function useClassicGame() {
     const [isActive, setActive] = useState<boolean>(false);
     const [isTotal, setTotal] = useState<number>(0);
     const [isOpen, setOpen] = useState<boolean>(false);
+    const [isEmpty, setEmpty] = useState<boolean>(false);
 
     const onClose = () => setOpen(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(DiceTotalRef.current);
     const { isScores, isClassic, setMode, setID } = useRollsHistory(isActive);
+
+    useEffect(() => {
+        if (isScores.current.length === 0) setEmpty(true); 
+    }, []);
 
     function RollDice () {
 
@@ -63,7 +68,18 @@ export default function useClassicGame() {
         isClassic.current.second = 0;
         isClassic.current.total = 0;
         isScores.current = [];
+        sessionStorage.setItem("Scores", JSON.stringify([]));
     }
+
+    const ImportSessionList = useMemo(() => {
+        const getScores = sessionStorage.getItem("Scores") as string;
+        if (getScores !== null) {
+            const listScores = JSON.parse(getScores);
+            isScores.current = listScores;
+        } else {
+            isScores.current = [];
+        }
+    },[isEmpty]);
 
     return { RollDice, 
              DiceTotalRef, 

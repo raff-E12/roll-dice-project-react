@@ -21,7 +21,6 @@ function useMotionLogic(DiceRefGame: TypesDice | MatchType) {
         MotionDice((DiceRefGame as MatchType).com, isDiceTwo);
     }
 
-
     },[isTarget, DiceRefGame, isDiceOne, isDiceTwo])
 
     function MotionDice(dice: HTMLDivElement | null, number: number) {

@@ -15,6 +15,14 @@ export default function useMatchGame() {
     const [isCOM, setCOM] = useState<number>(0);
     const [isWin, setWin] = useState<string>("");
     const [isReset, setReset] = useState(false);
+    const [isEmpty, setEmpty] = useState(false);
+
+    useEffect(() => {
+        if (isStatics.current.length === 0 
+            && isScoresMatch.current.length === 0 &&
+            Object.values(isPoints.current).length === 0 &&
+            Object.keys(isPoints.current).length === 0) setEmpty(true); 
+    }, []);
 
      function RollDiceMatch() {
 
@@ -96,10 +104,28 @@ export default function useMatchGame() {
         isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }};
         isScoresMatch.current = [];
         isStatics.current = [];
+        sessionStorage.settItem("Points", JSON.stringify([]));
+        sessionStorage.settItem("Statics", JSON.stringify([]));
+        sessionStorage.settItem("Match", JSON.stringify([]));
     }
 
-    console.log(isStatics.current, isPoints.current, isScoresMatch.current)
-
+    
+    const ImportSessionMatch =  useMemo(() => {
+      const getPoints = sessionStorage.getItem("Points") as string;
+      const getStatics = sessionStorage.getItem("Statics") as string;
+      const getMatch = sessionStorage.getItem("Match") as string;
+        if (getPoints !== null && getStatics !== null) {
+            const ParseList = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch)};
+            isPoints.current = ParseList.points;
+            isStatics.current = ParseList.statics;
+            isScoresMatch.current = ParseList.match;
+        } else {
+            isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" } };
+            isStatics.current = [];
+            isScoresMatch.current = [];
+        }
+    }, [isEmpty])
+    
     return { RollDiceMatch, 
              isPoints, 
              isScoresMatch, 
@@ -111,5 +137,6 @@ export default function useMatchGame() {
              isWin,
              isReset,
              setReset,
-             ResetMatchMode }
+             ResetMatchMode,
+             ImportSessionMatch }
 }

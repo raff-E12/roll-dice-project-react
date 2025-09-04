@@ -31,7 +31,7 @@ export default function StaticsPages() {
                  <div className='btn-switch st-full'>
                     <button className='btn classic' onClick={() => setTagert("ClassicMode")}><i className="fa-solid fa-dice-d6"></i></button>
                     <button className='btn match' onClick={() => setTagert("MatchMode")}><i className="fa-solid fa-web-awesome"></i></button>
-                    <button className='btn status' onClick={() => setClose(true)}><i className="fa-solid fa-list-ul"></i></button>
+                    <button className='btn status' onClick={() => setClose(true)}><i className="fa-solid fa-flag"></i></button>
                  </div>
 
                 {isTarget === "ClassicMode" &&  <div className='list-sc'>
@@ -111,7 +111,7 @@ export default function StaticsPages() {
                               <ul>
                                  <li className='st-full flex-center'>{element.player}</li>
                                  <li className='st-full flex-center'>{element.com}</li>
-                                 <li className='st-full flex-center'><i className={`fa-solid fa-${element.points?.win === "Player" ? "user" : "robot"}`}></i></li>
+                                 <li className='st-full flex-center'><i className={`fa-solid fa-${element.points?.win !== "COM" ? "user" : "robot"}`}></i></li>
                               </ul>
                            </div>
 

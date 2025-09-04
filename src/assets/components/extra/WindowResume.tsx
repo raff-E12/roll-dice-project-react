@@ -2,43 +2,114 @@ import React, { useState } from 'react'
 import "../css/WindowResumeStyle.css"
 import type { MatchScoresType, PointsTypes, TypesScores } from '../../types/ComponentsExportsTypes'
 
-type PropTypes = { StatusScheme: { Scores: TypesScores[], ScoresMatch: MatchScoresType[], Points: PointsTypes, Statics: PointsTypes[] },
-                   isClose: boolean, setClose: (value: boolean) => void}
+type PropTypes = { StatusScheme: { Scores: TypesScores[], 
+                                   ScoresMatch: MatchScoresType[], 
+                                   Points: PointsTypes, 
+                                   Statics: PointsTypes[] },
+                                   isClose: boolean, 
+                                   setClose: (value: boolean) => void}
 
 export default function WindowResume({StatusScheme, setClose, isClose}: PropTypes) {
    const { Scores, ScoresMatch, Points, Statics } = StatusScheme;
    const LostPoints = Points.player - Points.com;
+   const [isSwitch, setSwitch] = useState<string>("Classic");
 
-  function ParamaterImplement() {
+  function ValuesExtraStatus() {
    let MatchNumberMax = 0;
-   let NumberLoopMatch: any = null;
+   let NumberLoopMatch: number = 0;
    let NumberCurrentLoop = 0;
+   let TotalBonus = 0;
+   let TotalMatch = 0;
+   let LastSumTotal = 0;
+   let ThrowingDices = 0;
+   const ListTotal = [...new Set(Scores.map(element => element.total))];
+   const ScoresClassic = { first: Scores.map(element => element.first), second: Scores.map(element => element.second)};
+   const ListNumberDice = ScoresMatch.map(element => element.player);
+   const NumbersIndexClassic = { one: 0, two: 0, three: 0, four: 0, five: 0, six: 0 };
+   let TotalMin = 0;
+   let TotalMax = 0;
+   let AverangeTotal = 0;
 
    if (ScoresMatch.length !== 0 && Object.keys(Points).length !== 0) {
       
    MatchNumberMax = ScoresMatch.reduce((accumulator, currentElement) => { return Math.max(accumulator, currentElement.player) }, 0);
-   NumberLoopMatch = ScoresMatch.map(element => element.player).reduce((acccumulator: Record<number, number> = {}, Currentnumber) => { 
+   const NumberLoopList = ListNumberDice.reduce((acccumulator: Record<number, number> = {}, Currentnumber) => { 
       acccumulator[Currentnumber] = (acccumulator[Currentnumber] || 0) + 1;
       return acccumulator
     }, {});
 
-    NumberCurrentLoop = Number(Object.keys(NumberLoopMatch).reduce((a, b) => NumberLoopMatch[Number(a)] > NumberLoopMatch[Number(b)] ? a : b));
+    NumberLoopMatch = Number(Object.keys(NumberLoopList).reduce((a, b) => NumberLoopList[Number(a)] > NumberLoopList[Number(b)] ? a : b));
    } else {
       MatchNumberMax = 0;
       NumberCurrentLoop = 0;
    }
 
-   return { max: MatchNumberMax, loop: NumberCurrentLoop }
+  if (Object.values(Points.bonus!).length !== 0) {
+    TotalBonus = Points.bonus!.couple + Points.bonus!.fullrun + Points.bonus!.poker + Points.bonus!.triple;
+    TotalMatch = ScoresMatch.length;
   }
 
-  const NumbersExtra = ParamaterImplement();
+  if (Scores.length !== 0) {
+     LastSumTotal = ListTotal[ListTotal.length - 1];
+     ThrowingDices = Scores.length;
+     const NumbersLists = [...ScoresClassic.first, ...ScoresClassic.second];
+
+     for (let key = 0; key < NumbersLists.length; key++) {
+
+        switch (NumbersLists[key]) {
+          case 1:
+          NumbersIndexClassic.one++;
+          break;
+
+          case 2:
+          NumbersIndexClassic.two++;
+          break;
+
+          case 3:
+          NumbersIndexClassic.three++;
+          break;
+
+          case 4:
+          NumbersIndexClassic.four++;
+          break;
+
+          case 5:
+          NumbersIndexClassic.five++;
+          break;
+
+          case 6:
+          NumbersIndexClassic.six++;
+          break;
+        }
+
+     }
+
+     TotalMax = Number(ListTotal.find(number => Math.max(number)));
+     TotalMin = Number(ListTotal.find(number => Math.min(number)));
+     AverangeTotal = Number(ListTotal.find(number => number / 2));
+  }
+
+   return { max: MatchNumberMax, 
+            loop: NumberCurrentLoop, 
+            totalbonus: TotalBonus, 
+            totalmatch: TotalMatch, 
+            last: LastSumTotal,
+            throw: ThrowingDices,
+            face: NumbersIndexClassic,
+            maxtot: TotalMax,
+            mintot: TotalMin,
+            averange: AverangeTotal }
+  }
+
+  const NumbersExtra = ValuesExtraStatus();
 
   return (<>
-   <section className={`window-container debug-box flex-box ${!isClose && "hidden"}`}>
-      <div className='debug-box container-lg flex-center relative'>
+   <section className={`window-container flex-box ${!isClose && "hidden"}`}>
+      <div className='container-lg flex-center relative'>
 
          <div className='points-player-window'>
-             <div className='window-cont'>
+            
+          { isSwitch === "Match" && <div className='window-cont'>
 
                <div className='col-window-sc'>
                    <span className='dice-icon'><i className="fa-solid fa-medal"></i></span>
@@ -115,21 +186,104 @@ export default function WindowResume({StatusScheme, setClose, isClose}: PropType
 
                <div className='col-medium-rs'>
                   <span className='col-md'>Totale Lanci</span>
-                  <span className='col-md'>0</span>
+                  <span className='col-md'>{NumbersExtra.totalmatch}</span>
                   <span className='col-md'>Totale Bonus</span>
-                  <span className='col-md'>0</span>
+                  <span className='col-md'>{NumbersExtra.totalbonus}</span>
                </div>
 
-             </div>
+             </div> }
 
+            { isSwitch === "Classic" && <div className='window-cont'>
+
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-plus"></i></span>
+                   <span className='window-text'>
+                     <h4>U. Frequente</h4>
+                     <p>{NumbersExtra.last}</p>
+                   </span>
+               </div>
+
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-dice-one"></i></span>
+                   <span className='window-text'>
+                     <h4>Uno</h4>
+                     <p>{NumbersExtra.face.one}</p>
+                   </span>
+               </div>
+
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-dice-two"></i></span>
+                   <span className='window-text'>
+                     <h4>Due</h4>
+                     <p>{NumbersExtra.face.two}</p>
+                   </span>
+               </div>
+
+               
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-dice-three"></i></span>
+                   <span className='window-text'>
+                     <h4>Tre</h4>
+                     <p>{NumbersExtra.face.three}</p>
+                   </span>
+               </div>
+
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-dice-four"></i></span>
+                   <span className='window-text'>
+                     <h4>Quattro</h4>
+                     <p>{NumbersExtra.face.four}</p>
+                   </span>
+               </div>
+
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-dice-five"></i></span>
+                   <span className='window-text'>
+                     <h4>Cinque</h4>
+                     <p>{NumbersExtra.face.five}</p>
+                   </span>
+               </div>
+               
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-dice-six"></i></span>
+                   <span className='window-text'>
+                     <h4>Sei</h4>
+                     <p>{NumbersExtra.face.six}</p>
+                   </span>
+               </div>
+               
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-certificate"></i></span>
+                   <span className='window-text'>
+                     <h4>T. Minimo</h4>
+                     <p>{NumbersExtra.mintot}</p>
+                   </span>
+               </div>
+
+               <div className='col-window-sc'>
+                   <span className='dice-icon'><i className="fa-solid fa-star-of-life"></i></span>
+                   <span className='window-text'>
+                     <h4>T. Massimo</h4>
+                     <p>{NumbersExtra.maxtot}</p>
+                   </span>
+               </div>
+
+               <div className='col-medium-rs'>
+                  <span className='col-md'>Totale Lanci</span>
+                  <span className='col-md'>{NumbersExtra.throw}</span>
+                  <span className='col-md'>Media Totale</span>
+                  <span className='col-md'>{NumbersExtra.averange}</span>
+               </div>
+
+             </div>}
              
           <div className='left-selection'>
              <div className='cont-left'>
-                <span className='sel-btn classic'>
+                <span className='sel-btn classic' onClick={() => setSwitch("Classic")}>
                   <i className="fa-solid fa-cubes"></i>
                 </span>
 
-                <span className='sel-btn match'>
+                <span className='sel-btn match' onClick={() => setSwitch("Match")}>
                     <i className="fa-solid fa-dice-d6"></i>
                 </span>
 

@@ -49,7 +49,12 @@
 }
 
 .left-selection{
-    @apply absolute -right-9 top-10 -z-10 w-[120px] h-auto flex justify-end bg-yellow-700 items-end border-3 border-yellow-700 rounded-2xl;
+    @apply absolute -right-9 top-10 -z-10 max-sm:top-[420px] max-sm:rotate-[90deg] max-sm:right-[160px]
+    w-[120px] h-[126px] flex justify-end bg-yellow-700 items-end border-3 border-yellow-700 rounded-2xl;
+}
+
+.left-selection .sel-btn i {
+    @apply max-sm:rotate-[90deg];
 }
 
 .cont-left{
@@ -58,7 +63,7 @@
 
 .cont-left .sel-btn{
     @apply w-[60px] h-[60px] flex items-center justify-center text-white text-shadow-2xs inset-shadow-sm inset-shadow-yellow-700;
-    @apply active:scale-95 active:inset-shadow-2xs;
+    @apply active:scale-95 active:inset-shadow-2xs cursor-pointer;
 }
 
 .sel-btn.classic{

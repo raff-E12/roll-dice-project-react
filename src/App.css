@@ -79,8 +79,80 @@
     right-[30px] top-[30px] -z-10;
   }
 
+   .text-board, .roll-index h4{
+    font-family: var(--font-love-ya);
+   }
+
+   .text-roll-front, .icon-dice{
+    font-family: var(--font-montserrant);
+   }
+
+   .popup-layout{
+    font-family: var(--font-lexend);
+   }
+
+   .start-screen{
+    font-family: var(--font-lexend);
+   }
+
+   .list-index, .row-text, .row-empty{
+    font-family: var(--font-lexend);
+   }
+
+   .loading-ls{
+    @apply w-[60%] flex items-center justify-center 
+    flex-col font-bold text-3xl capitalize text-white h-screen;
+    font-family: var(--font-lexend);
+   }
+
+   .staics-page .points-player-window .window-cont .col-window-sc,.staics-page .points-player-window .window-cont .col-medium-rs{
+    font-family: var(--font-lexend);
+   }
+   
 }
 
 /***** Componenti Generali *****/
 
+@layer utilities {
+  .icon-max {
+    @apply w-[60px] h-[60px] text-3xl p-0.5 text-white flex items-center justify-center;
+  }
 
+  .container-side{
+    @apply h-full z-50 fixed top-0 left-0 flex justify-end
+    flex-row-reverse transition-all duration-200 w-[100%] bg-white/29 backdrop-blur-md;
+  }
+
+  .container-side.close{
+    @apply left-[-230px] w-[270px] bg-transparent backdrop-blur-none;
+  }
+
+  .debug-box{
+    @apply border-2 border-red-950;
+  }
+
+  .container-md{
+    @apply max-sm:w-[100%] sm:w-[60%] md:w-[60%] lg:w-[60%] xl:w-5xl 2xl:w-5xl h-auto;
+  }
+
+  .flex-box{
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .gap-col-x2{
+    @apply gap-3 flex flex-col 2xl:flex-row xl:flex-row lg:flex-row;
+  }
+
+  .container-full{
+    @apply w-full min-h-dvh flex;
+  }
+
+  .container-lg {
+    @apply max-sm:w-full sm:w-[69%] md:w-[59%] lg:w-[47%] xl:w-[50%] 2xl:w-[50%];
+  }
+
+  .container-xl{
+    @apply max-sm:w-[100%] sm:w-[100%] md:w-[99%] lg:w-[100%] xl:w-[90%] 2xl:w-[90%];
+  }
+
+}

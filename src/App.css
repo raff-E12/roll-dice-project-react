@@ -88,6 +88,16 @@
    .list-index, .row-text, .row-empty{
     font-family: var(--font-lexend);
    }
+
+   .loading-ls{
+    @apply w-[60%] flex items-center justify-center 
+    flex-col font-bold text-3xl capitalize text-white h-screen;
+    font-family: var(--font-lexend);
+   }
+
+   .staics-page .points-player-window .window-cont .col-window-sc,.staics-page .points-player-window .window-cont .col-medium-rs{
+    font-family: var(--font-lexend);
+   }
    
 }
 
@@ -102,11 +112,12 @@
   }
 
   .container-side{
-    @apply h-full z-40 fixed top-0 left-0 flex flex-row-reverse transition-all duration-200 w-[270px];
+    @apply h-full z-50 fixed top-0 left-0 flex justify-end
+    flex-row-reverse transition-all duration-200 w-[100%] bg-white/29 backdrop-blur-md;
   }
 
   .container-side.close{
-    @apply left-[-230px];
+    @apply left-[-230px] w-[270px] bg-transparent backdrop-blur-none;
   }
 
   .debug-box{

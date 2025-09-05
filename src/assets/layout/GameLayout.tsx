@@ -1,9 +1,10 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import SideBar from '../components/SideBar'
 import { Outlet } from 'react-router'
 import Footer from '../components/Footer'
 import { GlobalContext } from '../context/GlobalContext'
 import LoadingPage from '../components/extra/LoadingPage'
+import DiceLoadingSequence from '../components/extra/DiceLoadingSequence.tsx'
 
   /* Caricamento Lazy Mode */
   const GamePageClassic = lazy(() => import("../pages/GameClassic.tsx"));
@@ -19,11 +20,17 @@ import LoadingPage from '../components/extra/LoadingPage'
 
 export default function GameLayout() {
   const [isLoading, setLoading] = useState(true);
+  const [isStop, setStop] = useState(false);  
   
     useEffect(() => {
      let interval = setTimeout(() => setLoading(false), 1300);
      return () => clearTimeout(interval)
     },[])
+
+    useEffect(() => {
+      const interval = setTimeout(() => setStop(true), 1660);
+      return () => clearTimeout(interval);
+    }, [isStop])
   
     if (isLoading) {
       return <LoadingPage />
@@ -34,9 +41,13 @@ export default function GameLayout() {
     <Suspense fallback={<LoadingPage />}>
       <SideBar />
       <main className='main-sc'>
-          <div className='container-xl flex-box min-h-dvh'>
+          <div className={`container-xl flex-box min-h-dvh ${!isStop ? "hidden" : ""}`}>
             <Outlet />
           </div>
+          <div className={`loading-ls ${isStop ? "hidden" : ""}`}>
+                <h4>Loading...</h4>
+               <DiceLoadingSequence />
+           </div>
       <Footer />
       </main>
     </Suspense>

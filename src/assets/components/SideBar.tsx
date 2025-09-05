@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Squash as Hamburger } from 'hamburger-react'
 import "./css/SideBarStyle.css"
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 export default function SideBar() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isDrop, setDrop] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   return (<>
   <section className={`container-side ${ isOpen ? "" : "close"}`} onMouseLeave={() => setOpen(false)}>
@@ -34,8 +35,8 @@ export default function SideBar() {
                    </div>
                 </div>
                 <ul className={`drop-menu ${ isDrop ? "open" : ""}`}>
-                  <li><NavLink to={"/classic"}>Classico</NavLink></li>
-                  <li><NavLink to={"/vs-com"}>vs. COM</NavLink></li>
+                  <li onClick={() => navigate("/classic")}><p>Classico</p></li>
+                  <li onClick={() => navigate("/vs-com")}><p>vs. COM</p></li>
                 </ul>
             </div>
 

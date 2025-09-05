@@ -8,6 +8,7 @@ export type TypesScores =  { id: number, first: number, second: number, total: n
 export type TypesDice = { first: HTMLDivElement | null, second: HTMLDivElement | null };
 export type TextDiceThrowing = "Pronto al lancio?" | "Occhio al risultato…" | "";
 export type MatchType = { player: HTMLDivElement | null, com: HTMLDivElement | null };
+export type BonusTypes ={ id: number, bonus: { couple: number, triple: number, poker: number, fullrun: number }}
 export type PointsTypes = { id?: number, player: number, com: number, bonus?: { couple: number, triple: number, poker: number, fullrun: number }, points?: { player: number, com: number, win?: string } };
 export type MatchScoresType = { id: number, player: number, com: number, win: "Player" | "COM" | "Draw" | "" };
 
@@ -36,5 +37,6 @@ export interface ExportTypes {
     isWin: string,
     setReset: (value: boolean) => void,
     isReset: boolean,
-    ResetMatchMode: () => void
+    ResetMatchMode: () => void,
+    isBonus: React.RefObject<BonusTypes[]>
 };

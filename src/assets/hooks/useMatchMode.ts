@@ -1,19 +1,20 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { type MatchScoresType, type MatchType, type PointsTypes } from '../types/ComponentsExportsTypes';
+import { type ExportTypes, type MatchScoresType, type MatchType, type PointsTypes, type TypesScores } from '../types/ComponentsExportsTypes';
 import useMotionLogic from './useMotionLogic';
 import useRollsHistory from './useRollsHistory';
 
 type TypesWin = "Player" | "COM" | "Draw" | "";
+type ListExports = { points: PointsTypes, statics: PointsTypes[], match: MatchScoresType[] };
 
 export default function useMatchGame() {
     const MatchRef = useRef<MatchType>({ player: null, com: null });
     const [isActiveMatch, setActiveMatch] = useState<boolean>(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(MatchRef.current);
-    const { isMatch, isScoresMatch, setMode, isPoints, isStatics, setID } = useRollsHistory(isActiveMatch);
+    const { isMatch, isScoresMatch, setMode, isPoints, isStatics, setID, isBonus } = useRollsHistory(isActiveMatch);
     
     const [isPlayer, setPlayer] = useState<number>(0);
     const [isCOM, setCOM] = useState<number>(0);
-    const [isWin, setWin] = useState<string>("");
+    const [isWin, setWin] = useState<string>("Nothing");
     const [isReset, setReset] = useState(false);
     const [isEmpty, setEmpty] = useState(false);
 
@@ -101,12 +102,14 @@ export default function useMatchGame() {
         setDiceTwo(1)
         setReset(false);
         setMode("MatchMode");
-        isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }};
+        isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }, bonus: { couple: 0, triple: 0, fullrun: 0, poker: 0 }};
         isScoresMatch.current = [];
         isStatics.current = [];
+        isBonus.current = [];
         sessionStorage.settItem("Points", JSON.stringify([]));
         sessionStorage.settItem("Statics", JSON.stringify([]));
         sessionStorage.settItem("Match", JSON.stringify([]));
+        sessionStorage.setItem("Bonus", JSON.stringify([]));
     }
 
     
@@ -115,15 +118,19 @@ export default function useMatchGame() {
       const getStatics = sessionStorage.getItem("Statics") as string;
       const getMatch = sessionStorage.getItem("Match") as string;
         if (getPoints !== null && getStatics !== null) {
-            const ParseList = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch)};
+            const ParseList: ListExports = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch)};
             isPoints.current = ParseList.points;
             isStatics.current = ParseList.statics;
             isScoresMatch.current = ParseList.match;
+            
+            const findID = Number(ParseList.match.find(element => element.id === ParseList.match.length)?.id) + 1;
+            setID(findID);
         } else {
-            isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" } };
+            isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }, bonus: { couple: 0, triple: 0, fullrun: 0, poker: 0 } };
             isStatics.current = [];
             isScoresMatch.current = [];
         }
+
     }, [isEmpty])
     
     return { RollDiceMatch, 
@@ -138,5 +145,6 @@ export default function useMatchGame() {
              isReset,
              setReset,
              ResetMatchMode,
-             ImportSessionMatch }
+             ImportSessionMatch,
+             isBonus }
 }

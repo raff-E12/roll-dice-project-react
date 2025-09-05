@@ -11,13 +11,13 @@ type PropTypes = { StatusScheme: { Scores: TypesScores[],
 
 export default function WindowResume({StatusScheme, setClose, isClose}: PropTypes) {
    const { Scores, ScoresMatch, Points, Statics } = StatusScheme;
-   const LostPoints = Points.player - Points.com;
    const [isSwitch, setSwitch] = useState<string>("Classic");
 
   function ValuesExtraStatus() {
    let MatchNumberMax = 0;
    let NumberLoopMatch: number = 0;
    let NumberCurrentLoop = 0;
+   const LostPoints = Math.abs(Points.player - Points.com);
    let TotalBonus = 0;
    let TotalMatch = 0;
    let LastSumTotal = 0;
@@ -39,55 +39,56 @@ export default function WindowResume({StatusScheme, setClose, isClose}: PropType
     }, {});
 
     NumberLoopMatch = Number(Object.keys(NumberLoopList).reduce((a, b) => NumberLoopList[Number(a)] > NumberLoopList[Number(b)] ? a : b));
-   } else {
-      MatchNumberMax = 0;
-      NumberCurrentLoop = 0;
-   }
 
-  if (Object.values(Points.bonus!).length !== 0) {
-    TotalBonus = Points.bonus!.couple + Points.bonus!.fullrun + Points.bonus!.poker + Points.bonus!.triple;
-    TotalMatch = ScoresMatch.length;
-  }
+    } else {
+        MatchNumberMax = 0;
+        NumberCurrentLoop = 0;
+    }
 
-  if (Scores.length !== 0) {
-     LastSumTotal = ListTotal[ListTotal.length - 1];
-     ThrowingDices = Scores.length;
-     const NumbersLists = [...ScoresClassic.first, ...ScoresClassic.second];
+    if (Object.keys(Points.bonus!).length !== 0) {
+      TotalBonus = Points.bonus!.couple + Points.bonus!.fullrun + Points.bonus!.poker + Points.bonus!.triple;
+      TotalMatch = ScoresMatch.length;
+    }
 
-     for (let key = 0; key < NumbersLists.length; key++) {
+    if (Scores.length !== 0) {
+      LastSumTotal = ListTotal[ListTotal.length - 1];
+      ThrowingDices = Scores.length;
+      const NumbersLists = [...ScoresClassic.first, ...ScoresClassic.second];
 
-        switch (NumbersLists[key]) {
-          case 1:
-          NumbersIndexClassic.one++;
-          break;
+      for (let key = 0; key < NumbersLists.length; key++) {
 
-          case 2:
-          NumbersIndexClassic.two++;
-          break;
+          switch (NumbersLists[key]) {
+            case 1:
+            NumbersIndexClassic.one++;
+            break;
 
-          case 3:
-          NumbersIndexClassic.three++;
-          break;
+            case 2:
+            NumbersIndexClassic.two++;
+            break;
 
-          case 4:
-          NumbersIndexClassic.four++;
-          break;
+            case 3:
+            NumbersIndexClassic.three++;
+            break;
 
-          case 5:
-          NumbersIndexClassic.five++;
-          break;
+            case 4:
+            NumbersIndexClassic.four++;
+            break;
 
-          case 6:
-          NumbersIndexClassic.six++;
-          break;
-        }
+            case 5:
+            NumbersIndexClassic.five++;
+            break;
 
-     }
+            case 6:
+            NumbersIndexClassic.six++;
+            break;
+          }
 
-     TotalMax = Number(ListTotal.find(number => Math.max(number)));
-     TotalMin = Number(ListTotal.find(number => Math.min(number)));
-     AverangeTotal = Number(ListTotal.find(number => number / 2));
-  }
+      }
+
+      TotalMax = Number(ListTotal.find(number => Math.max(number)));
+      TotalMin = Number(ListTotal.find(number => Math.min(number)));
+      AverangeTotal = Number(ListTotal.find(number => number / 2));
+    }
 
    return { max: MatchNumberMax, 
             loop: NumberCurrentLoop, 
@@ -98,7 +99,8 @@ export default function WindowResume({StatusScheme, setClose, isClose}: PropType
             face: NumbersIndexClassic,
             maxtot: TotalMax,
             mintot: TotalMin,
-            averange: AverangeTotal }
+            averange: AverangeTotal,
+            lose: LostPoints }
   }
 
   const NumbersExtra = ValuesExtraStatus();
@@ -180,7 +182,7 @@ export default function WindowResume({StatusScheme, setClose, isClose}: PropType
                    <span className='dice-icon'><i className="fa-solid fa-face-sad-cry"></i></span>
                    <span className='window-text'>
                      <h4>Sconfitte</h4>
-                     <p>{LostPoints}</p>
+                     <p>{NumbersExtra.lose}</p>
                    </span>
                </div>
 

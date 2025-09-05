@@ -3,11 +3,11 @@
 
 @layer components {
     .staics-page{
-        @apply bg-red-700 relative bg-radial from-red-500 from-14% to-red-700 to-70% flex-col p-5;
+        @apply bg-red-700 relative bg-radial overflow-hidden from-red-500 from-14% to-red-700 to-70% flex-col p-8;
     }
 
     .statics-container{
-        @apply h-auto flex items-center justify-center flex-col gap-3;
+        @apply h-auto flex items-center justify-center flex-col gap-3 z-30;
     }
 
     .statics-gradient{
@@ -85,7 +85,7 @@
     }
 
     .col-stat {
-        @apply flex w-full flex-row h-[60px] gap-2 p-2;
+        @apply flex w-full flex-row h-[60px] gap-2 p-2 relative;
     }
 
     .col-stat .row-icon{
@@ -131,10 +131,27 @@
     @apply active:scale-75 active:transition-transform active:duration-75 active:ease-in-out;
   }
 
-   .btn-sections .btn.home{
+  .btn-sections .btn.home{
     @apply bg-green-700 bg-linear-to-b from-green-400 from-20% via-50% via-green-600 to-90% to-green-900;
     @apply border-3 border-green-950;
-    @apply disabled:bg-green-700 disabled:from-gray-700 disabled:via-gray-700 disabled:to-gray-700 disabled:pointer-events-none;
+  }
+
+  .btn-sections .btn.imp{
+    @apply bg-red-700 bg-linear-to-b from-red-400 from-20% via-50% via-red-600 to-90% to-red-900;
+    @apply border-3 border-red-950;
+  }
+
+  .btn-sections .btn.brush{
+    @apply bg-yellow-700 bg-linear-to-b from-yellow-400 from-20% via-50% via-yellow-600 to-90% to-yellow-900;
+    @apply border-3 border-yellow-950;
+  }
+
+  .staics-page #dice-bg-1{
+    @apply max-sm:-bottom-20 max-sm:-right-10 lg:-bottom-12 lg:-right-12;
+  }
+
+  .staics-page #dice-bg-2{
+    @apply max-sm:-top-10 max-sm:-left-10 lg:-top-9 lg:-left-6;
   }
 
 }

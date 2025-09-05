@@ -1,0 +1,54 @@
+import React, { createContext, useContext } from 'react'
+import type { ExportTypes } from '../types/ComponentsExportsTypes';
+import useClassicMode from '../hooks/useClassicMode';
+import useMatchMode from '../hooks/useMatchMode';
+
+type PropsTypes = React.PropsWithChildren;
+
+const contextCreateGlobal = createContext<ExportTypes>( { 
+  RollDice: () => {},
+  DiceTotalRef: { current: { first: null, second: null } },
+  isActive: false,
+  isTotal: 0,
+  isScores: { current: [] },
+  isFirst: 0,
+  isSecond: 0,
+  ResetGameMode: () => {},
+  isOpen: false,
+  onClose: () => {},
+  setOpen: () => {},
+  RollDiceMatch: () => {},
+  isScoresMatch: { current: [] },
+  isPoints: { current: { player: 0, com: 0, points: { player: 0, com: 0, win: "" } } },
+  isStatics: { current: [] },
+  MatchRef: { current: { player: null, com: null } },
+  isActiveMatch: false, 
+  isPlayer: 0, 
+  isCOM: 0, 
+  isWin: "",
+  isReset: false,
+  setReset: () => {},
+  ResetMatchMode: () => {},
+  isBonus: { current: [] }
+} );
+
+function GlobalContext({children}: PropsTypes) {
+
+  const useClassic = useClassicMode();
+  const useMatch = useMatchMode();
+
+  const ExportValues = { ...useClassic, ...useMatch };
+
+  return (<>
+  <contextCreateGlobal.Provider value={ExportValues}>
+    {children}
+  </contextCreateGlobal.Provider>
+  </>)
+}
+
+function ExportGlobalContext (){
+  const useGlobalExp = useContext(contextCreateGlobal);
+  return useGlobalExp
+}
+
+export { GlobalContext, ExportGlobalContext }

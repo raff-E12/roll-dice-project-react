@@ -1,0 +1,96 @@
+
+@import "tailwindcss";
+
+/***** Dice Styles *****/ 
+
+ .dice{
+    @apply relative w-[100px] h-[100px] transform-3d transition-normal duration-500 ease-in-out;
+
+    @apply 2xl:scale-100 xl:scale-100 lg:scale-75 md:scale-75 sm:scale-75 max-sm:scale-75;
+  }
+
+  .face{
+    @apply absolute w-[100%] h-[100%] rounded-2xl border-4 border-gray-200 
+    transform-3d bg-linear-150/hsl from-gray-200 to-gray-50;
+  }
+
+  .face::before{
+    @apply content-none absolute w-[100%] h-[100%] rounded-2xl bg-gray-200 translate-z-[-1px];
+  }
+
+  .face::after{
+    @apply content-none absolute w-[18px] h-[18px] rounded-2xl top-[50%] left-[50%] bg-gray-950;
+  }
+
+   .front {
+    @apply translate-z-[50px];
+  }
+
+  .front::after {
+    content: '';
+    @apply w-[30px] h-[30px] bg-red-500 mt-[-0px] ml-[-0px] absolute top-[50%] left-[50%];
+    @apply 2xl:w-[30px] 2xl:h-[30px] xl:w-[30px] xl:h-[30px] lg:w-[28px] lg:h-[28px];
+    transform: translate(-50%, -50%);
+  }
+
+  .back {
+    @apply rotate-x-[180deg] translate-z-[-50px];
+  }
+
+  .back::after {
+    content: '';
+    @apply mt-[-35px] ml-[-30px] absolute;
+    box-shadow: 40px 0, 0 25px, 40px 25px, 0 50px, 40px 50px;
+  }
+
+  .top {
+    @apply rotate-x-[90deg] translate-z-[0px] translate-y-[-50px];
+  }
+
+  .top::after {
+    content: '';
+    @apply mt-[-30px] ml-[-30px] absolute;
+    box-shadow: 40px 40px;
+  }
+
+  .bottom {
+    @apply rotate-x-[-90deg] translate-z-[0px] translate-y-[50px];
+  }
+
+  .bottom::after {
+    content: '';
+    @apply mt-[-36px] ml-[-36px] absolute;
+    box-shadow: 26px 26px, 52px 52px, 52px 0, 0 52px;
+  }
+
+  .right {
+    @apply rotate-y-[90deg] translate-z-[0px] translate-y-[0px] translate-x-[50px];
+  }
+
+  .right::after {
+    content: '';
+    @apply mt-[-30px] ml-[-30px] absolute;
+    box-shadow: 40px 0, 0 40px, 40px 40px;
+  }
+
+  .left {
+    @apply rotate-y-[90deg] translate-z-[0px] translate-x-[-50px];
+  }
+
+  .left::after {
+    content: '';
+    @apply mt-[-35px] ml-[-35px] absolute;
+    box-shadow: 25px 25px, 50px 50px;
+  }
+
+  .dice.roll{
+    @apply scale-75;
+  }
+
+  @keyframes rolling {
+      50% {
+        transform: rotateX(455deg) rotateY(455deg);
+      }
+  }
+
+/***** End Dice Styles *****/

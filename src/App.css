@@ -1,83 +1,99 @@
 
-/* Importazione di TailwindCss */
-
 @import "tailwindcss";
 
-:root {
-  /* Colori principali */
-  --color-primary: #ff4d4d; 
-  --color-secondary: #ffd93d;
-  --color-accent: #4dd2ff;
+/***** CSS Style Base *****/ 
 
-  /* Colori di sfondo */
-  --color-bg-dark: #1b1b1b;
-  --color-bg-light: #f5f5f5; 
+@theme default {
 
-  /* Testo */
-  --color-text-primary: #ffffff;
-  --color-text-dark: #222222;
-  --color-text-muted: #aaaaaa;
+  --font-lexend: "Lexend", sans-serif;
+  --font-montserrant: "Montserrat", sans-serif;
+  --font-varela: "Varela Round", sans-serif;
+  --font-love-ya: "Love Ya Like A Sister";
+  --color-primary: #3B82F6;
+  --color-secondary: #FACC15;
+  --color-accent: #22C55E; 
 
-  /* Stati interattivi */
-  --color-success: #4caf50;
-  --color-warning: #ff9800;
-  --color-error: #f44336;
+  /* Colori di stato */
+  --color-win: #16A34A;
+  --color-lose: #DC2626;
+  --color-draw: #6B7280;
 
-  /* Ombre e bordi */
-  --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.3);
-  --border-radius: 12px;
+  /* Sfondo e testo */
+  --color-bg: #111827;
+  --color-bg-light: #1F2937;
+  --color-text: #F3F4F6; 
+  --color-text-muted: #9CA3AF;
+
 }
-
-/***** Stile La Schermata Principale *****/ 
 
 @layer base {
+  
+  #root{
+    @apply min-h-lvh w-full backdrop-blur-xs flex items-start justify-center;
+  }
 
   body {
-    @apply h-screen flex items-center justify-center bg-transparent;
+    @apply min-h-lvh w-full flex items-start justify-start bg-[url(../public/img/bg_site.png)] bg-cover bg-no-repeat;
   }
- 
-  .main-sc {
-    @apply h-screen flex items-center justify-center w-screen 
-    border-2 border-white p-2 overflow-hidden bg-red-500;
-  }
-
-  .logo-sc{
-    @apply w-[70px] h-[70px] p-2 absolute top-0 left-0 m-6
-    2xl:w-[160px] 2xl:h-[160px] xl:w-[120px] 
-    xl:h-[120px] lg:w-[90px] lg:h-[90px] md:w-[70px] md:h-[70px];
-  }
-
 }
 
-/***** Fine Stile La Schermata Principale *****/
+/***** End CSS Style Base *****/
 
-/***** Componenti Generali *****/ 
 
 @layer components {
+   
+   .slidebar-sc{
+    background-color: var(--color-bg);
+    font-family: var(--font-lexend);
+   }
 
-  .modal-sc{
-    @apply w-screen absolute h-screen top-0 left-0 
-    bg-transparent backdrop-blur-xl flex items-center justify-center;
-  }
+   .drop-menu li{
+    font-family: var(--font-montserrant);
+   }
 
-  .modals{
-    @apply w-[600px] h-[400px] bg-white rounded-2xl p-10 flex flex-col
-    justify-center items-center relative;
-  }
+   .footer-sc{
+    @apply w-full bg-[#bababa57] h-auto flex flex-row p-2 gap-3;
+    font-family: var(--font-lexend);
 
-  #logo-modal{
-    @apply rotate-[20deg] w-[190px] h-[190px] 
-    absolute right-[-20px] top-[-30px];
-  }
+    @apply justify-start items-center text-white font-bold text-lg
+    backdrop-blur-2xl backdrop-saturate-50 border-t-2 border-t-white/15;
+   }
 
-  #logo-modal img:nth-of-type(1){
-    @apply drop-shadow-lg drop-shadow-black relative;
-  }
+   .main-sc{
+    @apply flex flex-col w-full justify-between items-center h-auto
+    2xl:justify-between xl:justify-between gap-4 relative;
+   }
 
-  #logo-modal img:nth-of-type(2){
-    @apply content-none w-[130px] h-[130px] absolute scale-200
-    right-[30px] top-[30px] -z-10;
-  }
+   .footer-logo{
+    @apply w-[70px] h-[70px] bg-[url("./../public/img/logo_3.png")] bg-contain bg-no-repeat;
+    @apply 2xl:w-[70px] 2xl:h-[70px] lg:w-[50px] lg:h-[50px];
+   }
+
+   .text-board, .roll-index h4{
+    font-family: var(--font-love-ya);
+   }
+   .text-roll-front, .icon-dice{
+    font-family: var(--font-montserrant);
+   }
+   .popup-layout{
+    font-family: var(--font-lexend);
+   }
+   .start-screen{
+    font-family: var(--font-lexend);
+   }
+   .list-index, .row-text, .row-empty{
+    font-family: var(--font-lexend);
+   }
+
+  .loading-ls{
+    @apply w-[60%] flex items-center justify-center 
+    flex-col font-bold text-3xl capitalize text-white h-screen;
+    font-family: var(--font-lexend);
+   }
+
+   .staics-page .points-player-window .window-cont .col-window-sc,.staics-page .points-player-window .window-cont .col-medium-rs{
+    font-family: var(--font-lexend);
+   }
 
    .text-board, .roll-index h4{
     font-family: var(--font-love-ya);
@@ -111,9 +127,12 @@
    
 }
 
-/***** Componenti Generali *****/
-
 @layer utilities {
+
+  .icon{
+    @apply w-[44px] h-[44px] text-lg p-0.5 text-white flex items-center justify-center;
+  }
+
   .icon-max {
     @apply w-[60px] h-[60px] text-3xl p-0.5 text-white flex items-center justify-center;
   }

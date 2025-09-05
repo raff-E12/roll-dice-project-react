@@ -1,9 +1,8 @@
 
 @import "tailwindcss";
 
-  /***** SideBar Style *****/ 
-   
-   .slidebar-sc{
+ .slidebar-sc{
+    @apply w-[620px] h-auto flex flex-col items-center justify-start border-b-3 border-b-red-600;
     @apply w-[220px] h-auto flex flex-col items-center justify-start border-b-3 border-b-red-600;
    }
 
@@ -11,38 +10,28 @@
      @apply bg-red-500 w-[40px] h-[29px] p-6 flex justify-center items-center 
      rounded-se-2xl rounded-br-2xl cursor-pointer;
    }
-
    .container-side .icon-brand{
     @apply bg-red-500 w-[70px] h-[70px] flex items-center justify-center p-4 rounded-2xl mt-7 mb-7;
    }
-
    .sidebar-col{
     @apply w-full bg-red-700 text-lg text-white font-bold cursor-pointer;
    }
-
    .drop-list{
     @apply w-full flex flex-col text-center;
    }
-
    .front-col{
      @apply flex flex-row justify-center items-center text-sm font-bold w-full p-2 hover:bg-red-600 
     transition-all duration-300;
    }
-
    .sidebar-col .front-col .text-front{
     @apply w-[90%] flex justify-between items-center p-1;
    }
-
    .drop-menu{
     @apply w-full flex-col h-0 justify-center overflow-hidden transition-all duration-300;
    }
-
    .drop-menu.open{
     @apply h-[134px] transition-all duration-300;
    }
-
    .drop-menu li{
     @apply w-full flex justify-start items-center text-[13px] p-2 border-l-6 border-l-yellow-500 hover:bg-red-600;
    }
-
-   /***** End SideBar Style *****/

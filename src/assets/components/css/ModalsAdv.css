@@ -1,0 +1,103 @@
+
+@import "tailwindcss";
+
+#popup-root .popup-overlay {
+   @apply backdrop-blur-lg flex justify-center items-center;
+}
+
+.popup-layout{
+   @apply bg-white w-[250px] h-auto relative flex flex-col p-6 rounded-2xl border-2 border-red-500/35 gap-5;
+
+   @apply 2xl:w-[620px] xl:w-[520px] lg:w-[540px] md:w-[560px] sm:w-[560px] min-sm:w-[450px];
+}
+
+.popup-title{
+    @apply w-full flex flex-row items-center justify-between p-2;
+}
+
+.popup-title .close-btn{
+    @apply w-[30px] h-[30px] bg-red-700 flex justify-center items-center text-sm text-white rounded-sm;
+}
+
+.popup-layout .popup-content{
+    @apply h-[190px] overflow-y-scroll;
+}
+
+.popup-btns{
+  @apply w-full flex items-center justify-end gap-2;
+}
+
+.popup-btns .btn{
+    @apply w-full bg-gray-500 capitalize p-2 font-bold 
+    text-sm rounded-2xl text-white cursor-pointer;
+}
+
+.popup-btns .btn.confirm{
+  @apply bg-red-600;
+}
+
+.popup-btns .btn.return{
+  @apply bg-gray-400;
+}
+
+#logo-modal{
+   @apply rotate-[20deg] w-[50px] h-[60px] absolute left-[-20px] top-[-3px];
+
+   @apply 2xl:w-[120px] 2xl:h-[120px] xl:w-[51px] xl:h-[80px];
+}
+
+#logo-modal img:nth-of-type(1){
+   @apply drop-shadow-lg drop-shadow-black max-w-full h-auto z-10;
+
+   @apply 2xl:top-1 2xl:right-3 xl:top-0 xl:right-3 xl:-left-6;
+}
+
+#logo-modal img:nth-of-type(2){
+   @apply content-none w-[40px] h-auto absolute scale-200 right-[3px] top-[5px] -z-10 animate-spin;
+   animation-duration: 10s;
+   @apply 2xl:w-[100px] 2xl:h-[100px] xl:w-[50px] xl:h-auto;
+}
+
+#popup-welcome.fade-in{
+   animation-name: Open-Window;
+   animation-duration: 2s;
+   animation-timing-function: ease-in-out;
+}
+
+#popup-welcome.fade-out{
+   animation-name: Open-Window;
+   animation-duration: 2s;
+   animation-direction: reverse;
+   animation-timing-function: ease-in-out;
+}
+
+#modal.fade-in{
+   animation-name: Modal-Animation;
+   animation-duration: 1s;
+   animation-direction: normal;
+   animation-timing-function: ease-in-out;
+}
+
+@keyframes Open-Window {
+   0% {
+      transform: translateY(-200px);
+      filter: opacity(0%);
+   }
+
+   100% {
+      transform: translateY(0px);
+      filter: opacity(100%);
+   }
+}
+
+@keyframes Modal-Animation { 
+  0%   { transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  3.4% { transform: matrix3d(0.316, 0, 0, 0, 0, 0.407, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  4.3% { transform: matrix3d(0.408, 0, 0, 0, 0, 0.54, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  6.81% { transform: matrix3d(0.659, 0, 0, 0, 0, 0.893, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  12.91% { transform: matrix3d(1.094, 0, 0, 0, 0, 1.328, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  18.72% { transform: matrix3d(1.212, 0, 0, 0, 0, 1.187, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  35.54% { transform: matrix3d(0.979, 0, 0, 0, 0, 0.962, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  63.26% { transform: matrix3d(1.007, 0, 0, 0, 0, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100%  { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+}

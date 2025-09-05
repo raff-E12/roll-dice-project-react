@@ -69,6 +69,32 @@
     @apply 2xl:w-[70px] 2xl:h-[70px] lg:w-[50px] lg:h-[50px];
    }
 
+   .text-board, .roll-index h4{
+    font-family: var(--font-love-ya);
+   }
+   .text-roll-front, .icon-dice{
+    font-family: var(--font-montserrant);
+   }
+   .popup-layout{
+    font-family: var(--font-lexend);
+   }
+   .start-screen{
+    font-family: var(--font-lexend);
+   }
+   .list-index, .row-text, .row-empty{
+    font-family: var(--font-lexend);
+   }
+
+  .loading-ls{
+    @apply w-[60%] flex items-center justify-center 
+    flex-col font-bold text-3xl capitalize text-white h-screen;
+    font-family: var(--font-lexend);
+   }
+
+   .staics-page .points-player-window .window-cont .col-window-sc,.staics-page .points-player-window .window-cont .col-medium-rs{
+    font-family: var(--font-lexend);
+   }
+
 }
 
 @layer utilities {

@@ -93,6 +93,10 @@
         @apply sm:w-[320px] md:w-[330px] lg:w-[440px];
     }
 
+    .box-hidden{
+        @apply absolute left-0 top-0 hidden;
+    }
+
     .flex-center-col{
         @apply flex justify-center items-center flex-col;
     }

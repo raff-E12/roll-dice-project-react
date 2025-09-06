@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "../css/WindowResumeStyle.css"
 import type { MatchScoresType, PointsTypes, TypesScores } from '../../types/ComponentsExportsTypes'
+import ButtonComponents from './ButtonComponents';
 
 type PropTypes = { StatusScheme: { Scores: TypesScores[], 
                                    ScoresMatch: MatchScoresType[], 
@@ -281,17 +282,29 @@ export default function WindowResume({StatusScheme, setClose, isClose}: PropType
              
           <div className='left-selection'>
              <div className='cont-left'>
-                <span className='sel-btn classic' onClick={() => setSwitch("Classic")}>
-                  <i className="fa-solid fa-cubes"></i>
-                </span>
+                <ButtonComponents 
+                 isClass='sel-btn classic'
+                 setTarget={setSwitch}
+                 isTarget={{ cond: true, target: "Classic" }}
+                 isText={{ cond: false, text: "" }}
+                 isIcons='fa-solid fa-cubes'
+                />
 
-                <span className='sel-btn match' onClick={() => setSwitch("Match")}>
-                    <i className="fa-solid fa-dice-d6"></i>
-                </span>
+                <ButtonComponents 
+                 isClass='sel-btn match'
+                 setTarget={setSwitch}
+                 isTarget={{ cond: true, target: "Match" }}
+                 isText={{ cond: false, text: "" }}
+                 isIcons='fa-solid fa-dice-d6'
+                />
 
-                <span className='sel-btn exit' onClick={() => setClose(false)}>
-                  <i className="fa-solid fa-xmark"></i>
-                </span>
+                <ButtonComponents 
+                 isClass='sel-btn exit'
+                 setClose={setClose}
+                 isText={{ cond: false, text: "" }}
+                 isIcons='fa-solid fa-xmark'
+                />
+                
              </div>
           </div>
 

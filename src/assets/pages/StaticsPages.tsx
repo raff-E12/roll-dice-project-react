@@ -1,23 +1,33 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import "./css/StaticsStylePage.css"
 import { ExportGlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router';
 import WindowResume from '../components/extra/WindowResume';
 import DiceLoadingSequence from '../components/extra/DiceLoadingSequence';
-
-type TargetStatus = "ClassicMode" | "MatchMode";
+import ButtonComponents from '../components/extra/ButtonComponents';
+import StaticsSoundGame from "../../../public/sound/status_music.mp3"
 
 export default function StaticsPages() {
-  const [isTarget, setTagert] = useState<TargetStatus>("ClassicMode");
+  const [isTarget, setTagert] = useState<string>("ClassicMode");
   const { isScores, isScoresMatch, isPoints, isStatics, isBonus } = ExportGlobalContext();
-  const navigate = useNavigate();
   const [isClose, setClose] = useState<boolean>(false);
   const [isStop, setStop] = useState<boolean>(false);
+  const [isPlay, setPlay] = useState<boolean>(false);
+  const AudioRef = useRef<HTMLAudioElement>(null);
 
    useEffect(() => {
       const interval = setTimeout(() => setStop(true), 1660);
       return () => clearTimeout(interval);
    }, [isStop])
+
+   const PlayMusicBackground = useMemo(() => {
+      if(isPlay){
+         AudioRef.current?.play();
+         AudioRef.current!.volume = 0.8;
+      } else {
+         AudioRef.current?.pause();
+      }
+   },[isPlay]);
 
   return (<>
    <section className='container-full staics-page flex-center'>
@@ -36,9 +46,31 @@ export default function StaticsPages() {
                <span className='st-full st-flex-col inset-st'>
 
                  <div className='btn-switch st-full'>
-                    <button className='btn classic' onClick={() => setTagert("ClassicMode")}><i className="fa-solid fa-dice-d6"></i></button>
-                    <button className='btn match' onClick={() => setTagert("MatchMode")}><i className="fa-solid fa-web-awesome"></i></button>
-                    <button className='btn status' onClick={() => setClose(true)}><i className="fa-solid fa-flag"></i></button>
+
+                    <ButtonComponents 
+                     isClass='btn classic'
+                     isTarget={{ cond: true, target: "ClassicMode" }}
+                     isText={{ cond: false, text: "" }}
+                     isIcons='fa-solid fa-dice-d6'
+                     setTarget={setTagert}
+                    />
+
+                     <ButtonComponents 
+                     isClass='btn match'
+                     isTarget={{ cond: true, target: "MatchMode" }}
+                     isText={{ cond: false, text: "" }}
+                     isIcons='fa-solid fa-web-awesome'
+                     setTarget={setTagert}
+                    />
+
+                      <ButtonComponents 
+                     isClass='btn status'
+                     isOpen={setClose}
+                     isText={{ cond: false, text: "" }}
+                     isIcons='fa-solid fa-flag'
+                     setTarget={setTagert}
+                    />
+                    
                  </div>
 
                 {isTarget === "ClassicMode" &&  <div className='list-sc'>
@@ -150,8 +182,22 @@ export default function StaticsPages() {
          <div className='statics-gradient p-3'>
             <span className='st-full st-box-in inset-st'>
                 <div className='btn-sections'>
-                    <button className='btn home' onClick={() => navigate("/classic")}><i className="fa-solid fa-house"></i></button>
-                    <button className='btn imp'><i className="fa-solid fa-gear"></i></button>
+
+                    <ButtonComponents 
+                     isClass='btn home'
+                     isText={{ cond: false, text: "" }}
+                     isNavigate={{ cond: true, to: "/classic" }}
+                     isIcons='fa-solid fa-house'
+                    />
+
+                   <ButtonComponents 
+                     isClass='btn imp'
+                     isText={{ cond: false, text: "" }}
+                     setPlay={setPlay}
+                     isPlay={isPlay}
+                     isIcons={isPlay ? " fa-solid fa-volume-high" : "fa-solid fa-volume-xmark"}
+                    />
+                    
                     <button className='btn brush'><i className="fa-solid fa-paintbrush"></i></button>
                 </div>
             </span>
@@ -171,6 +217,10 @@ export default function StaticsPages() {
    isClose={isClose}
    setClose={setClose}
    />
+
+   <audio className='absolute top-2 right-2 hidden' controls ref={AudioRef} loop>
+      <source src={StaticsSoundGame} type='audio/mpeg' />
+   </audio>
 
    <div className={`loading-ls ${isStop ? "hidden" : ""}`}>
       <h4>Loading...</h4>

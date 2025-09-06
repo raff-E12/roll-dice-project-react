@@ -1,4 +1,6 @@
 
+
+![App Screenshot](https://i.ibb.co/j9q0r3Pt/Nuovo-progetto.png)
 ## Roll Dice Project React
 
 Benvenuti nel progetto Roll Dice Project React: un'applicazione web interattiva che simula il lancio di dadi, sviluppata con React e TypeScript.

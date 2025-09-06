@@ -9,7 +9,7 @@ export default function SideBar() {
   const navigate = useNavigate();
 
   return (<>
-  <section className={`container-side ${ isOpen ? "" : "close"}`} onMouseLeave={() => setOpen(false)}>
+  <section className={`container-side ${ isOpen ? "" : "close"}`}>
 
     <div className='icon-sidebar'>
         <span className='icon'>
@@ -17,7 +17,7 @@ export default function SideBar() {
         </span>
     </div>
 
-    <div className='slidebar-sc'>
+    <div className='slidebar-sc' onMouseLeave={() => setOpen(false)}>
 
         <div className='icon-brand'>
           <span className='icon-max'>

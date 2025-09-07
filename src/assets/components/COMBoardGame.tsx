@@ -3,10 +3,11 @@ import { ExportGlobalContext } from '../context/GlobalContext'
 import Dice from './Dice';
 import ModalAdv from './ModalAdv';
 import ButtonComponents from './extra/ButtonComponents';
+import PopUpAdv from './extra/PopupAdv';
 
 export default function COMBoardGame() {
 
-  const { RollDiceMatch, MatchRef, isActiveMatch, setReset, ResetMatchMode, isReset } = ExportGlobalContext();
+  const { RollDiceMatch, MatchRef, isActiveMatch, setReset, ResetMatchMode, isReset, isAdv, setAdv } = ExportGlobalContext();
   const onClose = () => setReset(false);
   const [isRolls, setRolls] = useState<boolean>(false);
 
@@ -40,6 +41,12 @@ export default function COMBoardGame() {
           </div>
       </aside>
     </section>
+
+      <PopUpAdv
+          isText='Le Risorse sono già vuote.'
+          isAdv={isAdv}
+          setAdv={setAdv}
+        />
     
     <ModalAdv 
       isOpen={isReset}

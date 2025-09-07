@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import "./css/StaticsStylePage.css"
 import { ExportGlobalContext } from '../context/GlobalContext';
-import { useNavigate } from 'react-router';
 import WindowResume from '../components/extra/WindowResume';
 import DiceLoadingSequence from '../components/extra/DiceLoadingSequence';
 import ButtonComponents from '../components/extra/ButtonComponents';
@@ -10,6 +9,7 @@ import StaticsSoundGame from "../../../public/sound/status_music.mp3"
 export default function StaticsPages() {
   const [isTarget, setTagert] = useState<string>("ClassicMode");
   const { isScores, isScoresMatch, isPoints, isStatics, isBonus } = ExportGlobalContext();
+
   const [isClose, setClose] = useState<boolean>(false);
   const [isStop, setStop] = useState<boolean>(false);
   const [isPlay, setPlay] = useState<boolean>(false);
@@ -198,7 +198,6 @@ export default function StaticsPages() {
                      isIcons={isPlay ? " fa-solid fa-volume-high" : "fa-solid fa-volume-xmark"}
                     />
                     
-                    <button className='btn brush'><i className="fa-solid fa-paintbrush"></i></button>
                 </div>
             </span>
          </div>

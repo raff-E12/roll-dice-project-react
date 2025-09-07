@@ -2,7 +2,6 @@ import React, { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import SideBar from '../components/SideBar'
 import { Outlet } from 'react-router'
 import Footer from '../components/Footer'
-import { GlobalContext } from '../context/GlobalContext'
 import LoadingPage from '../components/extra/LoadingPage'
 import DiceLoadingSequence from '../components/extra/DiceLoadingSequence.tsx'
 
@@ -37,7 +36,6 @@ export default function GameLayout() {
     }
 
   return (<>
-
     <Suspense fallback={<LoadingPage />}>
       <SideBar />
       <main className='main-sc'>

@@ -38,5 +38,9 @@ export interface ExportTypes {
     setReset: (value: boolean) => void,
     isReset: boolean,
     ResetMatchMode: () => void,
-    isBonus: React.RefObject<BonusTypes[]>
+    isBonus: React.RefObject<BonusTypes[]>,
+    isAdv: boolean,
+    setAdv: (value: boolean) => void
+    isMod: boolean,
+    setMod: (value: boolean) => void
 };

@@ -13,6 +13,7 @@ export default function useClassicGame() {
     const [isTotal, setTotal] = useState<number>(0);
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isEmpty, setEmpty] = useState<boolean>(false);
+    const [isMod, setMod] = useState<boolean>(false);
 
     const onClose = () => setOpen(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(DiceTotalRef.current);
@@ -55,20 +56,25 @@ export default function useClassicGame() {
     }
 
     function ResetGameMode() {
-        setFirst(0);
-        setSecond(0);
-        setTotal(0);
-        setTarget("ClassicMode")
-        setDiceOne(1)
-        setID(1);
-        setDiceTwo(1)
-        setOpen(false);
-        setMode("ClassicMode");
-        isClassic.current.first = 0;
-        isClassic.current.second = 0;
-        isClassic.current.total = 0;
-        isScores.current = [];
-        sessionStorage.setItem("Scores", JSON.stringify([]));
+        if (isFirst !== 0 && isSecond !== 0 && isTotal !== 0) {
+            setFirst(0);
+            setSecond(0);
+            setTotal(0);
+            setTarget("ClassicMode")
+            setDiceOne(1)
+            setID(1);
+            setDiceTwo(1)
+            setOpen(false);
+            setMode("ClassicMode");
+            isClassic.current.first = 0;
+            isClassic.current.second = 0;
+            isClassic.current.total = 0;
+            isScores.current = [];
+            sessionStorage.setItem("Scores", JSON.stringify([]));
+        } else {
+            setMod(true);
+            setOpen(false);
+        }
     }
 
     const ImportSessionList = useMemo(() => {
@@ -93,5 +99,7 @@ export default function useClassicGame() {
              ResetGameMode, 
              isOpen, 
              onClose,
-             setOpen };
+             setOpen,
+             setMod,
+             isMod };
 }

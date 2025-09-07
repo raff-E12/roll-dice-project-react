@@ -29,7 +29,11 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isReset: false,
   setReset: () => {},
   ResetMatchMode: () => {},
-  isBonus: { current: [] }
+  isBonus: { current: [] },
+  isAdv: false,
+  setAdv: () => {},
+  isMod: false,
+  setMod: () => {}
 } );
 
 function GlobalContext({children}: PropsTypes) {

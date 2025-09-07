@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import "./css/StartPageStyle.css"
-import StartBanner from '../components/StartBanner'
+import StartBanner from '../components/extra/StartBanner'
 import { NavLink } from 'react-router';
 import SoundStartGame from "../../../public/sound/bg_welcome_game.mp3"
 import SoundClickBtn from "../../../public/sound/button-press-sound.mp3"

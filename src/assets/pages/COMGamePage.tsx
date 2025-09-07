@@ -5,7 +5,6 @@ import RollHistory from '../components/RollHistory'
 import ResultBoard from '../components/ResultBoard'
 import COMBoardGame from '../components/COMBoardGame'
 import { ExportGlobalContext } from '../context/GlobalContext'
-import BonusPop from '../components/extra/BonusPop'
 
 export default function COMGamePage() {
   const { isScoresMatch, isWin, isPlayer, isCOM, isActiveMatch } = ExportGlobalContext();

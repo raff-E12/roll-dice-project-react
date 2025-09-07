@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { type ExportTypes, type MatchScoresType, type MatchType, type PointsTypes, type TypesScores } from '../types/ComponentsExportsTypes';
+import { type BonusTypes, type ExportTypes, type MatchScoresType, type MatchType, type PointsTypes, type TypesScores } from '../types/ComponentsExportsTypes';
 import useMotionLogic from './useMotionLogic';
 import useRollsHistory from './useRollsHistory';
 
 type TypesWin = "Player" | "COM" | "Draw" | "";
-type ListExports = { points: PointsTypes, statics: PointsTypes[], match: MatchScoresType[] };
+type ListExports = { points: PointsTypes, statics: PointsTypes[], match: MatchScoresType[], bonus: BonusTypes[] };
 
 export default function useMatchGame() {
     const MatchRef = useRef<MatchType>({ player: null, com: null });
@@ -15,8 +15,9 @@ export default function useMatchGame() {
     const [isPlayer, setPlayer] = useState<number>(0);
     const [isCOM, setCOM] = useState<number>(0);
     const [isWin, setWin] = useState<string>("Nothing");
-    const [isReset, setReset] = useState(false);
-    const [isEmpty, setEmpty] = useState(false);
+    const [isReset, setReset] = useState<boolean>(false);
+    const [isEmpty, setEmpty] = useState<boolean>(false);
+    const [isAdv, setAdv] = useState<boolean>(false);
 
     useEffect(() => {
         if (isStatics.current.length === 0 
@@ -94,6 +95,7 @@ export default function useMatchGame() {
     }
 
       function ResetMatchMode() {
+       if (isPlayer !== 0 && isCOM !== 0 && isWin !== "") {
         setPlayer(0)
         setCOM(0)
         setTarget("MatchMode")
@@ -110,6 +112,10 @@ export default function useMatchGame() {
         sessionStorage.settItem("Statics", JSON.stringify([]));
         sessionStorage.settItem("Match", JSON.stringify([]));
         sessionStorage.setItem("Bonus", JSON.stringify([]));
+       } else {
+         setAdv(true);
+         setReset(false);
+       }
     }
 
     
@@ -117,11 +123,13 @@ export default function useMatchGame() {
       const getPoints = sessionStorage.getItem("Points") as string;
       const getStatics = sessionStorage.getItem("Statics") as string;
       const getMatch = sessionStorage.getItem("Match") as string;
+      const getBonus = sessionStorage.getItem("Bonus") as string;
         if (getPoints !== null && getStatics !== null) {
-            const ParseList: ListExports = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch)};
+            const ParseList: ListExports = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch), bonus: JSON.parse(getBonus)};
             isPoints.current = ParseList.points;
             isStatics.current = ParseList.statics;
             isScoresMatch.current = ParseList.match;
+            isBonus.current = ParseList.bonus;
             
             const findID = Number(ParseList.match.find(element => element.id === ParseList.match.length)?.id) + 1;
             setID(findID);
@@ -129,6 +137,7 @@ export default function useMatchGame() {
             isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }, bonus: { couple: 0, triple: 0, fullrun: 0, poker: 0 } };
             isStatics.current = [];
             isScoresMatch.current = [];
+            isBonus.current = [];
         }
 
     }, [isEmpty])
@@ -146,5 +155,7 @@ export default function useMatchGame() {
              setReset,
              ResetMatchMode,
              ImportSessionMatch,
-             isBonus }
+             isBonus,
+             isAdv,
+             setAdv }
 }

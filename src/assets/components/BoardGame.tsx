@@ -5,10 +5,11 @@ import type { ExportTypes, RefDice } from '../types/ComponentsExportsTypes';
 import ModalAdv from './ModalAdv';
 import { ExportGlobalContext } from '../context/GlobalContext';
 import ButtonComponents from './extra/ButtonComponents';
+import PopUpAdv from './extra/PopupAdv';
 
 
 export default function BoardGame() {
-  const { RollDice, DiceTotalRef, isActive, ResetGameMode, isOpen, onClose, setOpen } = ExportGlobalContext();
+  const { RollDice, DiceTotalRef, isActive, ResetGameMode, isOpen, onClose, setOpen, isMod, setMod } = ExportGlobalContext();
   const [isRolls, setRolls] = useState<boolean>(false);
 
   return (<>
@@ -42,6 +43,12 @@ export default function BoardGame() {
         </div>
     </aside>
   </section>
+
+    <PopUpAdv
+      isText='Le Risorse sono già vuote.'
+      isAdv={isMod}
+      setAdv={setMod}
+      />
   
   <ModalAdv 
     isOpen={isOpen} 

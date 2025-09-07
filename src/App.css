@@ -121,7 +121,9 @@
     font-family: var(--font-lexend);
    }
 
-   .staics-page .points-player-window .window-cont .col-window-sc,.staics-page .points-player-window .window-cont .col-medium-rs{
+   .staics-page .points-player-window .window-cont .col-window-sc, 
+   .staics-page .points-player-window .window-cont .col-medium-rs, 
+   .col-stat .row-icon, .container-pop .pop-con{
     font-family: var(--font-lexend);
    }
    

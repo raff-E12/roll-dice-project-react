@@ -78,6 +78,27 @@
    animation-timing-function: ease-in-out;
 }
 
+.container-pop{
+   @apply w-[290px] fixed h-auto rounded-2xl overflow-hidden p-3 backdrop-blur-2xl border-2 border-white shadow-2xl shadow-black
+   bg-white/10 bottom-0 right-0 m-10 z-20 flex justify-center items-center;
+}
+
+.container-pop .pop-con{
+   @apply flex justify-between w-full items-center flex-row text-sm font-bold gap-2;
+}
+
+.container-pop .pop-con .btn-pop{
+   @apply bg-red-700 p-2 w-8 text-white h-8 text-sm cursor-pointer active:bg-red-500
+   rounded-xl text-center flex justify-center items-center;
+}
+
+.container-pop.pop-ani{
+   animation-name: Popup-Opening;
+   animation-duration: 10s;
+   animation-direction: normal;
+   animation-timing-function: ease-in-out;
+}
+
 @keyframes Open-Window {
    0% {
       transform: translateY(-200px);
@@ -88,6 +109,17 @@
       transform: translateY(0px);
       filter: opacity(100%);
    }
+}
+
+@keyframes Popup-Opening {
+   0% { right: -1200px; }
+   10% { transform: skew(20deg, 0deg); }
+   15% { right: 0px; }
+   18% { transform: skew(1.2deg, 1.2deg); }
+   20% { transform: skew(1.0deg, 1.2deg); }
+   25% { transform: skew(0.1deg, 0.8deg); }
+   30% { transform: skew(0.1deg, 0.1deg); }
+   40% { transform: skew(0deg, 0deg); }
 }
 
 @keyframes Modal-Animation { 

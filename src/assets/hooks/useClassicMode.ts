@@ -79,13 +79,14 @@ export default function useClassicGame() {
 
     const ImportSessionList = useMemo(() => {
         const getScores = sessionStorage.getItem("Scores") as string;
-        if (getScores !== null) {
+        if (getScores !== null && getScores.length !== 0) {
             const listScores: TypesScores[] = JSON.parse(getScores);
             const findID = Number(listScores.find(element => element.id === listScores.length)?.id) + 1;
             isScores.current = listScores;
             setID(findID);
         } else {
             isScores.current = [];
+            setID(1);
         }
     },[isEmpty]);
 

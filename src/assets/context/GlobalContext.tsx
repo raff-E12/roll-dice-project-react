@@ -33,7 +33,8 @@ const contextCreateGlobal = createContext<ExportTypes>( {
   isAdv: false,
   setAdv: () => {},
   isMod: false,
-  setMod: () => {}
+  setMod: () => {},
+  isID: 0
 } );
 
 function GlobalContext({children}: PropsTypes) {

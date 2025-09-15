@@ -1,0 +1,68 @@
+
+@import "tailwindcss";
+
+.settings-modals{
+    @apply h-auto bg-red-600 border-2 border-yellow-700 rounded-2xl p-3
+    bg-linear-to-b from-5% from-yellow-300 via-80% via-yellow-500 to-65% to-yellow-600
+    flex justify-center items-center flex-col shadow-2xl shadow-black;
+
+    @apply max-sm:w-[300px] sm:w-full md:w-[420px] lg:w-[440px] xl:w-[720px] 2xl:w-[820px];
+}
+
+.set-int{
+    @apply w-full h-auto p-3 bg-red-600 rounded-2xl
+    border-2 border-yellow-700 flex justify-center items-center flex-col gap-3;
+    box-shadow: inset 0px 0px 4px var(--color-black);
+}
+
+.set-banner-title{
+    @apply w-full bg-linear-to-b from-5% from-yellow-300
+    via-80% via-yellow-500 to-65% to-yellow-600 p-2 border-2 border-yellow-700
+    text-xl font-bold text-white capitalize rounded-3xl flex items-center justify-center
+    text-shadow-2xs;
+
+    @apply max-sm:w-full sm:w-[300px] md:w-[300px] lg:w-[300px] xl:w-[420px] 2xl:w-[420px];
+}
+
+.set-menu{
+    @apply flex justify-center items-center flex-col w-full p-3;
+}
+
+.col-menu{
+    @apply w-full flex flex-col justify-start items-start p-3 gap-2;
+
+    @apply max-sm:w-[210px] sm:w-[210px] md:w-[280px] lg:w-[310px] xl:w-[420px] 2xl:w-[450px];
+}
+
+.col-menu .menu-text{
+    @apply w-full text-xl font-bold text-white;
+}
+
+.col-menu .menu-sec{
+    @apply w-full p-2 flex justify-center items-center h-auto;
+}
+
+/* Slider Style */
+
+.range-components{
+    @apply w-full flex relative items-center justify-center flex-col p-1;
+}
+
+.range-sc{
+    @apply appearance-none w-[100%] h-auto flex justify-center items-center outline-none
+    absolute top-0 bottom-0 pointer-events-none z-20;
+}
+
+.range-track{
+    @apply w-[100%] h-[10px] flex rounded-2xl bg-amber-400 inset-shadow-2xs inset-shadow-yellow-800
+    p-1 border-4 border-yellow-700 overflow-hidden;
+}
+
+.range-sc::-webkit-slider-runnable-track{
+    @apply appearance-none;
+}
+
+.range-sc::-webkit-slider-thumb{
+    @apply h-[20px] w-[20px] cursor-pointer rounded-4xl bg-yellow-500 border-4 border-yellow-700
+     pointer-events-auto z-30 appearance-none;
+}

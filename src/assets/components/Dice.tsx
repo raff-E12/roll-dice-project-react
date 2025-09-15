@@ -9,12 +9,12 @@ export default function Dice({DiceRef, isCondition, setCondition}: PropsDice) {
   const AudioRef = useRef<HTMLAudioElement>(null);
 
   const ClickSoundDice = useMemo(() => {
-     setTimeout(() => {
+     requestAnimationFrame(() => {
       if (isCondition) {
         AudioRef.current?.play();
         setCondition(false);
       }
-     }, 1600);
+     });
   },[isCondition]);
 
   return (<>

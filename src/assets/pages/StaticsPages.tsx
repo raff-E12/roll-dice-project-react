@@ -20,13 +20,15 @@ export default function StaticsPages() {
       return () => clearTimeout(interval);
    }, [isStop])
 
-   const PlayMusicBackground = useMemo(() => {
-      if(isPlay){
-         AudioRef.current?.play();
-         AudioRef.current!.volume = 0.8;
-      } else {
-         AudioRef.current?.pause();
-      }
+   const PlayMusicBackground = useEffect(() => {
+      requestAnimationFrame(() => {
+         if(isPlay){
+            AudioRef.current?.play();
+            AudioRef.current!.volume = 0.8;
+         } else {
+            AudioRef.current?.pause();
+         }
+      })
    },[isPlay]);
 
   return (<>

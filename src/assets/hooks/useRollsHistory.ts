@@ -35,6 +35,7 @@ export default function useRollsHistory(isActive: boolean) {
             if(count === 3) RestripleBonus++;
             if(count === 4) RespokerBonus++;    
             if (count === 5) ResfullRun++;
+            
             } else {
                 if (isMemory) {
                     count = 1;
@@ -92,7 +93,7 @@ export default function useRollsHistory(isActive: boolean) {
 
             AlternativeList = FindElement ? [...isScoresMatch.current] : [...isScoresMatch.current, { id: isID, ...isMatch.current }];
             isScoresMatch.current = AlternativeList; 
-            }, 4040)
+            }, 3020)
 
             setTimeout(() => {
             const BonusResolve = EditBonus(isScoresMatch, false);
@@ -114,7 +115,7 @@ export default function useRollsHistory(isActive: boolean) {
               const BonusObj = EditBonus(isScoresMatch, true);
               isBonus.current = [...isBonus.current, { id: isID, bonus: BonusObj }];
               SaveGameSession("Bonus", isBonus.current);
-            }, 5010);
+            }, 3130);
         }
 
      }, [isActive])
@@ -123,5 +124,5 @@ export default function useRollsHistory(isActive: boolean) {
         return sessionStorage.setItem(section, JSON.stringify(list));
      }
     
-    return { isScores, isScoresMatch, isMatch, isClassic, setMode, isPoints, isStatics, setID, isBonus }
+    return { isScores, isScoresMatch, isMatch, isClassic, setMode, isPoints, isStatics, setID, isBonus, isID }
 }

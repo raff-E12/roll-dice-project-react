@@ -1,6 +1,8 @@
 
 @import "tailwindcss";
 
+/***** Modals General *****/ 
+
 #popup-root .popup-overlay {
    @apply backdrop-blur-lg flex justify-center items-center;
 }
@@ -133,3 +135,125 @@
   63.26% { transform: matrix3d(1.007, 0, 0, 0, 0, 0.992, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100%  { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
 }
+
+/***** End Modals General *****/
+
+/***** Bonus Banner Class *****/
+
+.container-support {
+   @apply h-full absolute z-50 p-4;
+}
+
+.bonus-sc{
+   @apply w-[70%] h-[400px] flex items-center justify-center relative flex-col;
+}
+
+.container-banner{
+   @apply w-[500px] h-[300px] bg-no-repeat bg-center bg-size-[390px];
+}
+
+.container-banner.bonus-1{
+   @apply bg-[url("../../../../public/img/Bonus_1.png")];
+}
+
+.container-banner.bonus-2{
+   @apply bg-[url("../../../../public/img/Bonus_2.png")];
+}
+
+.container-banner.bonus-3{
+   @apply bg-[url("../../../../public/img/Bonus_3.png")];
+}
+
+.container-banner.bonus-4{
+   @apply bg-[url("../../../../public/img/Bonus_4.png")];
+}
+
+.bonus-sc .btn{
+   @apply w-[100px] h-auto bg-amber-50 text-center cursor-pointer
+   rounded-2xl p-2 shadow-2xl shadow-red-950 capitalize;
+}
+
+.bonus-sc .btn.exit{
+   @apply bg-gradient-to-b from-10% from-yellow-300/80 via-70% text-xl font-bold text-yellow-700 text-shadow-2xs
+   via-yellow-300 to-95% to-yellow-600 border-2 border-yellow-300/55;
+}
+
+.bonus-sc .btn:active{
+   @apply scale-75 text-white;
+}
+
+.container-banner.open-ani{
+   animation-name: Alert-Open;
+   animation-duration: 7s;
+   animation-direction: normal;
+   animation-timing-function: ease-out;
+}
+
+.bonus-light.open-ani{
+   animation-name: Light-Expansion;
+   animation-duration: 7s;
+   animation-direction: normal;
+   animation-timing-function: ease-out;
+}
+
+.container-banner.close-ani{
+   animation-name: Alert-Close;
+   animation-duration: 7s;
+   animation-direction: normal;
+   animation-timing-function: ease-in-out;
+}
+
+.container-support.open{
+   @apply opacity-100 bg-black/40 transition-all duration-100 ease-in;
+}
+
+.container-support.close{
+   display: none;
+   animation-name: Alert-Close;
+   animation-duration: 2s;
+   animation-direction: normal;
+   animation-timing-function: ease-in;
+}
+
+.bonus-light{
+   @apply h-[300px] absolute top-0 bg-[url("../../../../public/img/bg_retro_bonus.png")]
+   bg-no-repeat bg-center bg-size-[590px] -z-10 mt-9;
+
+   @apply max-sm:w-[320px] sm:w-[400px] md:w-[600px];
+}
+
+@keyframes Alert-Open {
+   0% { filter: opacity(0); transform: scale(0, 0); }
+   10% { filter: opacity(10); transform: scale(0.4, 0.4); }
+   20% { filter: opacity(50); transform: scale(0.9, 0.9); }
+   40% { filter: opacity(50); transform: scale(0.9, 0.9); }
+   100% { filter: opacity(100); transform: scale(1, 1); }
+}
+
+@keyframes Light-Expansion {
+   0% { filter: opacity(0); transform: scale(0, 0); }
+   40% { filter: opacity(50); transform: scale(0.10, 0.10); }
+   50% { filter: opacity(50); transform: scale(1.1, 1.1); }
+   70% { filter: opacity(50); transform: scale(1.9, 1.9); }
+   80% { filter: opacity(50); transform: scale(1.11, 1.11); }
+   90% { filter: opacity(50); transform: scale(1.20, 1.20); }
+   90.1% { filter: opacity(50); transform: scale(1.30, 1.30); }
+   90.1% { filter: opacity(50); transform: scale(1.10, 1.10); }
+   100% { filter: opacity(100); transform: scale(1, 1); }
+}
+
+@keyframes Alert-Close {
+   0% { filter: opacity(100); transform: scale(1, 1); }
+   10% { filter: opacity(20); transform: scale(1.2, 1.2); }
+   20% { filter: opacity(60); transform: scale(1.4, 1.4); }
+   30% { filter: opacity(50); transform: scale(1.9, 1.9); }
+   100% { filter: opacity(0); transform: scale(2, 2); }
+}
+
+@keyframes Background-Hidden {
+   0% { filter: opacity(100%); }
+   70% { filter: opacity(90%); }
+   100% { filter: opacity(0%); }
+}
+
+/***** End Bonus Banner Class *****/

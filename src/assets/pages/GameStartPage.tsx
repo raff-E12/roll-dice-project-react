@@ -13,12 +13,14 @@ export default function GameStartPage() {
   const [isPlay, setPlay] = useState<boolean>(false);
   
   const AudioPlayInteraction = useMemo(() => {
-    if (isPlay) {
-      AudioRef.current.first?.play();
-      AudioRef.current.first!.volume = 0.7;
-    } else {
-      AudioRef.current.first?.pause();
-    }
+   requestAnimationFrame(() => {
+      if (isPlay) {
+        AudioRef.current.first?.play();
+        AudioRef.current.first!.volume = 0.7;
+      } else {
+        AudioRef.current.first?.pause();
+      }
+   })
   }, [isPlay])
 
   return (<>

@@ -4,6 +4,7 @@ import Dice from './Dice';
 import ModalAdv from './ModalAdv';
 import ButtonComponents from './extra/ButtonComponents';
 import PopUpAdv from './extra/PopupAdv';
+import "../components/css/BoardBoxStyle.css"
 
 export default function COMBoardGame() {
 
@@ -32,8 +33,19 @@ export default function COMBoardGame() {
               />
           </div>
           <div className='board-dice flex-dice'>
-                <Dice DiceRef={(dice) => (MatchRef.current.player = dice)} isCondition={isRolls} setCondition={setRolls}/>
-                <Dice DiceRef={(dice) => (MatchRef.current.com = dice)} isCondition={isRolls} setCondition={setRolls}/>
+              
+              <span className='con-dice player flex-cols'>
+                <div className='int-dice'>
+                  <Dice DiceRef={(dice) => (MatchRef.current.player = dice)} isCondition={isRolls} setCondition={setRolls}/>
+                </div>
+              </span>
+                
+              <span className='con-dice bot flex-cols'>
+                 <div className='int-dice'>
+                   <Dice DiceRef={(dice) => (MatchRef.current.com = dice)} isCondition={isRolls} setCondition={setRolls}/>
+                 </div>
+              </span>
+
           </div>
           <div className='board-dice-total'>
             <div className='dice-form'></div>

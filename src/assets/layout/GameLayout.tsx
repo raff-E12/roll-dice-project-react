@@ -4,6 +4,9 @@ import { Outlet } from 'react-router'
 import Footer from '../components/Footer'
 import LoadingPage from '../components/extra/LoadingPage'
 import DiceLoadingSequence from '../components/extra/DiceLoadingSequence.tsx'
+import SettingsModals from '../pages/SettingsModals.tsx'
+import { ExportGlobalContext } from '../context/GlobalContext.tsx'
+import BonusAlert from '../components/BonusAlert.tsx'
 
   /* Caricamento Lazy Mode */
   const GamePageClassic = lazy(() => import("../pages/GameClassic.tsx"));
@@ -19,16 +22,16 @@ import DiceLoadingSequence from '../components/extra/DiceLoadingSequence.tsx'
 
 export default function GameLayout() {
   const [isLoading, setLoading] = useState(true);
-  const [isStop, setStop] = useState(false);  
+  const [isStop, setStop] = useState(false);
+  const [isSettings, setSettings] = useState(false);
+  const { isPoints, isActiveMatch, isReset, isBonus, isID } = ExportGlobalContext();
   
     useEffect(() => {
-     let interval = setTimeout(() => setLoading(false), 1300);
-     return () => clearTimeout(interval)
+     requestAnimationFrame(() => setLoading(false));
     },[])
 
     useEffect(() => {
-      const interval = setTimeout(() => setStop(true), 1660);
-      return () => clearTimeout(interval);
+      requestAnimationFrame(() => setStop(true));
     }, [isStop])
   
     if (isLoading) {
@@ -48,6 +51,8 @@ export default function GameLayout() {
            </div>
       <Footer />
       </main>
+      { isBonus.current !== null && <BonusAlert isReset={isReset} isActive={isActiveMatch} isBonus={isBonus.current} />}
+      {/* <SettingsModals isSettings={isSettings} setSettings={setSettings} /> */}
     </Suspense>
   </>)
 }

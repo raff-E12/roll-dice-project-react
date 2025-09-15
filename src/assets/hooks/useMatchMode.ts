@@ -10,7 +10,7 @@ export default function useMatchGame() {
     const MatchRef = useRef<MatchType>({ player: null, com: null });
     const [isActiveMatch, setActiveMatch] = useState<boolean>(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(MatchRef.current);
-    const { isMatch, isScoresMatch, setMode, isPoints, isStatics, setID, isBonus } = useRollsHistory(isActiveMatch);
+    const { isMatch, isScoresMatch, setMode, isPoints, isStatics, setID, isBonus, isID } = useRollsHistory(isActiveMatch);
     
     const [isPlayer, setPlayer] = useState<number>(0);
     const [isCOM, setCOM] = useState<number>(0);
@@ -45,7 +45,7 @@ export default function useMatchGame() {
               setTimeout(() => {
                 setPlayer(isPlayer + 1)
                 setWin(WinMatch)
-              }, 4010);
+              }, 3010);
 
             } else if (PlayerDice < COMDice) {
               WinMatch = "COM";
@@ -54,7 +54,7 @@ export default function useMatchGame() {
               setTimeout(() => {
               setCOM(isCOM + 1)
               setWin(WinMatch)
-              }, 4010);
+              }, 3010);
 
             } else if (PlayerDice === COMDice) {
               WinMatch = "Draw";
@@ -65,67 +65,68 @@ export default function useMatchGame() {
                 setPlayer(isPlayer + 1)
                 setCOM(isCOM + 1)
                 setWin(WinMatch)
-              }, 4010);
+              }, 3010);
             }
 
           setTarget("MatchMode");
 
-           setTimeout(() => {
-            setDiceOne(PlayerDice);
-            setDiceTwo(COMDice);
-           }, 500);
+          setDiceOne(PlayerDice);
+          setDiceTwo(COMDice);
             
 
           setMode("MatchMode");
 
-          setTimeout(() => {
-            isMatch.current.player = PlayerDice;
-            isMatch.current.com = COMDice;
-            isMatch.current.win = WinMatch;
-            isMatch.current.count.player = PointsPlayer;
-            isMatch.current.count.com = PointsCOM;
-           }, 4020);
+          isMatch.current.player = PlayerDice;
+          isMatch.current.com = COMDice;
+          isMatch.current.win = WinMatch;
+          isMatch.current.count.player = PointsPlayer;
+          isMatch.current.count.com = PointsCOM;
 
            setTimeout(() => {
              setActiveMatch(false);
-           }, 4030);
+           }, 4020);
 
         }
 
     }
 
-      function ResetMatchMode() {
-       if (isPlayer !== 0 && isCOM !== 0 && isWin !== "") {
+  function ResetMatchMode() {
+
+       if ( (isWin !== "Nothing")|| (isPlayer === 0 && isCOM === 0 && isWin === "Nothing") ) {
         setPlayer(0)
         setCOM(0)
         setTarget("MatchMode")
         setDiceOne(1)
         setID(1);
         setDiceTwo(1)
-        setReset(false);
+        setReset(false)
+        setWin("Nothing");
         setMode("MatchMode");
         isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }, bonus: { couple: 0, triple: 0, fullrun: 0, poker: 0 }};
         isScoresMatch.current = [];
         isStatics.current = [];
         isBonus.current = [];
-        sessionStorage.settItem("Points", JSON.stringify([]));
-        sessionStorage.settItem("Statics", JSON.stringify([]));
-        sessionStorage.settItem("Match", JSON.stringify([]));
+        sessionStorage.setItem("Points", JSON.stringify([]));
+        sessionStorage.setItem("Statics", JSON.stringify([]));
+        sessionStorage.setItem("Match", JSON.stringify([]));
         sessionStorage.setItem("Bonus", JSON.stringify([]));
        } else {
          setAdv(true);
          setReset(false);
        }
-    }
 
+    }
     
     const ImportSessionMatch =  useMemo(() => {
       const getPoints = sessionStorage.getItem("Points") as string;
       const getStatics = sessionStorage.getItem("Statics") as string;
       const getMatch = sessionStorage.getItem("Match") as string;
       const getBonus = sessionStorage.getItem("Bonus") as string;
-        if (getPoints !== null && getStatics !== null) {
+        if (getPoints !== null && getStatics !== null && getMatch !== null && getBonus !== null) {
             const ParseList: ListExports = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch), bonus: JSON.parse(getBonus)};
+           
+            if (ParseList.bonus.length !== 0) {
+
             isPoints.current = ParseList.points;
             isStatics.current = ParseList.statics;
             isScoresMatch.current = ParseList.match;
@@ -133,11 +134,15 @@ export default function useMatchGame() {
             
             const findID = Number(ParseList.match.find(element => element.id === ParseList.match.length)?.id) + 1;
             setID(findID);
+            
+            }
+
         } else {
             isPoints.current = { player: 0, com: 0, points: { player: 0, com: 0, win: "" }, bonus: { couple: 0, triple: 0, fullrun: 0, poker: 0 } };
             isStatics.current = [];
             isScoresMatch.current = [];
             isBonus.current = [];
+            setID(1);
         }
 
     }, [isEmpty])
@@ -157,5 +162,6 @@ export default function useMatchGame() {
              ImportSessionMatch,
              isBonus,
              isAdv,
-             setAdv }
+             setAdv,
+             isID }
 }

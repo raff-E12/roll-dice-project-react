@@ -12,7 +12,7 @@ export default function GameStartPage() {
   const AudioRef = useRef<{ first: HTMLAudioElement | null, second: HTMLAudioElement | null}>({ first: null, second: null });
   const [isPlay, setPlay] = useState<boolean>(false);
   
-  const AudioPlayInteraction = useMemo(() => {
+  useEffect(() => {
    requestAnimationFrame(() => {
       if (isPlay) {
         AudioRef.current.first?.play();

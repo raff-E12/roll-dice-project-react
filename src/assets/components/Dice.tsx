@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, type Ref } from 'react'
+import React, { useEffect, useMemo, useRef, type Ref } from 'react'
 import "./css/DiceStyle.css"
 import DiceSoundGame from "../../../public/sound/dice_throwing.mp3"
 
@@ -8,7 +8,7 @@ type PropsDice = { DiceRef: (dice: HTMLDivElement) => void, isCondition: boolean
 export default function Dice({DiceRef, isCondition, setCondition}: PropsDice) {
   const AudioRef = useRef<HTMLAudioElement>(null);
 
-  const ClickSoundDice = useMemo(() => {
+  useEffect(() => {
      requestAnimationFrame(() => {
       if (isCondition) {
         AudioRef.current?.play();

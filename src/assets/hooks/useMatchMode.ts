@@ -92,7 +92,7 @@ export default function useMatchGame() {
 
   function ResetMatchMode() {
 
-       if ( (isWin !== "Nothing")|| (isPlayer === 0 && isCOM === 0 && isWin === "Nothing") ) {
+       if ( (isWin !== "Nothing") || (isPlayer === 0 && isCOM === 0 && isWin === "Nothing") ) {
         setPlayer(0)
         setCOM(0)
         setTarget("MatchMode")
@@ -118,10 +118,12 @@ export default function useMatchGame() {
     }
     
     const ImportSessionMatch =  useMemo(() => {
+
       const getPoints = sessionStorage.getItem("Points") as string;
       const getStatics = sessionStorage.getItem("Statics") as string;
       const getMatch = sessionStorage.getItem("Match") as string;
       const getBonus = sessionStorage.getItem("Bonus") as string;
+
         if (getPoints !== null && getStatics !== null && getMatch !== null && getBonus !== null) {
             
             const ParseList: ListExports = { 
@@ -130,23 +132,23 @@ export default function useMatchGame() {
               match: JSON.parse(getMatch), 
               bonus: JSON.parse(getBonus)
             };
-           
-            if (ParseList.bonus.length !== 0) {
 
-            isPoints.current = ParseList.points;
-            isStatics.current = ParseList.statics;
-            isScoresMatch.current = ParseList.match;
-            isBonus.current = ParseList.bonus;
-            
-            const findID = Number(ParseList.match.find(element => element.id === ParseList.match.length)?.id) + 1;
-            setID(findID);
+              if (Object.keys(ParseList).length !== 0) {
 
-            if (isPoints) {
-              setCOM(Number((isPoints as React.RefObject<PointsTypes>).current.points?.com));
-              setPlayer(Number((isPoints as React.RefObject<PointsTypes>).current.points?.player));
-              setWin(String((isPoints as React.RefObject<PointsTypes>).current.points?.win));
-            }
-            
+              isPoints.current = ParseList.points;
+              isStatics.current = ParseList.statics;
+              isScoresMatch.current = ParseList.match;
+              isBonus.current = ParseList.bonus;
+              
+              const findID = Number(ParseList.match.find(element => element.id === ParseList.match.length)?.id) + 1;
+              setID(findID);
+
+              if (isPoints) {
+                setCOM(Number((isPoints as React.RefObject<PointsTypes>).current.points?.com));
+                setPlayer(Number((isPoints as React.RefObject<PointsTypes>).current.points?.player));
+                setWin(String((isPoints as React.RefObject<PointsTypes>).current.points?.win));
+              }
+              
             }
 
         } else {

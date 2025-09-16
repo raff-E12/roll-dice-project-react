@@ -14,75 +14,64 @@ function BonusAlert({ isReset, isActive, isBonus }: PropsTypes) {
   const AudioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    if (isReset) return
-    setCount(0);
-    sessionStorage.setItem("Count", String(0));
+    if (isReset) {
+      setCount(0);
+      sessionStorage.setItem("Count", "0");
+    }
   }, [isReset]);
 
   useEffect(() => {
-    let storage = Number(sessionStorage.getItem("Count"));
+    const storage = Number(sessionStorage.getItem("Count") ?? 0);
     setCount(storage);
   }, []);
 
-  const AudioPlay = useMemo(() => {
-    requestAnimationFrame(() => {
+  useEffect(() => {
     if (isAlert && isTarget !== "") {
-      AudioRef.current?.play();
+      requestAnimationFrame(() => {
+        AudioRef.current?.play();
+      });
     }
+  }, [isAlert, isTarget]);
+
+  useEffect(() => {
+    if (!isActive) return;
+    if (isBonus.length === 0) return;
+
+    let PrevNumber = isBonus.length - 1;
+
+    setCount(prev => {
+      const next = prev < PrevNumber ? prev + 1 : PrevNumber;
+      sessionStorage.setItem("Count", String(next));
+      return next;
     });
-  },[isActive])
+  }, [isActive, isBonus]);
 
-  const CountLogic = useMemo(() => {
-
-    if (!isActive) return
-    let PrevNumber = Math.abs(isBonus.length - 1);
-
-    if (isCount < PrevNumber) {
-      setCount(isCount + 2);
-    } else {
-      setCount(isCount - 1);
+  useEffect(() => {
+    if (!isActive || isBonus.length === 0 || isCount < 0) {
+      setAlert(false);
+      return;
     }
 
-  }, [isActive])
+      const bonus = isBonus[isCount]?.bonus;
+      if (!bonus) return;
 
-  const AlertCaseActive = useMemo(() => {
-
-      if (isBonus.length !== 0 && isCount > 0) {
-
-        let MemoryCouple = isBonus[isCount].bonus.couple;
-        let MemoryTriple = isBonus[isCount].bonus.triple;
-        let MemoryFullRun = isBonus[isCount].bonus.fullrun;
-        let MemoryPoker = isBonus[isCount].bonus.poker;
-
-          if (MemoryCouple === 1) {
-              setAlert(true);
-              setTarget("Couple");
-              sessionStorage.setItem("Count", String(isCount));
-          }
-
-          if (MemoryFullRun === 1) {
-              setAlert(true);
-              setTarget("FullRun");
-              sessionStorage.setItem("Count", String(isCount));
-          }
-
-          if (MemoryTriple === 1) {
-              setAlert(true);
-              setTarget("Triple");
-              sessionStorage.setItem("Count", String(isCount));
-          } 
-
-          if (MemoryPoker === 1) {
-              setAlert(true);
-              setTarget("Poker");
-              sessionStorage.setItem("Count", String(isCount));
-          } 
-
+      if (bonus.couple === 1) {
+        setTarget("Couple");
+        setAlert(true);
+      } else if (bonus.fullrun === 1) {
+        setTarget("FullRun");
+        setAlert(true);
+      } else if (bonus.triple === 1) {
+        setTarget("Triple");
+        setAlert(true);
+      } else if (bonus.poker === 1) {
+        setTarget("Poker");
+        setAlert(true);
       } else {
         setAlert(false);
       }
-     
-  },[isActive]);
+      
+    }, [isActive, isBonus, isCount]);
 
   return (<>
   <div className={`container-full flex-start container-support ${isAlert && "open" || !isAlert && "hidden"}`}>
@@ -98,14 +87,15 @@ function BonusAlert({ isReset, isActive, isBonus }: PropsTypes) {
      {isTarget === "Poker" && <div className={`container-banner bonus-4 ${isAlert && "open-ani"}`}></div>}
 
      <div className={`bonus-light ${isAlert && "open-ani"}`}></div>
-
+{/* 
      <div className='w-full flex justify-center items-center p-3'>
         <ButtonComponents 
         isClass='btn exit'
         isText={{ cond: true, text: "Esci"}}
         setClose={setAlert}
         />
-     </div>
+     </div> */}
+
     </div>
 
     <audio className='absolute top-1 right-1 hidden' preload='auto' controls ref={AudioRef}>

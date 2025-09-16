@@ -123,7 +123,13 @@ export default function useMatchGame() {
       const getMatch = sessionStorage.getItem("Match") as string;
       const getBonus = sessionStorage.getItem("Bonus") as string;
         if (getPoints !== null && getStatics !== null && getMatch !== null && getBonus !== null) {
-            const ParseList: ListExports = { points: JSON.parse(getPoints), statics: JSON.parse(getStatics), match: JSON.parse(getMatch), bonus: JSON.parse(getBonus)};
+            
+            const ParseList: ListExports = { 
+              points: JSON.parse(getPoints), 
+              statics: JSON.parse(getStatics), 
+              match: JSON.parse(getMatch), 
+              bonus: JSON.parse(getBonus)
+            };
            
             if (ParseList.bonus.length !== 0) {
 
@@ -134,6 +140,12 @@ export default function useMatchGame() {
             
             const findID = Number(ParseList.match.find(element => element.id === ParseList.match.length)?.id) + 1;
             setID(findID);
+
+            if (isPoints) {
+              setCOM(Number((isPoints as React.RefObject<PointsTypes>).current.points?.com));
+              setPlayer(Number((isPoints as React.RefObject<PointsTypes>).current.points?.player));
+              setWin(String((isPoints as React.RefObject<PointsTypes>).current.points?.win));
+            }
             
             }
 

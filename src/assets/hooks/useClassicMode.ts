@@ -17,7 +17,7 @@ export default function useClassicGame() {
 
     const onClose = () => setOpen(false);
     const { setTarget, setDiceOne, setDiceTwo } = useMotionLogic(DiceTotalRef.current);
-    const { isScores, isClassic, setMode, setID } = useRollsHistory(isActive);
+    const { isScores, isClassic, setMode, setID, isID } = useRollsHistory(isActive);
 
     useEffect(() => {
         if (isScores.current.length === 0) setEmpty(true); 
@@ -84,6 +84,13 @@ export default function useClassicGame() {
             const findID = Number(listScores.find(element => element.id === listScores.length)?.id) + 1;
             isScores.current = listScores;
             setID(findID);
+
+            if (isScores.current.length !== 0 && isID) {
+                setFirst((isScores as React.RefObject<TypesScores[]>).current[isID]?.first);
+                setSecond((isScores as React.RefObject<TypesScores[]>).current[isID]?.second);
+                setTotal((isScores as React.RefObject<TypesScores[]>).current[isID]?.total);
+            }
+
         } else {
             isScores.current = [];
             setID(1);

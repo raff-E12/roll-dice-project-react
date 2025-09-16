@@ -31,7 +31,7 @@ export default function GameLayout() {
     },[])
 
     useEffect(() => {
-      requestAnimationFrame(() => setStop(true));
+      setTimeout(() => setStop(true), 6400);
     }, [isStop])
   
     if (isLoading) {
